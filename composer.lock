@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41c89f80b0d5b62b8ca813c53c5bd1a5",
+    "content-hash": "78b9f64ddcde36b03aa5e5f5baa9a8d1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1819,16 +1819,16 @@
         },
         {
             "name": "elasticms/common-bundle",
-            "version": "1.8.41",
+            "version": "1.8.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ems-project/EMSCommonBundle.git",
-                "reference": "07906c711f1a95da72a932278534ae62d81a15b1"
+                "reference": "0011f43ee96f91495ec5319d16b63478eec397ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ems-project/EMSCommonBundle/zipball/07906c711f1a95da72a932278534ae62d81a15b1",
-                "reference": "07906c711f1a95da72a932278534ae62d81a15b1",
+                "url": "https://api.github.com/repos/ems-project/EMSCommonBundle/zipball/0011f43ee96f91495ec5319d16b63478eec397ad",
+                "reference": "0011f43ee96f91495ec5319d16b63478eec397ad",
                 "shasum": ""
             },
             "require": {
@@ -1898,20 +1898,20 @@
             "keywords": [
                 "elasticms"
             ],
-            "time": "2020-12-11T09:39:39+00:00"
+            "time": "2020-12-11T16:17:56+00:00"
         },
         {
             "name": "elasticms/core-bundle",
-            "version": "1.14.18",
+            "version": "1.14.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ems-project/EMSCoreBundle.git",
-                "reference": "a8131bc127c46e41c218a674f925932a2527b589"
+                "reference": "e65f9e53f38a0ebf6a1a5219db5e3ea2947dfe70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ems-project/EMSCoreBundle/zipball/a8131bc127c46e41c218a674f925932a2527b589",
-                "reference": "a8131bc127c46e41c218a674f925932a2527b589",
+                "url": "https://api.github.com/repos/ems-project/EMSCoreBundle/zipball/e65f9e53f38a0ebf6a1a5219db5e3ea2947dfe70",
+                "reference": "e65f9e53f38a0ebf6a1a5219db5e3ea2947dfe70",
                 "shasum": ""
             },
             "require": {
@@ -1993,7 +1993,7 @@
             "keywords": [
                 "elasticms"
             ],
-            "time": "2020-12-11T09:41:26+00:00"
+            "time": "2020-12-11T16:25:29+00:00"
         },
         {
             "name": "elasticms/maker-bundle",
@@ -2154,39 +2154,6 @@
                 "html"
             ],
             "time": "2020-06-29T00:56:53+00:00"
-        },
-        {
-            "name": "finlet/flexmail",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Finlet/flexmail.git",
-                "reference": "458b08560a704e14e24165892caff3bf14993b00"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Finlet/flexmail/zipball/458b08560a704e14e24165892caff3bf14993b00",
-                "reference": "458b08560a704e14e24165892caff3bf14993b00",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Finlet\\flexmail\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Rico van de Vin",
-                    "email": "rico@finlet.eu"
-                }
-            ],
-            "description": "Flexmail API PHP Wrapper.",
-            "time": "2016-01-11T10:04:22+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -12398,7 +12365,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "finlet/flexmail": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,
