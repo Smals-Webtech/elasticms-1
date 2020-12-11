@@ -11,17 +11,17 @@ class Client extends Document
         parent::__construct([
             '_id' => self::createID($id),
             '_type' => 'client',
-            '_source' => array_filter([
+            '_source' => \array_filter([
                 '_contenttype' => 'client',
-                'client_id'    => $id,
-                'name'         => $name,
-                'sequence'     => $sequence,
-            ])
+                'client_id' => $id,
+                'name' => $name,
+                'sequence' => $sequence,
+            ]),
         ]);
     }
 
     public static function createID(string $id)
     {
-        return sha1('client'.$id);
+        return \sha1('client'.$id);
     }
 }

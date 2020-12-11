@@ -39,10 +39,9 @@ class SearchActor
     {
         $filteredActorTypes = [];
         foreach ($authors as $author) {
-            if (is_array($author) && isset($author['actor']) && isset($this->types[$author['actor']])) {
+            if (\is_array($author) && isset($author['actor']) && isset($this->types[$author['actor']])) {
                 $filteredActorTypes[] = $this->types[$author['actor']];
-            }
-            elseif (is_string($author) && isset($this->types[$author])) {
+            } elseif (\is_string($author) && isset($this->types[$author])) {
                 $filteredActorTypes[] = $this->types[$author];
             }
         }
@@ -52,28 +51,29 @@ class SearchActor
 
     public function get(int $legislature, string $type, $ksegna = null, ?string $fullName = null, ?string $party = null): string
     {
-        $cacheKey = \implode('', func_get_args());
-        $actor = $fullName . ($party && !in_array($party, [
+        $cacheKey = \implode('', \func_get_args());
+        $actor = $fullName.($party && !\in_array($party, [
             'XXX',
             'YYY',
             'ZZZ',
-        ]) ? sprintf(' (%s)', $party) : '');
+        ]) ? \sprintf(' (%s)', $party) : '');
 
         if (isset($this->cache[$cacheKey])) {
             $this->addType($type, $cacheKey, $actor, $party);
             $this->emsLinks[] = $this->cache[$cacheKey];
+
             return $this->cache[$cacheKey];
         }
 
         $result = $this->search($ksegna, $fullName);
         $total = $result['hits']['total'];
 
-        if ($total === 1) {
+        if (1 === $total) {
             return $this->result($cacheKey, $type, $actor, $party, $result['hits']['hits'][0]);
         } elseif ($total > 1) {
             $retry = $this->search($ksegna, $fullName, $legislature);
 
-            if ($retry['hits']['total'] === 1) {
+            if (1 === $retry['hits']['total']) {
                 return $this->result($cacheKey, $type, $actor, $party, $retry['hits']['hits'][0]);
             }
         }
@@ -85,7 +85,7 @@ class SearchActor
     {
         $value = $actor;
         if (isset($result['_id'])) {
-            $value = sprintf('actr:%s', $result['_id']);
+            $value = \sprintf('actr:%s', $result['_id']);
             $this->emsLinks[] = $value;
         }
 
@@ -99,7 +99,7 @@ class SearchActor
     {
         $emsLink = $this->cache[$cacheKey];
 
-        if (substr($emsLink, 0, 4) !== 'actr') {
+        if ('actr' !== \substr($emsLink, 0, 4)) {
             return;
         }
 
@@ -112,8 +112,8 @@ class SearchActor
     {
         $bool = ['minimum_should_match' => 1];
         $bool['should'] = [
-            [ 'term' => ['id_ksegna' => $ksegna]],
-            ['term' => ['full_name.keyword' => $fullName]]
+            ['term' => ['id_ksegna' => $ksegna]],
+            ['term' => ['full_name.keyword' => $fullName]],
         ];
 
         if ($legislature) {

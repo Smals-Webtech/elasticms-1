@@ -16,7 +16,7 @@ class CPV
     /** @var string division|group|class|category */
     private $type;
 
-    /** @var array */
+    /** @var array<mixed> */
     private $body;
 
     const REGEX = "/^(?'category'(?'class'(?'group'(?'division'\d{2})\d{1})\d{1})\d{1})(?'id'\d{3})-\d{1}$/";
@@ -24,9 +24,12 @@ class CPV
     const CHILD_TYPES = [
         'division' => 'group',
         'group' => 'class',
-        'class' => 'category'
+        'class' => 'category',
     ];
 
+    /**
+     * @param array<mixed> $body
+     */
     public function __construct(array $body)
     {
         \preg_match(self::REGEX, $body['code'], $code);
@@ -47,12 +50,15 @@ class CPV
 
     public function getId(): string
     {
-        return sha1('cpv'.$this->body['code']);
+        return \sha1('cpv'.$this->body['code']);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getBody(): array
     {
-        return  array_merge($this->body, ['cpv_type' => $this->type]);
+        return \array_merge($this->body, ['cpv_type' => $this->type]);
     }
 
     public function getDivision(): string
@@ -77,11 +83,11 @@ class CPV
 
     private function setType(): void
     {
-        if ($this->category === $this->division . '000') {
+        if ($this->category === $this->division.'000') {
             $this->type = 'division';
-        } elseif ($this->category === $this->group . '00') {
+        } elseif ($this->category === $this->group.'00') {
             $this->type = 'group';
-        } elseif ($this->category === $this->class . '0') {
+        } elseif ($this->category === $this->class.'0') {
             $this->type = 'class';
         } else {
             $this->type = 'category';
@@ -91,7 +97,7 @@ class CPV
     /**
      * @param CPV[] $items
      */
-    public function setChildren(array $items)
+    public function setChildren(array $items): void
     {
         $childType = self::CHILD_TYPES[$this->type] ?? false;
 
@@ -103,7 +109,7 @@ class CPV
     /**
      * @param CPV[] $items
      */
-    private function addChildByType(array $items, string $childType)
+    private function addChildByType(array $items, string $childType): void
     {
         $get = 'get'.\ucfirst($this->type);
 

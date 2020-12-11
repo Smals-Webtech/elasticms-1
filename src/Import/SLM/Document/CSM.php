@@ -11,17 +11,17 @@ class CSM extends Document
         parent::__construct([
             '_id' => self::createID($acronym),
             '_type' => 'csm',
-            '_source' => array_filter([
+            '_source' => \array_filter([
                 '_contenttype' => 'csm',
-                'acronym'      => $acronym,
-                'fullname'     => $fullName,
-                'email'        => $email
-            ])
+                'acronym' => $acronym,
+                'fullname' => $fullName,
+                'email' => $email,
+            ]),
         ]);
     }
 
     public static function createID(string $acronym)
     {
-        return sha1('csm'.$acronym);
+        return \sha1('csm'.$acronym);
     }
 }

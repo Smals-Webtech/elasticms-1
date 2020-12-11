@@ -2,27 +2,30 @@
 
 namespace App\Twig;
 
-class Trade4uExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class Trade4uExtension extends AbstractExtension
 {
     /**
-     * @return array
+     * @return TwigFilter[]
      */
-    public function getFilters()
+    public function getFilters(): array
     {
-        return array(
-            new \Twig_SimpleFilter('trade4uMatch', array($this, 'trade4uMatch')),
-        );
+        return [
+            new TwigFilter('trade4uMatch', [$this, 'trade4uMatch']),
+        ];
     }
 
     /**
-     * Returns contact information foreach matching company domain
+     * Returns contact information foreach matching company domain.
      *
-     * @param array $company
-     * @param array $opportunity
+     * @param array<mixed> $company
+     * @param array<mixed> $opportunity
      *
-     * @return null|array
+     * @return array<mixed>
      */
-    public function trade4uMatch(array $company, array $opportunity)
+    public function trade4uMatch(array $company, array $opportunity): array
     {
         $contacts = $this->getContacts($company);
 
@@ -32,18 +35,17 @@ class Trade4uExtension extends \Twig_Extension
 
         $result = [];
 
-        if(isset($company['domains']))  {
+        if (isset($company['domains'])) {
             foreach ($company['domains'] as $domainNumber => $domain) {
-
                 if (!$this->domainMatchOpportunity($domain, $opportunity)) {
                     continue;
                 }
 
-                $domainContacts = array_filter($contacts, function (array $contact) use ($domainNumber) {
-                    return in_array($domainNumber, $contact['domain_notifications']);
+                $domainContacts = \array_filter($contacts, function (array $contact) use ($domainNumber) {
+                    return \in_array($domainNumber, $contact['domain_notifications']);
                 });
 
-                if (count($domainContacts) > 0) {
+                if (\count($domainContacts) > 0) {
                     $result[$domainNumber] = $domainContacts;
                 }
             }
@@ -53,24 +55,24 @@ class Trade4uExtension extends \Twig_Extension
     }
 
     /**
-     * Filter out invalid contacts
+     * Filter out invalid contacts.
      *
-     * @param array $company
+     * @param array<mixed> $company
      *
-     * @return array
+     * @return array<mixed>
      */
-    private function getContacts(array $company)
+    private function getContacts(array $company): array
     {
-        if(! isset($company['contacts'])) {
-            return  [];
+        if (!isset($company['contacts'])) {
+            return [];
         }
 
-        return array_filter($company['contacts'], function(array $contact) {
-            if (null == trim($contact['email'])) {
+        return \array_filter($company['contacts'], function (array $contact) {
+            if (null == \trim($contact['email'])) {
                 return false;
             }
 
-            if (null == trim($contact['title'])) {
+            if (null == \trim($contact['title'])) {
                 return false;
             }
 
@@ -83,12 +85,10 @@ class Trade4uExtension extends \Twig_Extension
     }
 
     /**
-     * @param array $domain
-     * @param array $opportunity
-     *
-     * @return bool
+     * @param array<mixed> $domain
+     * @param array<mixed> $opportunity
      */
-    private function domainMatchOpportunity(array $domain, array $opportunity)
+    private function domainMatchOpportunity(array $domain, array $opportunity): bool
     {
         if (false === $this->match($domain, $opportunity, 'products')) {
             return false;
@@ -106,13 +106,11 @@ class Trade4uExtension extends \Twig_Extension
     }
 
     /**
-     * @param array  $opportunity
-     * @param array  $domain
-     * @param string $field       products, activities, countries_active
-     *
-     * @return bool
+     * @param array<mixed> $opportunity
+     * @param array<mixed> $domain
+     * @param string       $field       products, activities, countries_active
      */
-    private function match(array $domain, array $opportunity, $field)
+    private function match(array $domain, array $opportunity, $field): bool
     {
         if (!isset($opportunity[$field]) || null == $opportunity[$field]) {
             return true;
@@ -123,7 +121,7 @@ class Trade4uExtension extends \Twig_Extension
         }
 
         foreach ($opportunity[$field] as $link) {
-            if (in_array($link, $domain[$field])) {
+            if (\in_array($link, $domain[$field])) {
                 return true; //domain field matches
             }
         }

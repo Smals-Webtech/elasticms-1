@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Command\Instructions;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CoreBundle\Service\DataService;
 use EMS\CoreBundle\Service\EnvironmentService;
 use Psr\Log\LoggerInterface;
@@ -136,6 +136,7 @@ final class PublishQuarterCommand extends Command
             $message = \sprintf('There are "%s" revision(s) in draft. Please resolve this before launch a publish quarter.', \count($draftedRevisions));
             $this->io->error($message);
             $this->logger->error($message);
+
             return -1;
         }
         $this->io->note('No drafts found');
@@ -151,6 +152,7 @@ final class PublishQuarterCommand extends Command
         } catch (\Exception $e) {
             $this->io->error($e->getMessage());
             $this->logger->error($e->getMessage());
+
             return -1;
         }
         $nextSnapshotName = $this->generateNextSnapshotName($lastSnapshotName);
@@ -160,7 +162,7 @@ final class PublishQuarterCommand extends Command
         $createEnvironmentCommandArguments = [
             'command' => 'ems:environment:create',
             'name' => $nextSnapshotName,
-            '--strict' => true
+            '--strict' => true,
         ];
 
         try {
@@ -168,6 +170,7 @@ final class PublishQuarterCommand extends Command
         } catch (\Exception $e) {
             $this->io->error($e->getMessage());
             $this->logger->error($e->getMessage());
+
             return -1;
         }
 
@@ -179,7 +182,7 @@ final class PublishQuarterCommand extends Command
             'target' => $nextSnapshotName,
             '--force' => true,
             //'--snapshot' => false,
-            '--strict' => true
+            '--strict' => true,
         ];
 
         try {
@@ -187,6 +190,7 @@ final class PublishQuarterCommand extends Command
         } catch (\Exception $e) {
             $this->io->error($e->getMessage());
             $this->logger->error($e->getMessage());
+
             return -1;
         }
 
@@ -207,20 +211,21 @@ final class PublishQuarterCommand extends Command
                             'add' => [
                                 'index' => $snapshotIndex,
                                 'alias' => $this->previewManageAlias,
-                            ]
+                            ],
                         ],
                         [
                             'add' => [
                                 'index' => $snapshotIndex,
                                 'alias' => $this->templateManageAlias,
-                            ]
-                        ]
-                    ]
-                ]
+                            ],
+                        ],
+                    ],
+                ],
             ]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->io->error($e->getMessage());
             $this->logger->error($e->getMessage());
+
             return -1;
         }
         $this->io->success(\sprintf('The index "%s" has been added to the M.A. "%s" and "%s"', $snapshotIndex, $this->previewManageAlias, $this->templateManageAlias));
@@ -232,7 +237,7 @@ final class PublishQuarterCommand extends Command
             'source' => $this->nextEnvironment,
             'target' => $this->latestEnvironment,
             '--force' => true,
-            '--strict' => true
+            '--strict' => true,
         ];
 
         try {
@@ -240,16 +245,17 @@ final class PublishQuarterCommand extends Command
         } catch (\Exception $e) {
             $this->io->error($e->getMessage());
             $this->logger->error($e->getMessage());
+
             return -1;
         }
 
-        $this->io->title(\sprintf('6. Loop the command "ems:contenttype:transform" to apply ContentRemover transformer to "%s" content-type(s)', implode(', ', $this->contentTypes)));
+        $this->io->title(\sprintf('6. Loop the command "ems:contenttype:transform" to apply ContentRemover transformer to "%s" content-type(s)', \implode(', ', $this->contentTypes)));
         foreach ($this->contentTypes as $contentType) {
             $transformCommand = $this->getApplication()->find('ems:contenttype:transform');
             $transformCommandArguments = [
                 'contentType' => $contentType,
                 'user' => $this->user,
-                '--strict' => true
+                '--strict' => true,
             ];
 
             try {
@@ -257,6 +263,7 @@ final class PublishQuarterCommand extends Command
             } catch (\Exception $e) {
                 $this->io->error($e->getMessage());
                 $this->logger->error($e->getMessage());
+
                 return -1;
             }
         }
@@ -266,6 +273,7 @@ final class PublishQuarterCommand extends Command
         $this->io->note(\sprintf('"%s" revisions have been unlocked.', $countUnlockedRevisions));
 
         $this->io->success('Quarter is published.');
+
         return 0;
     }
 
@@ -273,13 +281,15 @@ final class PublishQuarterCommand extends Command
     {
         list($q, $year, $quarter) = \explode('-', $lastSnapshotName);
 
-        if (\intval($quarter) === 4) {
-            $year++;
-            return $q . '-' . $year . '-' . 1;
+        if (4 === \intval($quarter)) {
+            ++$year;
+
+            return $q.'-'.$year.'-'. 1;
         }
 
-        $quarter++;
-        return $q . '-' . $year . '-' . $quarter;
+        ++$quarter;
+
+        return $q.'-'.$year.'-'.$quarter;
     }
 
     private function checkAndGetLastSnapshotName(): string

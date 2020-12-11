@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Import\Chamber\XML;
 
 use App\Import\Chamber\Import;
@@ -40,14 +39,13 @@ class MOTI
         $this->extractorService = $extractorService;
         $this->fileService = $fileService;
 
-        if (get_class($parentDocument) == 'App\Import\Chamber\XML\FLWB'){
-            $this->file = $this->import->getRootDir() . '/' . $this->source['file']['path'] . $this->source['file']['filename'];
+        if ('App\Import\Chamber\XML\FLWB' == \get_class($parentDocument)) {
+            $this->file = $this->import->getRootDir().'/'.$this->source['file']['path'].$this->source['file']['filename'];
         } else {
-            $this->file = $this->import->getRootDir() . '/' . $this->source['path'] . $this->source['filename'];
+            $this->file = $this->import->getRootDir().'/'.$this->source['path'].$this->source['filename'];
         }
 
-
-        $this->hash = sha1_file($this->file);
+        $this->hash = \sha1_file($this->file);
         $this->content = $this->extractorService->extractData($this->hash, $this->file);
     }
 
@@ -94,18 +92,22 @@ class MOTI
     public function getActors()
     {
         $actors = [];
-        if (get_class($this->parentDocument) == 'App\Import\Chamber\XML\FLWB'){
+        if ('App\Import\Chamber\XML\FLWB' == \get_class($this->parentDocument)) {
             foreach ($this->source['authors'] as $author) {
                 $actors[] = $author['actor'];
             }
+
             return $actors;
         }
-        if (!isset($this->parentDocument->getSource()['motions'])) return '';
+        if (!isset($this->parentDocument->getSource()['motions'])) {
+            return '';
+        }
         foreach ($this->parentDocument->getSource()['motions'] as $motion) {
             foreach ($motion['authors'] as $author) {
                 $actors[] = $author;
             }
         }
+
         return $actors;
     }
 
@@ -113,19 +115,23 @@ class MOTI
     {
         $actors = [];
 
-        if (get_class($this->parentDocument) == 'App\Import\Chamber\XML\FLWB'){
+        if ('App\Import\Chamber\XML\FLWB' == \get_class($this->parentDocument)) {
             foreach ($this->source['authors'] as $author) {
                 $actors[] = ['actor' => $author['actor'], 'type' => 1];
             }
+
             return $actors;
         }
 
-        if (!isset($this->parentDocument->getSource()['motions'])) return '';
+        if (!isset($this->parentDocument->getSource()['motions'])) {
+            return '';
+        }
         foreach ($this->parentDocument->getSource()['motions'] as $motion) {
             foreach ($motion['authors'] as $author) {
                 $actors[] = ['actor' => $author, 'type' => 1];
             }
         }
+
         return $actors;
     }
 

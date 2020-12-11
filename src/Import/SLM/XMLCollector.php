@@ -9,43 +9,53 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class XMLCollector
 {
+    /** @var array<mixed> */
+    private $collectionCSM = [];
+    /** @var array<mixed> */
+    private $collectionSLA = [];
+    /** @var array<mixed> */
     private $collectionClients = [];
-    private $collectionCSM     = [];
-    private $collectionSLA     = [];
 
     const MAPPING_CLIENT = [
-        'ClientNR'     => 'id',
-        'Client_NR'    => 'id',
-        'ClientSeq'    => 'sequence',
-        'ClientName'   => 'name',
+        'ClientNR' => 'id',
+        'Client_NR' => 'id',
+        'ClientSeq' => 'sequence',
+        'ClientName' => 'name',
     ];
 
     const MAPPING_CSM = [
-        'CSMAcronyme'  => 'acronym',
-        'CSM_Acronym'  => 'acronym',
-        'fullname'     => 'fullname',
-        'email'        => 'email',
+        'CSMAcronyme' => 'acronym',
+        'CSM_Acronym' => 'acronym',
+        'fullname' => 'fullname',
+        'email' => 'email',
     ];
 
     const MAPPING_SLA = [
-        'SLA_NR'       => 'id',
-        'Status'       => 'sla_status',
+        'SLA_NR' => 'id',
+        'Status' => 'sla_status',
         'service_name' => 'service_name',
-        'ServiceName'  => 'service_name',
-        'Service_FR'   => 'sla_service_fr',
-        'Service_NL'   => 'sla_service_nl',
-        'SLA_doc'      => 'sla_doc',
-        'CSMAcronyme'  => 'csm_acronym',
-        'CSM_Acronym'  => 'csm_acronym',
-        'Client_NR'    => 'client_id',
-        'ClientNR'     => 'client_id',
-        'ClientName'   => 'client_name',
+        'ServiceName' => 'service_name',
+        'Service_FR' => 'sla_service_fr',
+        'Service_NL' => 'sla_service_nl',
+        'SLA_doc' => 'sla_doc',
+        'CSMAcronyme' => 'csm_acronym',
+        'CSM_Acronym' => 'csm_acronym',
+        'Client_NR' => 'client_id',
+        'ClientNR' => 'client_id',
+        'ClientName' => 'client_name',
     ];
 
+    /**
+     * @param array<mixed> $xml
+     */
     public function collect(array $xml): void
     {
         $crawler = new Crawler();
-        $crawler->addXmlContent(file_get_contents($xml['file']));
+        $fileContent = \file_get_contents($xml['file']);
+        if (false === $fileContent) {
+            throw new \RuntimeException(\sprintf('Unexpected false on file_get_contents(""%s)', $fileContent));
+        }
+        $crawler->addXmlContent($fileContent);
         $elements = $crawler->filterXPath('//default:Detail');
 
         foreach ($elements as $element) {
@@ -63,32 +73,49 @@ class XMLCollector
         }
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getClients(): array
     {
-        return array_map(function (array $client) {
+        return \array_map(function (array $client) {
             return new Client($client['id'], $client['name'], $client['sequence'] ?? null);
         }, $this->collectionClients);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getCSMs(): array
     {
-        return array_map(function (array $csm){
-            return new CSM($csm['acronym'], $csm['fullname'] ?? null, $csm['email'] ?? null);;
+        return \array_map(function (array $csm) {
+            return new CSM($csm['acronym'], $csm['fullname'] ?? null, $csm['email'] ?? null);
         }, $this->collectionCSM);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getSLAs(): array
     {
-        return array_map(function (array $sla) {
+        return \array_map(function (array $sla) {
             return new SLA($sla);
         }, $this->collectionSLA);
     }
 
-    private function getElementData(\DOMElement $element, array $mapping): array
+    /**
+     * @param array<mixed> $mapping
+     *
+     * @return array<mixed>
+     */
+    private function getElementData(\DOMNode $element, array $mapping): array
     {
         $data = [];
 
         foreach ($mapping as $attr => $property) {
+            if (!$element instanceof \DOMElement) {
+                continue;
+            }
             $value = $element->getAttribute($attr);
 
             if (!isset($data[$property]) && null != $value) {
@@ -99,6 +126,9 @@ class XMLCollector
         return $data;
     }
 
+    /**
+     * @param array<mixed> $data
+     */
     private function add(string $collection, string $id, array $data): void
     {
         if (\array_key_exists($id, $this->{$collection})) {

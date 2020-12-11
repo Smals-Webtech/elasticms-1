@@ -18,11 +18,11 @@ final class Url
     private $type;
     /** @var array */
     private $facets = [];
-    /** @var null|string */
+    /** @var string|null */
     private $serviceId;
-    /** @var null|string */
+    /** @var string|null */
     private $serviceName;
-    /** @var null|string */
+    /** @var string|null */
     private $serviceKeywords;
     /** @var array */
     private $descriptions = [];
@@ -72,7 +72,7 @@ final class Url
         }
 
         foreach ($this->descriptions as $description) {
-            $data = array_merge($data, $description);
+            $data = \array_merge($data, $description);
         }
 
         return $data;
@@ -84,7 +84,7 @@ final class Url
             return [];
         }
 
-        return is_string($data[$property]) ? [$data[$property]] : array_values($data[$property]);
+        return \is_string($data[$property]) ? [$data[$property]] : \array_values($data[$property]);
     }
 
     private function setDescriptions(array $data): void
@@ -95,7 +95,7 @@ final class Url
         foreach ($nested as $description) {
             $lang = $description['language'] ?? $description['Language'];
 
-            $this->descriptions[] = array_filter([
+            $this->descriptions[] = \array_filter([
                 ('title_'.$lang) => $description['title'],
                 ('body_'.$lang) => $description['body'] ?? null,
             ]);

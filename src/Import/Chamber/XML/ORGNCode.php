@@ -27,7 +27,7 @@ class ORGNCode
         2 => 'legislature',
         3 => 'category',
         4 => 'group',
-        5 => 'element'
+        5 => 'element',
     ];
 
     const CATEGORIES = [
@@ -43,7 +43,7 @@ class ORGNCode
             4 => 'plenary',
             5 => 'commission',
             6 => 'political_group',
-        ]
+        ],
     ];
 
     public function __construct(string $code, string $pathFr, string $pathNl)
@@ -52,16 +52,16 @@ class ORGNCode
         $explode = \explode('.', $code);
         $this->level = \count($explode);
 
-        $explodePathFr = array_values(array_filter(\explode('/', $pathFr)));
-        $explodePathNl = array_values(array_filter(\explode('/', $pathNl)));
+        $explodePathFr = \array_values(\array_filter(\explode('/', $pathFr)));
+        $explodePathNl = \array_values(\array_filter(\explode('/', $pathNl)));
 
         foreach ($explode as $i => $value) {
             if (isset(self::LEVELS[$i])) {
                 $this->{self::LEVELS[$i]} = $value;
 
-                $this->translations[self::LEVELS[$i]] = array_filter([
+                $this->translations[self::LEVELS[$i]] = \array_filter([
                     'fr' => $explodePathFr[$i] ?? null,
-                    'nl' => $explodePathNl[$i] ?? null
+                    'nl' => $explodePathNl[$i] ?? null,
                 ]);
             }
         }
@@ -76,7 +76,7 @@ class ORGNCode
 
     public function isValid(): bool
     {
-        return $this->legislature !== null;
+        return null !== $this->legislature;
     }
 
     public function getCode(): string
@@ -106,7 +106,7 @@ class ORGNCode
 
     public function getType(): ?string
     {
-        if ($this->level === 6 && $this->getTranslation('category', 'fr') === 'Groupes Politiques') {
+        if (6 === $this->level && 'Groupes Politiques' === $this->getTranslation('category', 'fr')) {
             return 'political_group';
         }
 

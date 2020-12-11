@@ -16,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Example
+ * Example.
  *
  * php bin/console ems:job:kb-import mdk chef http://kennisbeheer.hippocmsacc.smals.be /cms/repository "sql=SELECT+*+FROM+kennisbeheer%3AThemeDocument+WHERE+jcr%3Apath+LIKE+%27%2Fcontent%2Fdocuments%2F%25%27+and+hippo%3Aavailability+%3D+%27live%27&limit=20"
  */
@@ -59,7 +59,7 @@ class ImportCommand extends Command
         $this->client = new HttpClient([
             'base_uri' => $input->getArgument('url'),
             'timeout' => 30,
-            'auth' => [$input->getArgument('username'), $input->getArgument('password')]
+            'auth' => [$input->getArgument('username'), $input->getArgument('password')],
         ]);
     }
 
@@ -77,15 +77,15 @@ class ImportCommand extends Command
         $progressBar->start();
 
         foreach ($search as $result) {
-            $item = $this->getItem($path . $result['jcr:path']);
+            $item = $this->getItem($path.$result['jcr:path']);
 
             if (isset($item['links']['kennisbeheer:content'])) {
-               // $content = $this->getItem($this->client->get($path . $result['jcr:path'].$item['links']['kennisbeheer:content']));
+                // $content = $this->getItem($this->client->get($path . $result['jcr:path'].$item['links']['kennisbeheer:content']));
                // $item['hippostd:content'] = $content['hippostd:content'];
             }
 
-            if (isset($item['kennisbeheer:documents']) && \count(array_keys($item['kennisbeheer:documents'])) > 2) {
-                $documents = $this->getItem($this->client->get($path . $result['jcr:path'].$item['links']['kennisbeheer:documents']));
+            if (isset($item['kennisbeheer:documents']) && \count(\array_keys($item['kennisbeheer:documents'])) > 2) {
+                $documents = $this->getItem($this->client->get($path.$result['jcr:path'].$item['links']['kennisbeheer:documents']));
 
 //                if (\count($documents['links']) > 0) {
 //                    dump($item, $result, $documents); die;
@@ -95,7 +95,7 @@ class ImportCommand extends Command
             $this->bulker->indexDocument(new Document([
                 '_id' => $item['jcr:uuid'],
                 '_type' => $item['jcr:primaryType'],
-                '_source' => $item
+                '_source' => $item,
             ]), $index);
 
             $progressBar->advance();
@@ -109,7 +109,7 @@ class ImportCommand extends Command
     {
         $contents = $this->client->get($uri)->getBody()->getContents();
 
-        preg_match('/Number of results found: .*/m', $contents, $matches);
+        \preg_match('/Number of results found: .*/m', $contents, $matches);
         if ($matches) {
             $this->style->comment($matches[0]);
         }
@@ -118,7 +118,7 @@ class ImportCommand extends Command
         $crawler->addHtmlContent($contents);
         $table = $crawler->filterXPath('//html/body/table[@summary="searchresult"]');
 
-        $headers = $table->filterXPath('//th')->each(function (Crawler $th){
+        $headers = $table->filterXPath('//th')->each(function (Crawler $th) {
             return $th->html();
         });
 
@@ -127,10 +127,10 @@ class ImportCommand extends Command
                 return $td->html();
             });
 
-            return ($values ? array_combine($headers, $values) : null);
+            return $values ? \array_combine($headers, $values) : null;
         });
 
-        return array_filter($data);
+        return \array_filter($data);
     }
 
     private function getItem(string $path): array
@@ -145,22 +145,22 @@ class ImportCommand extends Command
         $list = $crawler->filterXPath('//html/body/ul');
 
         $list->filterXPath('//li[@type="circle"]/a')->each(function (Crawler $circle) use (&$item, $path) {
-            $text = trim(preg_replace('/\s+/', ' ', $circle->text()));
+            $text = \trim(\preg_replace('/\s+/', ' ', $circle->text()));
 
-            $item['links'][$text] = $this->getItem(str_replace('//', '/', $path . substr($circle->attr('href'), 1)));
+            $item['links'][$text] = $this->getItem(\str_replace('//', '/', $path.\substr($circle->attr('href'), 1)));
         });
 
         $list->filterXPath('//li[@type="disc"]')->each(function (Crawler $disc) use (&$item) {
-            $text = trim(preg_replace('/\s+/', ' ', $disc->text()));
+            $text = \trim(\preg_replace('/\s+/', ' ', $disc->text()));
 
             $regex = '/^\[name="(?<label>.*)"] =(?<value>.*)/i';
-            preg_match($regex, $text, $matches);
+            \preg_match($regex, $text, $matches);
 
             $label = $matches['label'];
-            $value = trim($matches['value']) ?? null;
+            $value = \trim($matches['value']) ?? null;
 
-            if (preg_match('/^\[(?<data>.*)]$/', $value, $valueMatch)) {
-                $value = array_filter(array_map('trim', explode(', ', $valueMatch['data'])));
+            if (\preg_match('/^\[(?<data>.*)]$/', $value, $valueMatch)) {
+                $value = \array_filter(\array_map('trim', \explode(', ', $valueMatch['data'])));
             }
 
             $item[$label] = $value;

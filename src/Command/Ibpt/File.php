@@ -19,7 +19,7 @@ class File
     public function __construct($website, $file)
     {
         $this->crawler = new Crawler();
-        $this->localPath = $website . DIRECTORY_SEPARATOR . $file;
+        $this->localPath = $website.DIRECTORY_SEPARATOR.$file;
         $content = $this->getFileRawContent($this->localPath);
         $this->crawler->addHtmlContent($content);
     }
@@ -39,7 +39,6 @@ class File
 
             $content = \fread($file, \filesize($filePath));
             \fclose($file);
-
         } catch (\Exception $e) {
             throw new \Error($e->getMessage());
         }
@@ -70,18 +69,21 @@ class File
     public function getLanguage(): string
     {
         $language = $this->crawler->filterXPath('//ul[@id="top-languages"]//li[@class="active"]')->first()->text();
+
         return self::LANGUAGES[\trim($language)] ?? 'en';
     }
 
     public function getDescription(): ?string
     {
         $desc = $this->crawler->filterXPath('//div[@style="clear:left"]')->first();
+
         return $desc->count() ? \trim($desc->html()) : '';
     }
 
     public function getTargetGroup(): string
     {
         $targetGroupRaw = $this->crawler->filterXPath('//ul[@id="top-section"]/li[@class="active"]')->first()->text();
+
         return \in_array($targetGroupRaw, self::CONSUMERS) ? 'consumers' : 'operators';
     }
 
@@ -89,15 +91,16 @@ class File
     {
         $typeFilter = $this->crawler->filterXPath('//div[@class="right-content"]/div/p')->first();
 
-        if(!$typeFilter->count()){
+        if (!$typeFilter->count()) {
             return '';
         }
 
         $typeRaw = $typeFilter->html(); // e.g. <strong>Type</strong><br> Overheidsopdracht
-        if(\strpos($typeRaw, 'Type') !== false){
+        if (false !== \strpos($typeRaw, 'Type')) {
             $typeArray = \explode(' ', $typeRaw); // e.g. ['<strong>Type</strong><br>', ['Overheidsopdracht']
+
             return \array_pop($typeArray); // e.g. Overheidsopdracht
-        }else{
+        } else {
             return '';
         }
     }
@@ -110,6 +113,7 @@ class File
             $lang = \strtolower(\trim($crawler->text()));
             $attachments[] = [$lang, $crawler->attr('href')];
         });
+
         return $attachments;
     }
 
@@ -138,30 +142,32 @@ class File
     public function getReactionDate(): ?string
     {
         $this->crawler->filterXPath('//div[@class="right-content"]/div/p')->each(function (Crawler $crawler) use (&$reactionDate) {
-            if (\strpos($crawler->html(), 'React untill') !== false
-                || \strpos($crawler->html(), 'Reageren tot') !== false
-                || \strpos($crawler->html(), 'Reagieren bis') !== false
-                || \strpos($crawler->html(), 'Réagir') !== false
+            if (false !== \strpos($crawler->html(), 'React untill')
+                || false !== \strpos($crawler->html(), 'Reageren tot')
+                || false !== \strpos($crawler->html(), 'Reagieren bis')
+                || false !== \strpos($crawler->html(), 'Réagir')
             ) {
                 $pieces = \explode(' ', $crawler->html());
                 $reactionDate = \array_pop($pieces);
             }
         });
+
         return $reactionDate;
     }
 
     public function getClosingDate(): ?string
     {
         $this->crawler->filterXPath('//div[@class="right-content"]/div/p')->each(function (Crawler $crawler) use (&$closingDate) {
-            if (\strpos($crawler->html(), 'Date closing') !== false
-                || \strpos($crawler->html(), 'Sluitingsdatum') !== false
-                || \strpos($crawler->html(), 'Abgabetermin') !== false
-                || \strpos($crawler->html(), 'Date de fermeture') !== false
+            if (false !== \strpos($crawler->html(), 'Date closing')
+                || false !== \strpos($crawler->html(), 'Sluitingsdatum')
+                || false !== \strpos($crawler->html(), 'Abgabetermin')
+                || false !== \strpos($crawler->html(), 'Date de fermeture')
             ) {
                 $pieces = \explode(' ', $crawler->html());
                 $closingDate = \array_pop($pieces);
             }
         });
+
         return $closingDate;
     }
 
@@ -190,9 +196,9 @@ class File
     public function getLinkedContent(): ?string
     {
         $this->crawler->filterXPath('//ul[@class="entity_detail_related_list"]/li/a/@href')->each(function (Crawler $crawler) use (&$linked) {
-            $linked = 'publication:' . \hash('sha1', $crawler->text());
+            $linked = 'publication:'.\hash('sha1', $crawler->text());
         });
+
         return $linked;
     }
-
 }

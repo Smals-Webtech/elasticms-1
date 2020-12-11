@@ -30,17 +30,17 @@ class KPI extends Document
         parent::__construct([
             '_id' => self::createID($row['kpi_id']),
             '_type' => 'kpi',
-            '_source' => array_filter([
+            '_source' => \array_filter([
                 '_contenttype' => 'kpi',
                 'averages' => $this->calculateAverages(),
                 'condition' => $this->condition ? $this->condition->getEMSId() : null,
                 'kpi_id' => $row['kpi_id'],
                 'kpi_type' => $this->type->getEMSId(),
-                'label' =>  $row['kpi_label'] ?? null,
-                'title' =>  \implode(' - ', \array_filter([$row['kpi_id'], $row['kpi_label']])),
+                'label' => $row['kpi_label'] ?? null,
+                'title' => \implode(' - ', \array_filter([$row['kpi_id'], $row['kpi_label']])),
                 'service_window' => $this->serviceWindow ? $this->serviceWindow->getEMSId() : null,
-                'sla' => sprintf('sla:%s', $this->slaId),
-            ])
+                'sla' => \sprintf('sla:%s', $this->slaId),
+            ]),
         ]);
     }
 
@@ -49,7 +49,7 @@ class KPI extends Document
      */
     public function getChildren(): array
     {
-        return array_filter([
+        return \array_filter([
             $this->condition,
             $this->serviceWindow,
             $this->type,
@@ -63,7 +63,7 @@ class KPI extends Document
 
     public static function createID(string $id)
     {
-        return sha1('kpi'.$id);
+        return \sha1('kpi'.$id);
     }
 
     public function getSLAId(): string
@@ -77,7 +77,7 @@ class KPI extends Document
             return [];
         }
 
-        return array_filter([
+        return \array_filter([
             'slo' => $slo,
             'raw' => $this->calculateAverage('b', $slo['percentage']),
             'c1' => $this->calculateAverage('c1', $slo['percentage']),
@@ -93,12 +93,12 @@ class KPI extends Document
             $values[] = $data->getPercentage($type);
         }
 
-        $values = array_filter($values);
-        $average = $values ? floatval(array_sum($values))/count($values) : null;
+        $values = \array_filter($values);
+        $average = $values ? \floatval(\array_sum($values)) / \count($values) : null;
 
-        return array_filter([
+        return \array_filter([
             'percentage' => $average,
-            'class' => $sloAverage && $average ? ($sloAverage > $average ? 'text-danger': 'text-success') : null
+            'class' => $sloAverage && $average ? ($sloAverage > $average ? 'text-danger' : 'text-success') : null,
         ]);
     }
 
@@ -115,10 +115,10 @@ class KPI extends Document
     {
         $monthsInfo = [];
         $regex = '/^(?<info>[a-z0-9]*)_(\d{4}_)?(?<month>\d{2})$/i';
-        $filter = array_filter($row, function ($value) { return $value != null; });
+        $filter = \array_filter($row, function ($value) { return null != $value; });
 
         foreach ($filter as $column => $value) {
-            if (preg_match($regex, $column, $match)) {
+            if (\preg_match($regex, $column, $match)) {
                 $monthsInfo[(int) $match['month']][$match['info']] = $value;
             }
         }

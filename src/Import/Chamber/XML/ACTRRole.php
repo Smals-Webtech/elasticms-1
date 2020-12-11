@@ -6,7 +6,7 @@ use App\Import\Chamber\Import;
 use App\Import\Chamber\Model;
 
 /**
- * Example http://data.dekamer.be/v0/actr/1
+ * Example http://data.dekamer.be/v0/actr/1.
  */
 class ACTRRole extends Model
 {
@@ -62,7 +62,7 @@ class ACTRRole extends Model
             return true;
         }
 
-        if (!isset($this->source['legislature']) || $this->source['orgn_root'] == '03') {
+        if (!isset($this->source['legislature']) || '03' == $this->source['orgn_root']) {
             return false;
         }
 
@@ -76,11 +76,11 @@ class ACTRRole extends Model
 
     protected function clean($value, $key): bool
     {
-        if ($value === '/null') {
+        if ('/null' === $value) {
             return true;
         }
 
-        if ($key === 'orgn:functionSummary' && empty($value)) {
+        if ('orgn:functionSummary' === $key && empty($value)) {
             return true;
         }
 
@@ -107,7 +107,7 @@ class ACTRRole extends Model
             'actr:description_NL',
             'actr:finalMotif',
             'actr:rangNr',
-            'actr:successorRole'
+            'actr:successorRole',
         ];
     }
 
@@ -123,13 +123,13 @@ class ACTRRole extends Model
             'actr:beginDate' => ['source', 'date_start', $dateCallback],
             'actr:endDate' => ['source', 'date_end', $dateCallback],
             'actr:theoreticalEndDate' => ['source', 'date_theoretical_end', $dateCallback],
-            'actr:prestationDate' => ['source', 'date_presentation', $dateCallback]
+            'actr:prestationDate' => ['source', 'date_presentation', $dateCallback],
         ];
     }
 
     protected function parseStatus(string $value)
     {
-        $this->source['active'] = $value == 'active';
+        $this->source['active'] = 'active' == $value;
     }
 
     public function parseOrgnfunctionSummary($value)

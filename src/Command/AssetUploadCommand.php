@@ -51,7 +51,7 @@ class AssetUploadCommand extends Command implements CommandInterface
         }
 
         foreach ($folders as $folder) {
-            $sfStyle->section(sprintf('processing folder %s', $folder));
+            $sfStyle->section(\sprintf('processing folder %s', $folder));
 
             $files = new \RecursiveIteratorIterator(
                 new \RecursiveDirectoryIterator($folder),
@@ -64,34 +64,33 @@ class AssetUploadCommand extends Command implements CommandInterface
 
             foreach ($files as $name => $file) {
                 /** @var $file \SplFileInfo */
-
                 $filePath = $file->getPathname();
 
                 if ($file->isDir()) {
                     continue;
                 }
 
-                $sha1File = sha1_file($file->getPathname());
+                $sha1File = \sha1_file($file->getPathname());
 
-                $this->fileService->uploadFile(basename($filePath), mime_content_type($filePath), $filePath, 'admin');
+                $this->fileService->uploadFile(\basename($filePath), \mime_content_type($filePath), $filePath, 'admin');
 
                 if (!$this->fileService->head($sha1File)) {
                     $this->fileService->create($sha1File, $filePath);
-                    $sfStyle->writeln(sprintf('created file %s with sha1 %s', $filePath, $sha1File));
+                    $sfStyle->writeln(\sprintf('created file %s with sha1 %s', $filePath, $sha1File));
                 }
 
                 $this->extractor->extractData($sha1File);
 
-                $counter++;
+                ++$counter;
 
-                if ($counter%25 === 0) {
+                if (0 === $counter % 25) {
                     $processBar->advance(25);
                 }
 
                 $this->em->clear();
             }
 
-            $processBar->advance($counter%25);
+            $processBar->advance($counter % 25);
             $processBar->finish();
         }
     }

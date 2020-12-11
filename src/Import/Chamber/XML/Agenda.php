@@ -18,7 +18,7 @@ class Agenda extends Model
         $this->process($data);
 
         $time = $this->data['time'] ?? '00:00:00';
-        $this->date = \DateTime::createFromFormat('Y-m-dH:i:s', ($this->data['date']. $time));
+        $this->date = \DateTime::createFromFormat('Y-m-dH:i:s', ($this->data['date'].$time));
         $this->source['date_agenda'] = $this->date->format('Y-m-d H:i:s');
         $this->source['date_day_agenda'] = $this->date->format('Y-m-d');
         $this->source['date_hour_agenda'] = $this->date->format('H:i:s');
@@ -26,7 +26,7 @@ class Agenda extends Model
 
         $title = $this->date->format('d-m-Y');
         if (isset($this->data['time'])) {
-            $title .= ' ' . $this->date->format('H:i');
+            $title .= ' '.$this->date->format('H:i');
         }
         $this->source['title_nl'] = $title;
         $this->source['title_fr'] = $title;
@@ -49,7 +49,7 @@ class Agenda extends Model
         return [
             '@schemaVersion', '@modification',
             'title', 'id', 'organ', 'date', 'time', 'status',
-            'building', 'room', 'meetingNumber', 'agenda'
+            'building', 'room', 'meetingNumber', 'agenda',
         ];
     }
 
@@ -71,16 +71,18 @@ class Agenda extends Model
     {
         $this->source['agenda_organ'] = $value;
 
-        if (\strtolower($value) === 'plen') {
+        if ('plen' === \strtolower($value)) {
             $this->source['type_agenda'] = 'plen';
+
             return;
         }
-        if (\strtolower(\substr($value, 0, 4)) === 'comm') {
+        if ('comm' === \strtolower(\substr($value, 0, 4))) {
             $this->source['type_agenda'] = 'ci';
+
             return;
         }
 
-        throw new \RuntimeException(sprintf('invalid organ %s', $value));
+        throw new \RuntimeException(\sprintf('invalid organ %s', $value));
     }
 
     protected function parseTitle(array $data): void
@@ -141,8 +143,6 @@ class Agenda extends Model
                     }
                 }
             }
-
-
         }
         $normalize['section'] = $sections;
 
@@ -152,10 +152,10 @@ class Agenda extends Model
     private function normalize(array &$data)
     {
         foreach ($data as $key => &$value) {
-            if ($key === 'id') {
+            if ('id' === $key) {
                 unset($data[$key]);
                 continue;
-            } elseif ($key === 'label') {
+            } elseif ('label' === $key) {
                 foreach ($value as $label) {
                     if (null != $label['#']) {
                         $data[$label['@lang']] = $label['#'];
@@ -165,8 +165,8 @@ class Agenda extends Model
                 continue;
             }
 
-            if (is_array($value)) {
-                $value = array_filter($value);
+            if (\is_array($value)) {
+                $value = \array_filter($value);
                 if (null == $value) {
                     unset($data[$key]);
                 } else {
@@ -176,13 +176,13 @@ class Agenda extends Model
                 }
             }
 
-            if ($key === 'description' || $key === 'link') {
+            if ('description' === $key || 'link' === $key) {
                 foreach ($value as $k => $v) {
                     $data[$key.'_'.$k] = $v;
                 }
                 unset($data[$key]);
-            } elseif (substr($key, 0, 1) === '@') {
-                $data[substr($key, 1)] = $value;
+            } elseif ('@' === \substr($key, 0, 1)) {
+                $data[\substr($key, 1)] = $value;
                 unset($data[$key]);
             }
         }

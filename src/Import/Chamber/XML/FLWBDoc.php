@@ -25,7 +25,7 @@ class FLWBDoc
         '1' => 'AUTEUR, AUTEUR',
         '2' => 'SUCCESSEUR-AUTEUR, OVERNEMER-AUTEUR',
         '3' => 'SIGNATAIRE, ONDERTEKENAAR',
-        '4' => 'SUCCESSEUR-SIGNATAIRE, OVERNEMER-ONDERTEKENAAR'
+        '4' => 'SUCCESSEUR-SIGNATAIRE, OVERNEMER-ONDERTEKENAAR',
     ];
     const TYPES_OWNER = [
         'K' => 'KAMER, CHAMBRE',
@@ -80,13 +80,14 @@ class FLWBDoc
     public function getSource(): array
     {
         $source = $this->source;
-        ksort($source);
+        \ksort($source);
+
         return \array_filter($source, [Model::class, 'arrayFilterFunction']);
     }
 
     public function isMainDocChamber(): bool
     {
-        return (isset($this->source['number_doc']) && $this->source['number_doc'] === '1') && (isset($this->source['owner_code']) && $this->source['owner_code'] === 'K');
+        return (isset($this->source['number_doc']) && '1' === $this->source['number_doc']) && (isset($this->source['owner_code']) && 'K' === $this->source['owner_code']);
     }
 
     public function getDocType(): ?string
@@ -96,18 +97,18 @@ class FLWBDoc
 
     public function getDocTypes(): array
     {
-        return isset($this->source['doc_type']) ? array_filter(array_merge([$this->source['doc_type']], $this->subDocTypes), [Model::class, 'arrayFilterFunction']) : [];
+        return isset($this->source['doc_type']) ? \array_filter(\array_merge([$this->source['doc_type']], $this->subDocTypes), [Model::class, 'arrayFilterFunction']) : [];
     }
 
     public static function makeDocType(string $code, string $label): ?string
     {
         foreach (self::DOC_TYPES as $key => $codes) {
-            if (in_array($code, $codes, true)) {
+            if (\in_array($code, $codes, true)) {
                 return $key;
             }
         }
 
-        if (\stripos('ADOPTE', $label) !== false) {
+        if (false !== \stripos('ADOPTE', $label)) {
             return 'flwb_doc_type.text_adopted';
         }
 
@@ -120,7 +121,7 @@ class FLWBDoc
             'BICAM_SDOCNAME', 'DOCNR', 'MAIN_VOLGNR', 'LEGISL', 'SESSION',
             'OWNER', 'DEPOTDAT', 'MAINDOC_TYPE', 'DISTRIBUTION_DATE',
             'ENVOI', 'VOTE', 'CONSID', 'CADUC', 'COMMENTS',
-            'MAINDOC_JOINTDOCS', 'AUTEURM', 'SUBDOCS', 'EXCADUC', 'MAIN_PDFDOC'
+            'MAINDOC_JOINTDOCS', 'AUTEURM', 'SUBDOCS', 'EXCADUC', 'MAIN_PDFDOC',
         ];
     }
 
@@ -151,11 +152,11 @@ class FLWBDoc
 
     protected function parseMAIN_PDFDOC(array $value): void
     {
-        if($value['DOCLINK'] === ''){
+        if ('' === $value['DOCLINK']) {
             return;
         }
         $this->source['main_pdfdoc']['doc_link'] = $value['DOCLINK'];
-        if(isset($value['DOCDATE']) && $value['DOCDATE'] !== ''){
+        if (isset($value['DOCDATE']) && '' !== $value['DOCDATE']) {
             $this->source['main_pdfdoc']['doc_date'] = $value['DOCDATE'];
         }
         $this->source['main_pdfdoc']['film'] = $value['FILM'];
@@ -164,9 +165,9 @@ class FLWBDoc
 
     protected function parseOWNER(array $value): void
     {
-
-        if (is_array($value['OWNER_KODE'])) {
+        if (\is_array($value['OWNER_KODE'])) {
             $this->source['owner_code'] = $value['OWNER_KODE']['OWNER'];
+
             return;
         }
 
@@ -175,7 +176,6 @@ class FLWBDoc
         }
 
         $this->source['owner_code'] = $value['OWNER_KODE'];
-
     }
 
     protected function parseMAINDOC_TYPE(array $value): void
@@ -195,10 +195,10 @@ class FLWBDoc
 
     protected function parseCOMMENTS(array $value): void
     {
-        if (!empty($value['COMMENTS_textF']) && $value['COMMENTS_textF'] != ' ') {
+        if (!empty($value['COMMENTS_textF']) && ' ' != $value['COMMENTS_textF']) {
             $this->source['comments_fr'] = $value['COMMENTS_textF'];
         }
-        if (!empty($value['COMMENTS_textN']) && $value['COMMENTS_textN'] != ' ') {
+        if (!empty($value['COMMENTS_textN']) && ' ' != $value['COMMENTS_textN']) {
             $this->source['comments_nl'] = $value['COMMENTS_textN'];
         }
     }
@@ -209,10 +209,10 @@ class FLWBDoc
         $nested = isset($mainDoc['MAINDOC_JOINTDOC_NRJ']) ? [$mainDoc] : $mainDoc;
 
         foreach ($nested as $item) {
-            if (empty($item['MAINDOC_JOINTDOC_TYPE_textF'] || empty($item['MAINDOC_JOINTDOC_TYPE_textN']))){
+            if (empty($item['MAINDOC_JOINTDOC_TYPE_textF'] || empty($item['MAINDOC_JOINTDOC_TYPE_textN']))) {
                 continue;
             }
-            $this->source['join_docs'][] = array_merge([
+            $this->source['join_docs'][] = \array_merge([
                 'doc_type_fr' => $item['MAINDOC_JOINTDOC_TYPE_textF'],
                 'doc_type_nl' => $item['MAINDOC_JOINTDOC_TYPE_textN'],
             ], $this->flwb->createFileInfo($item['MAINDOC_JOINTDOC_NRJ']));
@@ -224,10 +224,10 @@ class FLWBDoc
         $nested = isset($value['AUTEURM_SLEUTEL']) ? [$value] : $value;
 
         foreach ($nested as $item) {
-            if (isset($item['AUTEURM_FAMNAAM']) && $item['AUTEURM_FAMNAAM'] === 'NOT FOUND') {
+            if (isset($item['AUTEURM_FAMNAAM']) && 'NOT FOUND' === $item['AUTEURM_FAMNAAM']) {
                 continue;
             }
-            if (isset($item['AUTEURM_SLEUTEL']) && $item['AUTEURM_SLEUTEL'] === '000000') {
+            if (isset($item['AUTEURM_SLEUTEL']) && '000000' === $item['AUTEURM_SLEUTEL']) {
                 continue;
             }
             $type = $item['AUTEURM_TYPE'];
@@ -255,7 +255,7 @@ class FLWBDoc
 
         foreach ($nested as $data) {
             if (isset($data['SUB_PDFDOC']['SUB_PDFDOC_DOCLINK']) &&
-                ($data['SUB_PDFDOC']['SUB_PDFDOC_DOCLINK'] === 'NONE' || $data['SUB_PDFDOC']['SUB_PDFDOC_DOCLINK'] === '')){
+                ('NONE' === $data['SUB_PDFDOC']['SUB_PDFDOC_DOCLINK'] || '' === $data['SUB_PDFDOC']['SUB_PDFDOC_DOCLINK'])) {
                 continue;
             }
             $subDoc = new FLWBDocSub($this->flwb, $this->logger, $data);

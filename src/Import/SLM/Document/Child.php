@@ -13,7 +13,7 @@ class Child
 
     private function __construct(string $type, string $label)
     {
-        $this->id = sha1($type.$label);
+        $this->id = \sha1($type.$label);
         $this->type = $type;
         $this->label = $label;
     }
@@ -35,7 +35,7 @@ class Child
 
     public function getEMSId(): string
     {
-        return sprintf('%s:%s', $this->type, $this->id);
+        return \sprintf('%s:%s', $this->type, $this->id);
     }
 
     public static function create(string $type, ?string $label = null): ?Child

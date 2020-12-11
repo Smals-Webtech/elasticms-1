@@ -30,13 +30,13 @@ class ORGN extends Model implements ParentDocument
 
         parent::__construct($import, Model::TYPE_ORGN, $this->source['id_orgn']);
 
-        if ($this->source['type_orgn'] === 'commission') {
+        if ('commission' === $this->source['type_orgn']) {
             $this->source['commission_group_id'] = $orgnCode->getGroup();
             $this->source['commission_group_nl'] = $orgnCode->getTranslation('group', 'nl');
             $this->source['commission_group_fr'] = $orgnCode->getTranslation('group', 'fr');
         }
 
-        if ($this->source['type_orgn'] === 'political_group') {
+        if ('political_group' === $this->source['type_orgn']) {
             $this->children[] = new ORGNParty($import, $this);
         }
 
@@ -57,7 +57,7 @@ class ORGN extends Model implements ParentDocument
 
     protected function clean($value, $key): bool
     {
-        if(\in_array($key, ['actr:children', 'orgn:memberships'], true) && !\is_array($value)) {
+        if (\in_array($key, ['actr:children', 'orgn:memberships'], true) && !\is_array($value)) {
             return true;
         }
 
@@ -128,7 +128,7 @@ class ORGN extends Model implements ParentDocument
         $roles = [];
 
         foreach ($nested as $role) {
-            if (false === $activeRoles && $role['@status'] === 'active') {
+            if (false === $activeRoles && 'active' === $role['@status']) {
                 $activeRoles = true;
             }
 
@@ -141,7 +141,7 @@ class ORGN extends Model implements ParentDocument
 
     private function setSearch(Import $import)
     {
-        if (isset($this->source['type_orgn']) && $this->source['type_orgn'] === 'commission') {
+        if (isset($this->source['type_orgn']) && 'commission' === $this->source['type_orgn']) {
             $dates = $import->getLegislatureDates([$this->source['legislature']]);
 
             $this->source['search_id'] = $this->source['id_orgn'];

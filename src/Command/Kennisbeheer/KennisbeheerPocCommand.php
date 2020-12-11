@@ -2,7 +2,7 @@
 
 namespace App\Command\Kennisbeheer;
 
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Elasticsearch\Bulk\Bulker;
 use GuzzleHttp\Client as HttpClient;
@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Proof of concept for importing kenninsbeheer data from hippo to elasticsearch
+ * Proof of concept for importing kenninsbeheer data from hippo to elasticsearch.
  */
 class KennisbeheerPocCommand extends Command implements CommandInterface
 {
@@ -51,7 +51,7 @@ class KennisbeheerPocCommand extends Command implements CommandInterface
         $httpClient = new HttpClient([
             'base_uri' => self::$url,
             'timeout' => 30,
-            'auth' => [$input->getArgument('username'), $input->getArgument('password')]
+            'auth' => [$input->getArgument('username'), $input->getArgument('password')],
         ]);
 
         $xpath = "//*[@kennisbeheer:public_flag='true' and hippo:availability='live']";
@@ -88,21 +88,21 @@ class KennisbeheerPocCommand extends Command implements CommandInterface
         $document = [];
 
         $list->filterXPath('//li[@type="circle"]/a')->each(function (Crawler $circle) use (&$document, $path) {
-            $text = trim(preg_replace('/\s+/', ' ', $circle->text()));
+            $text = \trim(\preg_replace('/\s+/', ' ', $circle->text()));
 
-            $document[$text] = $path . substr($circle->attr('href'), 1);
+            $document[$text] = $path.\substr($circle->attr('href'), 1);
         });
 
         $list->filterXPath('//li[@type="disc"]')->each(function (Crawler $disc) use (&$document) {
-            $text = trim(preg_replace('/\s+/', ' ', $disc->text()));
+            $text = \trim(\preg_replace('/\s+/', ' ', $disc->text()));
             $regex = '/\[.*="(?<label>.*)"\] = (?<value>.*)/';
-            preg_match($regex, $text, $matches);
+            \preg_match($regex, $text, $matches);
 
             $label = $matches['label'];
             $value = $matches['value'];
 
-            if (preg_match('/^\[(?<data>.*)]$/', $value, $valueMatch)) {
-                $value = array_filter(explode(', ', $valueMatch['data']));
+            if (\preg_match('/^\[(?<data>.*)]$/', $value, $valueMatch)) {
+                $value = \array_filter(\explode(', ', $valueMatch['data']));
             }
 
             $document[$label] = $value;
@@ -113,22 +113,22 @@ class KennisbeheerPocCommand extends Command implements CommandInterface
 
     private function searchXpath(HttpClient $httpClient, $xpath, $limit = 1000)
     {
-        $response = $httpClient->get('/cms/repository/?'.http_build_query(['xpath' => $xpath, 'limit' => $limit]));
+        $response = $httpClient->get('/cms/repository/?'.\http_build_query(['xpath' => $xpath, 'limit' => $limit]));
         $contents = $response->getBody()->getContents();
 
         $re = '/Number of results found: (?<count>\d+)/m';
-        preg_match($re, $contents, $matches, PREG_OFFSET_CAPTURE, 0);
+        \preg_match($re, $contents, $matches, PREG_OFFSET_CAPTURE, 0);
         $total = (int) $matches['count'][0];
 
         if ($total > $limit) {
-            throw new \RuntimeException(sprintf('Not everything is returned, limit: %d, total: %d', $limit, $total));
+            throw new \RuntimeException(\sprintf('Not everything is returned, limit: %d, total: %d', $limit, $total));
         }
 
         $crawler = new Crawler();
         $crawler->addHtmlContent($contents);
         $table = $crawler->filterXPath('//html/body/table[@summary="searchresult"]');
 
-        $headers = $table->filterXPath('//th')->each(function (Crawler $th){
+        $headers = $table->filterXPath('//th')->each(function (Crawler $th) {
             return $th->html();
         });
 
@@ -137,9 +137,9 @@ class KennisbeheerPocCommand extends Command implements CommandInterface
                 return $td->html();
             });
 
-            return ($values ? array_combine($headers, $values) : null);
+            return $values ? \array_combine($headers, $values) : null;
         });
 
-        return array_filter($data);
+        return \array_filter($data);
     }
 }

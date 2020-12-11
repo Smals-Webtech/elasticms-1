@@ -12,8 +12,12 @@ class ImportDocument
     private $name;
     /** @var int */
     private $year;
+    /** @var array<mixed> */
     private $files = [];
 
+    /**
+     * @param array<mixed> $document
+     */
     public function __construct(array $document, FileService $fileService)
     {
         $source = $document['_source'];
@@ -40,7 +44,7 @@ class ImportDocument
     public function getCSVFile(): string
     {
         foreach ($this->files as $file) {
-            if ($file['extension'] === 'csv') {
+            if ('csv' === $file['extension']) {
                 return $file['file'];
             }
         }
@@ -48,11 +52,14 @@ class ImportDocument
         throw new \Exception('csv file not found!');
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getFiles(string $extension): array
     {
         $files = $this->files;
 
-        return array_filter($files, function (array $file) use ($extension) {
+        return \array_filter($files, function (array $file) use ($extension) {
             return $file['extension'] === $extension;
         });
     }

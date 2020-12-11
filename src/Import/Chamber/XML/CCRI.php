@@ -22,7 +22,7 @@ class CCRI implements CollectionInterface
         $data = $this->xmlToArray($file);
         $legislature = $data['@leg'];
 
-        if  ($import->existLegislature($legislature)) {
+        if ($import->existLegislature($legislature)) {
             foreach ($data['MEETING'] as $meeting) {
                 $this->collection[] = new Report($import, Model::TYPE_CCRI, SearchCategories::CAT_CCRI, $legislature, $meeting, $extractorService);
             }
@@ -30,7 +30,7 @@ class CCRI implements CollectionInterface
         }
     }
 
-    public function getCollection() : array
+    public function getCollection(): array
     {
         return $this->collection;
     }

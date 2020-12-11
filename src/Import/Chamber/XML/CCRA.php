@@ -22,7 +22,7 @@ class CCRA implements CollectionInterface
         $data = $this->xmlToArray($file);
         $legislature = $data['@leg'];
 
-        if  ($import->existLegislature($legislature)) {
+        if ($import->existLegislature($legislature)) {
             foreach ($data['MEETING'] as $meeting) {
                 $this->collection[] = new Report($import, Model::TYPE_CCRA, SearchCategories::CAT_CCRA, $legislature, $meeting, $extractorService);
             }
@@ -30,7 +30,7 @@ class CCRA implements CollectionInterface
         }
     }
 
-    public function getCollection() : array
+    public function getCollection(): array
     {
         return $this->collection;
     }

@@ -8,7 +8,7 @@ class SearchTypes
 
     public static function single($type, int $legislature): array
     {
-        $types = is_array($type) ? $type : [$type];
+        $types = \is_array($type) ? $type : [$type];
 
         return [
             'legislature' => $legislature,
@@ -25,22 +25,22 @@ class SearchTypes
 
     public function hasTypes(): bool
     {
-        return $this->types != null;
+        return null != $this->types;
     }
 
     public function addTypes(array $types, string $legislature = null): void
     {
-        $key = $legislature === null ? 'global' : $legislature;
+        $key = null === $legislature ? 'global' : $legislature;
 
         if (isset($this->types[$key]['types'])) {
             $this->types[$key]['types'] = $this->mergeTypes($this->types[$key]['types'], $types);
         } else {
-            $this->types[$key] = array_filter(['legislature' => $legislature, 'types' => $types]);
+            $this->types[$key] = \array_filter(['legislature' => $legislature, 'types' => $types]);
         }
     }
 
     /**
-     * Add global types to all other legislatures
+     * Add global types to all other legislatures.
      */
     private function mergeGlobal(): void
     {
@@ -51,7 +51,7 @@ class SearchTypes
         $global = $this->types['global'];
 
         foreach ($this->types as $legislature => &$type) {
-            if ($legislature === 'all') {
+            if ('all' === $legislature) {
                 continue;
             }
 
@@ -61,6 +61,6 @@ class SearchTypes
 
     private function mergeTypes(array $current, array $merge): array
     {
-        return \array_values(array_unique(array_merge($current, $merge)));
+        return \array_values(\array_unique(\array_merge($current, $merge)));
     }
 }

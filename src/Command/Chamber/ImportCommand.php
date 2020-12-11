@@ -7,7 +7,7 @@ use App\Import\Chamber\IndexHelper;
 use App\Import\Chamber\Model;
 use App\Import\Chamber\ModelFactory;
 use App\Import\Chamber\XML\MTNG;
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Storage\StorageManager;
 use EMS\CoreBundle\Elasticsearch\Bulker;
@@ -40,9 +40,9 @@ class ImportCommand extends Command implements CommandInterface
         Model::TYPE_CCRI => '/^CI_.*.xml$/',
         Model::TYPE_PCRI => '/^PI_.*.xml$/',
     ];
-    /**  @var AssetExtractorService */
+    /** @var AssetExtractorService */
     private $extractorService;
-    /**  @var StorageManager */
+    /** @var StorageManager */
     private $storageManager;
     /** @var FileService */
     private $fileService;
@@ -64,7 +64,7 @@ class ImportCommand extends Command implements CommandInterface
         $this
             ->setDescription('Import Chamber')
             ->addArgument('dir', InputArgument::REQUIRED, 'directory')
-            ->addArgument('type', InputArgument::REQUIRED, sprintf('type [%s]', implode(', ', array_keys(Model::TYPES))))
+            ->addArgument('type', InputArgument::REQUIRED, \sprintf('type [%s]', \implode(', ', \array_keys(Model::TYPES))))
             ->addArgument('importId', InputArgument::REQUIRED, 'importId')
             ->addOption('environment', null, InputOption::VALUE_REQUIRED, 'ems env default template')
             ->addOption('pattern', null, InputOption::VALUE_REQUIRED, 'regex of file to import', '.*')
@@ -85,11 +85,11 @@ class ImportCommand extends Command implements CommandInterface
         }
 
         $type = $input->getArgument('type');
-        if ($input->getOption('keepCV') && $type !== Model::TYPE_ACTR) {
-            throw new \RuntimeException(sprintf('The option "--keepCV" can only be used for the type "%s"', Model::TYPE_ACTR));
+        if ($input->getOption('keepCV') && Model::TYPE_ACTR !== $type) {
+            throw new \RuntimeException(\sprintf('The option "--keepCV" can only be used for the type "%s"', Model::TYPE_ACTR));
         }
         if ($input->getOption('append') && \in_array($type, IndexHelper::INDEX_BREAKS_WITH_APPEND)) {
-            throw new \RuntimeException(sprintf('The option "--append" is not allowed for the type "%s"', $type));
+            throw new \RuntimeException(\sprintf('The option "--append" is not allowed for the type "%s"', $type));
         }
     }
 
@@ -98,7 +98,7 @@ class ImportCommand extends Command implements CommandInterface
         list($dir, $type, $importId, $environment, $dry, $clean, $limit, $bulkSize, $dryPdf, $append, $keepCv, $pattern) = $this->getOptions($input);
 
         $style = new SymfonyStyle($input, $output);
-        $style->title(sprintf('Chamber import %s from %s', $type, $dir));
+        $style->title(\sprintf('Chamber import %s from %s', $type, $dir));
 
         $logger = new ConsoleLogger($output);
         $this->indexer->setLogger($logger);
@@ -124,11 +124,12 @@ class ImportCommand extends Command implements CommandInterface
         if ($this->bulker->hasErrors()) {
             $style->warning('Rolling back indexes! Processing of Children cancelled');
             $indexHelper->rollbackIndexes();
+
             return;
         }
 
         foreach ($factory->getChildren() as list($childType, $children)) {
-            $style->section(sprintf('Collected %d %s', \count($children), $childType));
+            $style->section(\sprintf('Collected %d %s', \count($children), $childType));
 
             if (!$dry) {
                 $childProgress = $style->createProgressBar(\count($children));
@@ -158,35 +159,35 @@ class ImportCommand extends Command implements CommandInterface
     {
         return [
             $input->getArgument('dir'),
-            strtolower($input->getArgument('type')),
-            strtolower($input->getArgument('importId')),
+            \strtolower($input->getArgument('type')),
+            \strtolower($input->getArgument('importId')),
             $input->getOption('environment') ?? 'template',
-            (bool)$input->getOption('dry'),
-            (bool)$input->getOption('clean'),
-            (int)$input->getOption('limit') > 0 ? (int)$input->getOption('limit') : null,
-            (int)$input->getOption('bulkSize') > 0 ? (int)$input->getOption('bulkSize') : 500,
-            (bool)$input->getOption('dryPdf'),
-            (string)$input->getOption('append'),
-            (bool)$input->getOption('keepCV'),
-            (string)$input->getOption('pattern'),
+            (bool) $input->getOption('dry'),
+            (bool) $input->getOption('clean'),
+            (int) $input->getOption('limit') > 0 ? (int) $input->getOption('limit') : null,
+            (int) $input->getOption('bulkSize') > 0 ? (int) $input->getOption('bulkSize') : 500,
+            (bool) $input->getOption('dryPdf'),
+            (string) $input->getOption('append'),
+            (bool) $input->getOption('keepCV'),
+            (string) $input->getOption('pattern'),
         ];
     }
 
     private function findFiles(SymfonyStyle $style, string $dir, string $type, string $pattern = '.*'): \Generator
     {
-        if ($type === Model::TYPE_MTNG) {
+        if (Model::TYPE_MTNG === $type) {
             yield from MTNG::findFiles($style, $dir);
         } else {
             $regex = self::REGEX[$type] ?? '/^.*.xml$/';
-            $regex = str_replace('.*', $pattern, $regex);
+            $regex = \str_replace('.*', $pattern, $regex);
             $files = Finder::create()->in($dir)->files()->name($regex);
 
             $progress = $style->createProgressBar($files->count());
             $progress->start();
 
             foreach ($files as $file) {
-                /** @var $file SplFileInfo */
-                $style->write('   ' . $file->getFilename());
+                /* @var $file SplFileInfo */
+                $style->write('   '.$file->getFilename());
                 yield $file;
                 $progress->advance();
             }

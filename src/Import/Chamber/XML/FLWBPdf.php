@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Import\Chamber\XML;
 
 use App\Import\Chamber\Import;
@@ -42,9 +41,9 @@ class FLWBPdf
         $this->filename = $source['file']['filename'];
         $this->filepath = $source['file']['path'];
         $this->filelabel = $source['file']['label'];
-        $this->file = $this->import->getRootDir() . '/' . $this->filepath . $this->filename;
+        $this->file = $this->import->getRootDir().'/'.$this->filepath.$this->filename;
 
-        $this->hash = sha1_file($this->file);
+        $this->hash = \sha1_file($this->file);
         $this->content = $this->extractorService->extractData($this->hash, $this->file);
     }
 
@@ -56,10 +55,10 @@ class FLWBPdf
     public function getSearchTypes()
     {
         $searchTypes = [SearchCategories::CAT_FLWB_PDF];
-        if( FLWBDoc::DOC_TYPE_AMENDMENT === ($this->source['doc_type'] ?? false)) {
+        if (FLWBDoc::DOC_TYPE_AMENDMENT === ($this->source['doc_type'] ?? false)) {
             $searchTypes[] = SearchCategories::CAT_FLWB_AMENDMENT;
         }
-        if( FLWBDoc::DOC_TYPE_COMMISSION_REPORT === ($this->source['doc_type'] ?? false)) {
+        if (FLWBDoc::DOC_TYPE_COMMISSION_REPORT === ($this->source['doc_type'] ?? false)) {
             $searchTypes[] = SearchCategories::CAT_FLWB_COMMISSION_REPORT;
         }
 

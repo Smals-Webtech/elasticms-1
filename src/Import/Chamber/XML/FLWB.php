@@ -11,7 +11,7 @@ use EMS\CoreBundle\Service\FileService;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * FLWB (NL: Wetsvoorstel, FR: Propoistion de loi, EN: Legislation)
+ * FLWB (NL: Wetsvoorstel, FR: Propoistion de loi, EN: Legislation).
  */
 class FLWB extends Model implements ParentDocument
 {
@@ -46,28 +46,27 @@ class FLWB extends Model implements ParentDocument
         $this->source['keywords_fr'] = [];
         $this->source['keywords_nl'] = [];
 
-
         $this->process($this->xmlToArray($file));
         $this->setSearch($import->getLegislature($this->source['legislature']));
 
-        parent::__construct($import, Model::TYPE_FLWB, $this->source['legislature'] . $this->source['id_flwb']);
+        parent::__construct($import, Model::TYPE_FLWB, $this->source['legislature'].$this->source['id_flwb']);
     }
 
     public function getActor(string $type, string $ksegna, string $firstName, string $lastName, ?string $party): string
     {
-        $fullName = sprintf('%s %s', $firstName, $lastName);
+        $fullName = \sprintf('%s %s', $firstName, $lastName);
 
         return $this->import->searchActor->get($this->source['legislature'], $type, $ksegna, $fullName, $party);
     }
 
     public function createFileInfo(string $name): array
     {
-        $info = ['label' => $name, 'filename' => sprintf('%s.pdf', $name)];
+        $info = ['label' => $name, 'filename' => \sprintf('%s.pdf', $name)];
 
-        preg_match('/(?P<leg>\d{2})(?P<type>K|S|R)(?P<folder>\d{4})/', $name, $match);
+        \preg_match('/(?P<leg>\d{2})(?P<type>K|S|R)(?P<folder>\d{4})/', $name, $match);
 
         if ('K' === $match['type']) {
-            $info['path'] = sprintf('FLWB/Pdf/%d/%s/', $match['leg'], $match['folder']);
+            $info['path'] = \sprintf('FLWB/Pdf/%d/%s/', $match['leg'], $match['folder']);
         } elseif ('S' === $match['type']) {
             $senateLeg = ($match['leg'] - 48); //49 is 1
             if ($senateLeg >= 1) {
@@ -87,7 +86,7 @@ class FLWB extends Model implements ParentDocument
 
     public function getChildren(): array
     {
-        return array_merge($this->children, $this->keywords->all());
+        return \array_merge($this->children, $this->keywords->all());
     }
 
     public function hasPublicationDate(): bool
@@ -112,20 +111,20 @@ class FLWB extends Model implements ParentDocument
 
     public function inStatusChamber(string $locale, string $search): bool
     {
-        if (!isset($this->source['status_chamber_' . $locale])) {
+        if (!isset($this->source['status_chamber_'.$locale])) {
             return false;
         }
 
-        return strpos(strtoupper($this->source['status_chamber_' . $locale]), strtoupper($search));
+        return \strpos(\strtoupper($this->source['status_chamber_'.$locale]), \strtoupper($search));
     }
 
     public function inTitle(string $search): bool
     {
-        $titles = array_unique(array_filter($this->titles));
-        $pattern = sprintf('/.*%s.*/i', $search);
+        $titles = \array_unique(\array_filter($this->titles));
+        $pattern = \sprintf('/.*%s.*/i', $search);
 
         foreach ($titles as $title) {
-            if (preg_match($pattern, $title)) {
+            if (\preg_match($pattern, $title)) {
                 return true;
             }
         }
@@ -140,17 +139,17 @@ class FLWB extends Model implements ParentDocument
 
     protected function clean($value, $key): bool
     {
-        if ($value === 'nothing' && $key === '@FIELD') {
+        if ('nothing' === $value && '@FIELD' === $key) {
             return true;
         }
-        if (is_array($value)) {
+        if (\is_array($value)) {
             return empty($value);
         }
 
-        if (trim($value) === '') {
+        if ('' === \trim($value)) {
             return true;
         }
-        if (($key === 'MONITEUR_nr' || $key === 'COMPET_BEVOEGD_AANTALDAG') && $value === '000') {
+        if (('MONITEUR_nr' === $key || 'COMPET_BEVOEGD_AANTALDAG' === $key) && '000' === $value) {
             return true;
         }
 
@@ -161,7 +160,7 @@ class FLWB extends Model implements ParentDocument
     {
         return [
             'SDOCNAME', 'ID', 'TITLE', 'TITLE_SHORT', 'TERMART', 'SITU', 'LEG', 'BICAM', 'COMMISSIES', 'COMPET_BEVOEGD',
-            'TREFWOORDEN', 'VOTEKAMER', 'VOTESENAAT', 'VOTEMOT', 'VOTECAN', 'PUBLIC', 'MAIN_DEPOTDAT', 'COPY', 'FirstBorn'
+            'TREFWOORDEN', 'VOTEKAMER', 'VOTESENAAT', 'VOTEMOT', 'VOTECAN', 'PUBLIC', 'MAIN_DEPOTDAT', 'COPY', 'FirstBorn',
         ];
     }
 
@@ -177,7 +176,7 @@ class FLWB extends Model implements ParentDocument
             return Model::createDate($value);
         };
         $notYesCallback = function (string $value) {
-            return strtoupper($value) !== 'N';
+            return 'N' !== \strtoupper($value);
         };
 
         return [
@@ -199,12 +198,12 @@ class FLWB extends Model implements ParentDocument
 
     protected function parseSDOCNAME(string $value): void
     {
-        preg_match('/(\d+)(?P<type>K|S|R)(?P<id>\d+)/', $value, $match);
+        \preg_match('/(\d+)(?P<type>K|S|R)(?P<id>\d+)/', $value, $match);
         $types = ['K' => 'chamber', 'S' => 'senate', 'R' => 'united'];
 
         $this->source['id_flwb'] = $value;
-        $this->source['id_flwb_short'] = substr($value, -4);
-        $this->source['id_number'] = intval(substr($value, -4));
+        $this->source['id_flwb_short'] = \substr($value, -4);
+        $this->source['id_number'] = \intval(\substr($value, -4));
 
         if ('R' == $match['type']) {
             $this->source['types_flwb'] = [$types['K'], $types['S']];
@@ -258,7 +257,7 @@ class FLWB extends Model implements ParentDocument
 
     protected function parseTERMART(array $value): void
     {
-        $this->source['constitution_number'] = (int)$value['TERMART_KODE'];
+        $this->source['constitution_number'] = (int) $value['TERMART_KODE'];
         $this->source['constitution_fr'] = $value['TERMART_FR'] ?? null;
         $this->source['constitution_nl'] = $value['TERMART_NL'] ?? null;
     }
@@ -287,12 +286,12 @@ class FLWB extends Model implements ParentDocument
                 $this->mainDocTypes = $doc->getDocTypes();
             }
 
-            $docTypes = array_merge($docTypes, $doc->getDocTypes());
+            $docTypes = \array_merge($docTypes, $doc->getDocTypes());
             $this->source['docs'][] = $doc->getSource();
             foreach ($doc->getSource() as $subdocs) {
-                if (is_array($subdocs)) {
+                if (\is_array($subdocs)) {
                     foreach ($subdocs as $subdoc) {
-                        if(is_array($subdoc) && isset($subdoc['doc_type']) && $subdoc['doc_type'] == 'flwb_doc_type.motion'){
+                        if (\is_array($subdoc) && isset($subdoc['doc_type']) && 'flwb_doc_type.motion' == $subdoc['doc_type']) {
                             $this->createMotion($subdoc);
                         }
                     }
@@ -300,7 +299,7 @@ class FLWB extends Model implements ParentDocument
             }
         }
 
-        $this->docTypes = array_values(array_unique($docTypes));
+        $this->docTypes = \array_values(\array_unique($docTypes));
     }
 
     protected function parseCOMMISSIES(array $value): void
@@ -316,7 +315,7 @@ class FLWB extends Model implements ParentDocument
     protected function parseTREFWOORDEN(array $value): void
     {
         foreach ($value as $type => $keywords) {
-            $nested = isset($keywords[$type . '_kode']) ? [$keywords] : $keywords;
+            $nested = isset($keywords[$type.'_kode']) ? [$keywords] : $keywords;
 
             foreach ($nested as $data) {
                 $this->keywords->addFLWB($type, $data);
@@ -331,7 +330,7 @@ class FLWB extends Model implements ParentDocument
         $nested = isset($value['COMPET_BEVOEGD_KODE']) ? [$value] : $value;
 
         foreach ($nested as $data) {
-            $this->source['jurisdictions'][] = array_filter([
+            $this->source['jurisdictions'][] = \array_filter([
                 'code' => $data['COMPET_BEVOEGD_KODE'],
                 'date' => self::createDate($data['COMPET_BEVOEGD_DATUM']),
                 'text_fr' => $data['COMPET_BEVOEGD_textF'],
@@ -346,7 +345,7 @@ class FLWB extends Model implements ParentDocument
     protected function parsePUBLIC(array $value): void
     {
         $this->source['date_publication'] = self::createDate($value['MONITEUR']['MONITEUR_DATE']);
-        $this->source['number_publication'] = (int)$value['MONITEUR']['MONITEUR_nr'];
+        $this->source['number_publication'] = (int) $value['MONITEUR']['MONITEUR_nr'];
 
         if (isset($value['MONITEUR']['LAWDAT'])) {
             $this->source['date_publication_law'] = self::createDate($value['MONITEUR']['LAWDAT']);
@@ -355,7 +354,7 @@ class FLWB extends Model implements ParentDocument
         if (isset($value['ERRATUM'])) {
             foreach ($value['ERRATUM'] as $e) {
                 $this->source['errata'][] = [
-                    'erratum_number' => (int)$e['ERRATUM_NR'],
+                    'erratum_number' => (int) $e['ERRATUM_NR'],
                     'erratum_date' => self::createDate($e['ERRATUM_DATE']),
                 ];
             }
@@ -399,14 +398,13 @@ class FLWB extends Model implements ParentDocument
 
     protected function indexAttachments(FLWBDoc $doc): void
     {
-
         if (!$this->import->isAttachmentIndexingEnabled()) {
             return;
         }
 
         $flwbPdf = $this->indexAttachment($this->source['id_flwb'] ?? '', $doc->getSource());
 
-        if ($flwbPdf === null) {
+        if (null === $flwbPdf) {
             return;
         }
 
@@ -417,7 +415,7 @@ class FLWB extends Model implements ParentDocument
 
     protected function indexAttachment(string $idFlwb, $source): ?FLWBPdf
     {
-        if (!file_exists($this->getFileWithPath($source))) {
+        if (!\file_exists($this->getFileWithPath($source))) {
             return null;
         }
 
@@ -430,18 +428,19 @@ class FLWB extends Model implements ParentDocument
     protected function getFileWithPath(array $source): string
     {
         if (isset($source['file']['path']) && isset($source['file']['filename'])) {
-            return $this->import->getRootDir() . '/' . $source['file']['path'] . $source['file']['filename'];
+            return $this->import->getRootDir().'/'.$source['file']['path'].$source['file']['filename'];
         }
+
         return 'FLWB doc not found';
     }
 
     protected function createMotion($source): void
     {
-        if(!$this->import->isAttachmentIndexingEnabled()){
+        if (!$this->import->isAttachmentIndexingEnabled()) {
             return;
         }
 
-        if(!file_exists($this->getFileWithPath($source))){
+        if (!\file_exists($this->getFileWithPath($source))) {
             return;
         }
 

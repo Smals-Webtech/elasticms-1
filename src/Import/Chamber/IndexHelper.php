@@ -30,12 +30,12 @@ class IndexHelper
         $this->indexer = $indexer;
         $this->environment = $environment;
 
-        $this->name = Import::EMS_INSTANCE_ID . 'import_' . $importId;
-        $this->timestamp = date("Ymd_His");
+        $this->name = Import::EMS_INSTANCE_ID.'import_'.$importId;
+        $this->timestamp = \date('Ymd_His');
 
         $this->indexRollbackBlacklist = \array_map(
             function ($postfix) {
-                return sprintf('%s_%s', $this->name, $postfix);
+                return \sprintf('%s_%s', $this->name, $postfix);
             },
             self::INDEX_POSTFIX_ROLLBACK_BLACKLIST
         );
@@ -48,22 +48,22 @@ class IndexHelper
 
     public function getIndex(DocumentInterface $doc, string $append = ''): string
     {
-        if ($append !== '') {
+        if ('' !== $append) {
             return $this->getAppendIndex($doc, $append);
         }
 
         $removeRegex = null;
-        $name = $this->name . '_' . $doc->getType();
+        $name = $this->name.'_'.$doc->getType();
 
         if (\in_array($doc->getType(), [Model::TYPE_CCRA, Model::TYPE_CCRI, Model::TYPE_PCRA, Model::TYPE_PCRI])) {
-            $removeRegex = sprintf('/%s/', $name);
-            $name .= '_' . $this->timestamp;
+            $removeRegex = \sprintf('/%s/', $name);
+            $name .= '_'.$this->timestamp;
         }
 
         if (\in_array($doc->getType(), [Model::TYPE_INQO, Model::TYPE_FLWB, Model::TYPE_QRVA, Model::TYPE_MTNG])) {
-            $name .= '_' . $doc->getSource()['legislature'];
-            $removeRegex = sprintf('/%s/', $name);
-            $name .= '_' . $this->timestamp;
+            $name .= '_'.$doc->getSource()['legislature'];
+            $removeRegex = \sprintf('/%s/', $name);
+            $name .= '_'.$this->timestamp;
         }
 
         if (!\array_key_exists($name, $this->indexes)) {
@@ -82,35 +82,35 @@ class IndexHelper
     private function getAppendIndex(DocumentInterface $doc, string $append): string
     {
         $existing = [];
-        $indexAliases = $this->indexer->getAliasesByIndex('webchamber_ma_' . $append);
+        $indexAliases = $this->indexer->getAliasesByIndex('webchamber_ma_'.$append);
 
-        if ($indexAliases === []) {
+        if ([] === $indexAliases) {
             throw new \RuntimeException('No indexes found, cannot append.');
         }
 
         $legislature = '';
         if (\in_array($doc->getType(), [Model::TYPE_INQO, Model::TYPE_FLWB, Model::TYPE_QRVA, Model::TYPE_MTNG])) {
-            $legislature = '_' . $doc->getSource()['legislature'];
+            $legislature = '_'.$doc->getSource()['legislature'];
         }
 
-        $index = $this->name . '_' . $doc->getType() . $legislature;
+        $index = $this->name.'_'.$doc->getType().$legislature;
 
         foreach ($indexAliases as $key => $value) {
             // Add every index that matches the string $index to $existing
-            if (strpos($key, $index) !== false) {
+            if (false !== \strpos($key, $index)) {
                 $existing[] = $key;
             }
         }
-        if ($existing === []) {
+        if ([] === $existing) {
             throw new \RuntimeException('No existing indexes found to append to, try without the append parameter.');
         }
 
-        return max($existing);
+        return \max($existing);
     }
 
     public function switchIndexes(bool $clean)
     {
-        $alias = Import::EMS_INSTANCE_ID . 'ma_' . $this->environment;
+        $alias = Import::EMS_INSTANCE_ID.'ma_'.$this->environment;
 
         foreach ($this->indexes as $name => $removeRegex) {
             $this->indexer->atomicSwitch($alias, $name, $removeRegex, $clean);
@@ -147,11 +147,11 @@ class IndexHelper
 
     private function getMappings(): array
     {
-        return \json_decode(\file_get_contents(__DIR__ . '/index_mapping.json'), true);
+        return \json_decode(\file_get_contents(__DIR__.'/index_mapping.json'), true);
     }
 
     private function getSettings(): array
     {
-        return \json_decode(\file_get_contents(__DIR__ . '/index_settings.json'), true);
+        return \json_decode(\file_get_contents(__DIR__.'/index_settings.json'), true);
     }
 }

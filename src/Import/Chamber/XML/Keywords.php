@@ -6,17 +6,17 @@ class Keywords
 {
     private $keywords = [];
 
-    const TYPE_KEYWORDS  = 'keywords';
-    const TYPE_FREE      = 'keywords_free';
+    const TYPE_KEYWORDS = 'keywords';
+    const TYPE_FREE = 'keywords_free';
     const TYPE_CANDIDATE = 'keywords_candidate';
     const TYPE_IMPORTANT = 'keywords_main';
 
     private const FLWB = [
-        'EDISCRIPTOR'   => self::TYPE_KEYWORDS,
-        'EDESCRIPTOR'   => self::TYPE_KEYWORDS,
-        'EKANDIDAAT'    => self::TYPE_CANDIDATE,
-        'FREE'          => self::TYPE_FREE,
-        'IMPORTANT'     => self::TYPE_IMPORTANT,
+        'EDISCRIPTOR' => self::TYPE_KEYWORDS,
+        'EDESCRIPTOR' => self::TYPE_KEYWORDS,
+        'EKANDIDAAT' => self::TYPE_CANDIDATE,
+        'FREE' => self::TYPE_FREE,
+        'IMPORTANT' => self::TYPE_IMPORTANT,
     ];
 
     public function add(string $type, array $data = []): void
@@ -43,24 +43,24 @@ class Keywords
                 'show_de' => isset($data['de'][$i]) ? true : false,
                 'show_en' => false,
             ]);
-            $i++;
+            ++$i;
         }
     }
 
     public function addFLWB(string $type, array $data): void
     {
         if (!\array_key_exists($type, self::FLWB)) {
-            throw new \Exception(sprintf('invalid keyword type : %s', $type));
+            throw new \Exception(\sprintf('invalid keyword type : %s', $type));
         }
 
         $this->keywords[self::FLWB[$type]][] = Child::createKeyword([
             'code' => (int) $data[$type.'_kode'],
-            'title_fr' => $data[$type . '_textF'],
-            'title_nl' => $data[$type . '_textN'],
-            'title_de' => $data[$type . '_textD'] ?? null,
+            'title_fr' => $data[$type.'_textF'],
+            'title_nl' => $data[$type.'_textN'],
+            'title_de' => $data[$type.'_textD'] ?? null,
             'show_fr' => true,
             'show_nl' => true,
-            'show_de' => isset($data[$type . '_textD']) ? true : false,
+            'show_de' => isset($data[$type.'_textD']) ? true : false,
             'show_en' => false,
         ]);
     }
@@ -70,12 +70,12 @@ class Keywords
         $data = [];
 
         foreach ($this->keywords as $type => $keywords) {
-            $data[$type] = array_map(function (Child $keyword) {
+            $data[$type] = \array_map(function (Child $keyword) {
                 return $keyword->getEmsId();
             }, $keywords);
         }
 
-        return array_filter($data);
+        return \array_filter($data);
     }
 
     public function isEmpty(): bool
@@ -85,7 +85,7 @@ class Keywords
 
     public function all(): array
     {
-        return \array_unique(array_merge(
+        return \array_unique(\array_merge(
             $this->keywords[self::TYPE_KEYWORDS] ?? [],
             $this->keywords[self::TYPE_CANDIDATE] ?? [],
             $this->keywords[self::TYPE_FREE] ?? [],
@@ -95,12 +95,12 @@ class Keywords
 
     public function getKeywordsText($locale): array
     {
-        return array_map(function (Child $keyword) use($locale) { return $keyword->getSource()['title_'.$locale]; }, $this->all());
+        return \array_map(function (Child $keyword) use ($locale) { return $keyword->getSource()['title_'.$locale]; }, $this->all());
     }
 
     public function getEmsIds(): array
     {
-        return array_map(function (Child $keyword) { return $keyword->getEmsId(); }, $this->all());
+        return \array_map(function (Child $keyword) { return $keyword->getEmsId(); }, $this->all());
     }
 
     public function deduplicateMainKeywords(): void
@@ -118,8 +118,8 @@ class Keywords
 
     private function removeKeyword(string $type, Child $keyword): void
     {
-       if (isset($this->keywords[$type])) {
-           $this->keywords[$type] = \array_values(\array_filter($this->keywords[$type], function (Child $child) use ($keyword) {
+        if (isset($this->keywords[$type])) {
+            $this->keywords[$type] = \array_values(\array_filter($this->keywords[$type], function (Child $child) use ($keyword) {
                 return $child->getEmsId() !== $keyword->getEmsId();
             }));
         }

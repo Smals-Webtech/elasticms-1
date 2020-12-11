@@ -29,11 +29,11 @@ class ACTRMember extends Model implements MergeInterface
         $this->legislature = $legislature;
         $this->process($data);
 
-        $fullName = $this->data['first_name'] . ' ' . $this->data['last_name'];
+        $fullName = $this->data['first_name'].' '.$this->data['last_name'];
         $actor = $this->searchACTRByFullName($fullName, $legislature);
 
         if (null === $actor) {
-            throw new \LogicException(sprintf('Actor %s not found for legislature %d', $fullName, $legislature));
+            throw new \LogicException(\sprintf('Actor %s not found for legislature %d', $fullName, $legislature));
         }
 
         $this->source = $actor['_source'];
@@ -41,7 +41,7 @@ class ACTRMember extends Model implements MergeInterface
         $this->source['is_member'] = true;
         $this->source['id_ksegna'] = $this->data['id_ksegna'];
 
-        $this->mergeCV($this->source['cv']??[]);
+        $this->mergeCV($this->source['cv'] ?? []);
 
         $partySeed = ORGNParty::getSeed($this->data['party'], $this->data['party']);
 
@@ -67,15 +67,14 @@ class ACTRMember extends Model implements MergeInterface
 
     private function mergeCV(array $currentCV)
     {
-
         $filtered = [];
         foreach ($currentCV as $cv) {
-            $filtered[intval($cv['legislature'])] = $cv;
+            $filtered[\intval($cv['legislature'])] = $cv;
         }
 
-        $filtered[intval($this->legislature)] = $this->getCV();
+        $filtered[\intval($this->legislature)] = $this->getCV();
 
-        $this->source['cv'] = array_values($filtered);
+        $this->source['cv'] = \array_values($filtered);
     }
 
     public function merge(DocumentInterface $current)
@@ -83,7 +82,6 @@ class ACTRMember extends Model implements MergeInterface
         $currentCV = $current->getSource()['cv'] ?? [];
 
         $this->mergeCV($currentCV);
-
 
         $this->source['search_parties'] = \array_values(\array_unique(\array_merge(
             $current->getSource()['search_parties'] ?? [],
@@ -99,13 +97,13 @@ class ACTRMember extends Model implements MergeInterface
             'KSEGNA', 'PERSON_ID',
             'NAFONAM', 'NAAKTIE', 'NATYPEP', 'NAGROUP', 'GROUPE',
             'PARENT_REF_ID', 'ROLE_REFERENCE_TYPO_ID', 'TYPO_ID',
-            'MAJNAAM', 'LANGUAGE_CODE', 'EMAIL', 'WEBSITE'
+            'MAJNAAM', 'LANGUAGE_CODE', 'EMAIL', 'WEBSITE',
         ];
     }
 
     protected function getCallbacks(): array
     {
-        $stringCallback = function (string $value) { return trim($value); };
+        $stringCallback = function (string $value) { return \trim($value); };
 
         return [
             'KSEGNA' => ['data', 'id_ksegna', $stringCallback], //Don't cast to int, prefix with letter O, example O1057
@@ -148,17 +146,17 @@ class ACTRMember extends Model implements MergeInterface
                 'bool' => [
                     'must' => [
                         ['term' => ['full_name.keyword' => ['value' => $fullName]]],
-                        ['term' => ['legislature' => ['value' =>$legislature]]]
-                    ]
-                ]
-            ]
+                        ['term' => ['legislature' => ['value' => $legislature]]],
+                    ],
+                ],
+            ],
         ]);
 
-        if ($search['hits']['total'] === 1) {
+        if (1 === $search['hits']['total']) {
             return $search['hits']['hits'][0];
         }
 
-        if (array_key_exists($fullName, self::WRONG_NAMES)) {
+        if (\array_key_exists($fullName, self::WRONG_NAMES)) {
             return $this->searchACTRByFullName(self::WRONG_NAMES[$fullName], $legislature);
         }
 

@@ -2,7 +2,7 @@
 
 namespace App\Command\Flexmail;
 
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CoreBundle\Command\EmsCommand;
 use Finlet\flexmail\Config\Config;
@@ -13,10 +13,9 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 /**
  * Example command:
- * php bin\console ems:job:flexmail:lists
+ * php bin\console ems:job:flexmail:lists.
  */
 class FlexmailGetListsCommand extends EmsCommand implements CommandInterface
 {
@@ -45,14 +44,14 @@ class FlexmailGetListsCommand extends EmsCommand implements CommandInterface
         $categories = $API_Category->getAll()->categoryTypeItems;
 
         foreach ($categories as $category) {
-            $categoryPhrase = "Category: " . $category->categoryName . ' (' . $category->categoryId . ')';
+            $categoryPhrase = 'Category: '.$category->categoryName.' ('.$category->categoryId.')';
             $output->writeln($categoryPhrase);
             $this->logger->log(100, $categoryPhrase);
             $categoryIdArray = ['categoryId' => $category->categoryId];
             $lists = $API_List->getAll($categoryIdArray);
             foreach ($lists->mailingListTypeItems as $list) {
-                $listPhrase = "- List: " . $list->mailingListName . ' (' . $list->mailingListId . ') - '
-                    . $list->mailingListLanguage . ' - SubscribersCount: ' . $list->mailingListCount;
+                $listPhrase = '- List: '.$list->mailingListName.' ('.$list->mailingListId.') - '
+                    .$list->mailingListLanguage.' - SubscribersCount: '.$list->mailingListCount;
                 $output->writeln($listPhrase);
                 $this->logger->log(100, $listPhrase);
             }
@@ -64,11 +63,11 @@ class FlexmailGetListsCommand extends EmsCommand implements CommandInterface
     private function initFlexmail(): FlexmailAPI
     {
         $config = new Config();
-        $config->set('wsdl', getenv('FLEXMAIL_WSDL'));
-        $config->set('service', getenv('FLEXMAIL_SERVICE'));
-        $config->set('user_id', getenv('FLEXMAIL_USER_ID'));
-        $config->set('user_token', getenv('FLEXMAIL_USER_TOKEN'));
-        $config->set('debug_mode', getenv('FLEXMAIL_DEBUG_MODE'));
+        $config->set('wsdl', \getenv('FLEXMAIL_WSDL'));
+        $config->set('service', \getenv('FLEXMAIL_SERVICE'));
+        $config->set('user_id', \getenv('FLEXMAIL_USER_ID'));
+        $config->set('user_token', \getenv('FLEXMAIL_USER_TOKEN'));
+        $config->set('debug_mode', \getenv('FLEXMAIL_DEBUG_MODE'));
 
         $this->config = $config;
 

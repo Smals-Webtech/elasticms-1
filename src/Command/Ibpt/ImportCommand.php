@@ -2,12 +2,12 @@
 
 namespace App\Command\Ibpt;
 
-use Elasticsearch\Client;
+use Elastica\Client;
 use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
 use EMS\CommonBundle\Elasticsearch\Document;
+use EMS\CommonBundle\Storage\StorageManager;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Elasticsearch\Indexer;
-use EMS\CommonBundle\Storage\StorageManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -52,7 +52,7 @@ class ImportCommand extends Command
     const SEARCH_INDEX = 'webibpt_v1_preview';
     const TYPE = 'import_publication';
 
-    CONST PUBLICATION_TYPES = ['Consultations' => 'consultation',
+    const PUBLICATION_TYPES = ['Consultations' => 'consultation',
         'Konsultation' => 'consultation',
         'Decisions' => 'decision',
         'Communication' => 'communication',
@@ -74,7 +74,6 @@ class ImportCommand extends Command
         'Mededeling' => 'communication',
         'Overige' => 'other',
         'Autre' => 'other',
-
 
         'decree' => 'national_framework_decree',
         'Nationaal kader – ministerieel besluit' => 'national_framework_decree',
@@ -112,7 +111,6 @@ class ImportCommand extends Command
         'act' => 'national_framework_act',
         'order' => 'national_framework_ministerial_order',
 
-
         'Statistics' => 'statistics',
 
         'FAQ' => 'faq',
@@ -124,7 +122,6 @@ class ImportCommand extends Command
 
         'Formulaire' => 'form',
         'List' => 'other',
-
 
         'Bijlage' => 'other',
         'Jahresbericht' => 'annual_report',
@@ -146,7 +143,6 @@ class ImportCommand extends Command
         'Statistieken' => 'statistics',
         'Statistiken' => 'statistics',
 
-
         'release' => 'press_release',
         'Lijst' => 'other',
         'decision' => 'decision',
@@ -154,7 +150,6 @@ class ImportCommand extends Command
         'presse' => 'press_release',
         'Beheersplan' => 'press_release',
         'Pressemeldung' => 'press_release',
-
 
         'Beschlussentwurf' => 'consultation',
         'Ontwerpbesluit' => 'consultation',
@@ -165,7 +160,6 @@ class ImportCommand extends Command
         'Arbeitsplan' => 'operational_plan',
         'Strategisch plan' => 'strategic_plan',
 
-
         'Manual' => 'other',
         'Manuel' => 'other',
         'Handleiding' => 'other',
@@ -175,9 +169,7 @@ class ImportCommand extends Command
         'contract' => 'other',
         'Database' => 'database',
         'Beheerscontract' => 'management_contract',
-
     ];
-
 
     protected static $defaultName = 'ems:job:ibpt:import';
 
@@ -212,17 +204,17 @@ class ImportCommand extends Command
     {
         $csv = $input->getArgument('csv');
         if (!\file_exists($csv)) {
-            throw new \Error('File ' . $csv . ' does not exist');
+            throw new \Error('File '.$csv.' does not exist');
         }
 
         $website = $input->getArgument('website');
         if (!\file_exists($website)) {
-            throw new \Error('Folder ' . $website . ' does not exist');
+            throw new \Error('Folder '.$website.' does not exist');
         }
 
         $attachments = $input->getArgument('attachments');
         if (!\file_exists($attachments)) {
-            throw new \Error('Folder ' . $attachments . ' does not exist');
+            throw new \Error('Folder '.$attachments.' does not exist');
         }
     }
 
@@ -251,18 +243,19 @@ class ImportCommand extends Command
     private function getHmlFilePaths(): array
     {
         $filePaths = \scandir($this->website);
-        return \array_diff($filePaths, array('.', '..'));
+
+        return \array_diff($filePaths, ['.', '..']);
     }
 
-
-    private function escapefileUrl($url){
+    private function escapefileUrl($url)
+    {
         $parts = \parse_url($url);
-        $path_parts = \array_map('rawurldecode', explode('/', $parts['path']));
+        $path_parts = \array_map('rawurldecode', \explode('/', $parts['path']));
 
         return
-            $parts['scheme'] . '://' .
-            $parts['host'] .
-            implode('/', array_map('rawurlencode', $path_parts))
+            $parts['scheme'].'://'.
+            $parts['host'].
+            \implode('/', \array_map('rawurlencode', $path_parts))
             ;
     }
 
@@ -272,12 +265,12 @@ class ImportCommand extends Command
             return null;
         }
 
-        if(!$this->existingTaxonomies) {
+        if (!$this->existingTaxonomies) {
             $this->existingTaxonomies = [];
             $tempTaxo = $this->client->search([
                 'index' => self::SEARCH_INDEX,
                 'type' => 'taxonomy',
-                'size' => 1000
+                'size' => 1000,
             ]);
             foreach ($tempTaxo['hits']['hits'] as $item) {
                 $this->existingTaxonomies[$item['_source']['title_fr']] = $item['_id'];
@@ -290,12 +283,10 @@ class ImportCommand extends Command
         $taxonomies = [];
         $rawTaxonomies = $this->extractRawTaxonomies($file->getOriginalUrl());
 
-        foreach($rawTaxonomies as $taxonomy)
-        {
+        foreach ($rawTaxonomies as $taxonomy) {
             if (isset($this->existingTaxonomies[$taxonomy])) {
                 $taxonomies[] = 'taxonomy:'.$this->existingTaxonomies[$taxonomy];
-            }
-            else {
+            } else {
                 //$output->writeln(sprintf('Taxonomy not found: %s', $taxonomy));
             }
         }
@@ -309,20 +300,19 @@ class ImportCommand extends Command
             '_type' => self::TYPE,
             '_score' => 1,
             '_source' => [
-                'title_' . $lang => $file->getTitle(),
-                'body_' . $lang => $file->getDescription(),
-                'show_' . $lang => true,
+                'title_'.$lang => $file->getTitle(),
+                'body_'.$lang => $file->getDescription(),
+                'show_'.$lang => true,
                 'target_group' => $file->getTargetGroup(),
                 '_contenttype' => self::TYPE,
                 'category' => $taxonomies,
                 '_sha1' => $sha,
-            ]
+            ],
         ];
 
-        if (isset( ImportCommand::PUBLICATION_TYPES[$file->getType()])) {
+        if (isset(ImportCommand::PUBLICATION_TYPES[$file->getType()])) {
             $document['_source']['type'] = ImportCommand::PUBLICATION_TYPES[$file->getType()];
         }
-
 
         if ($file->getPublicationDate()) {
             $date = \date('Y/m/d', \strtotime($file->getPublicationDate()));
@@ -344,7 +334,7 @@ class ImportCommand extends Command
             $document['_source']['linked_content'] = [$file->getLinkedContent()];
         }
 
-        if (strpos($file->getOriginalUrl(), 'interface')) {
+        if (\strpos($file->getOriginalUrl(), 'interface')) {
             $document['_source']['frequency'] = [];
             $params = [
                 'index' => self::SEARCH_INDEX,
@@ -352,27 +342,26 @@ class ImportCommand extends Command
                 'body' => [
                     'query' => [
                         'match_phrase' => [
-                            "filename" => \basename($file->getOriginalUrl())
-                        ]
-                    ]
+                            'filename' => \basename($file->getOriginalUrl()),
+                        ],
+                    ],
                 ],
             ];
 
             $response = $this->client->search($params);
             foreach ($response['hits']['hits'] as $hit) {
-                $document['_source']['frequency'][] = 'frequency:' . $hit['_id'];
+                $document['_source']['frequency'][] = 'frequency:'.$hit['_id'];
             }
         }
 
         foreach ($file->getAttachments() as $attachment) {
-            $path = $this->attachments . DIRECTORY_SEPARATOR . basename($attachment[1]);
-
+            $path = $this->attachments.DIRECTORY_SEPARATOR.\basename($attachment[1]);
 
             if (!\file_exists($path)) {
                 try {
                     $downloadedFileContents = \file_get_contents($this->escapefileUrl($attachment[1]));
-                    if($downloadedFileContents === false){
-                        $this->logger->warning('Failed to download file at: ' . $attachment[1]);
+                    if (false === $downloadedFileContents) {
+                        $this->logger->warning('Failed to download file at: '.$attachment[1]);
                         continue;
                     }
                     //if (empty($content)) {
@@ -380,22 +369,20 @@ class ImportCommand extends Command
                     //    continue;
                     //}
 
-                    $save = file_put_contents($path, $downloadedFileContents);
-                    if($save === false){
-                        $this->logger->warning('Failed to save file to: ' . $path);
+                    $save = \file_put_contents($path, $downloadedFileContents);
+                    if (false === $save) {
+                        $this->logger->warning('Failed to save file to: '.$path);
                         continue;
                     }
 
-                    if (filesize($path) === 0) {
-                        unlink($path);
-                        $this->logger->warning('empty file: ' . $attachment[1]);
+                    if (0 === \filesize($path)) {
+                        \unlink($path);
+                        $this->logger->warning('empty file: '.$attachment[1]);
                         continue;
                     }
-
-                }
-                catch (\Exception $e) {
+                } catch (\Exception $e) {
                     //dump($e);
-                    $this->logger->warning('Failed to save file from: ' . $attachment[1]);
+                    $this->logger->warning('Failed to save file from: '.$attachment[1]);
                     continue;
                 }
             }
@@ -403,12 +390,12 @@ class ImportCommand extends Command
             if (\file_exists($path)) {
                 $content = \file_get_contents($path);
                 if (empty($content)) {
-                    $this->logger->warning('empty file: ' . $path);
+                    $this->logger->warning('empty file: '.$path);
                     continue;
                 }
                 $mime = \mime_content_type($path);
                 $filename = \basename($attachment[1]);
-                $document['_source']['file_' . $attachment[0]] = [
+                $document['_source']['file_'.$attachment[0]] = [
                     '_author' => null,
                     '_content' => null,
                     '_date' => null,
@@ -417,48 +404,44 @@ class ImportCommand extends Command
                     'filename' => $filename,
                     'filesize' => \filesize($path),
                     'mimetype' => $mime,
-                    'sha1' => $this->storageManager->saveContents($content, $mime, $filename)
+                    'sha1' => $this->storageManager->saveContents($content, $mime, $filename),
                 ];
-            }
-            else {
-                $this->logger->warning('Failed to find file at: ' . $path);
+            } else {
+                $this->logger->warning('Failed to find file at: '.$path);
                 continue;
             }
         }
 
         foreach ($file->getOtherLanguages() as $lang) {
-            $fileNameOnDisk = \hash('sha1', \strtolower($lang[1])) . '.html';
-            $path = $this->website . DIRECTORY_SEPARATOR . $fileNameOnDisk;
+            $fileNameOnDisk = \hash('sha1', \strtolower($lang[1])).'.html';
+            $path = $this->website.DIRECTORY_SEPARATOR.$fileNameOnDisk;
 
-
-            if (! \file_exists($path)) {
+            if (!\file_exists($path)) {
                 try {
-                    $downloadedFileContents = \file_get_contents('https://www.ibpt.be' . $lang[1]);
-                    if($downloadedFileContents === false){
-                        $this->logger->warning('Failed to download file at: ' . 'https://www.ibpt.be' . $lang[1]);
+                    $downloadedFileContents = \file_get_contents('https://www.ibpt.be'.$lang[1]);
+                    if (false === $downloadedFileContents) {
+                        $this->logger->warning('Failed to download file at: '.'https://www.ibpt.be'.$lang[1]);
                         continue;
                     }
                     if (empty($downloadedFileContents)) {
                         $this->urlInError[] = $file->getOriginalUrl();
+
                         return null;
                         //$this->logger->warning('empty file: ' . $lang[1]);
                         //dump($file->getOriginalUrl());
                         //continue;
                     }
 
-                    $save = file_put_contents($path, $downloadedFileContents);
-                    if($save === false){
-                        $this->logger->warning('Failed to save file to: ' . $path);
+                    $save = \file_put_contents($path, $downloadedFileContents);
+                    if (false === $save) {
+                        $this->logger->warning('Failed to save file to: '.$path);
                         continue;
                     }
-                }
-                catch (\Exception $e) {
-                    $this->logger->warning('Failed to save file from: ' . 'https://www.ibpt.be'.$lang[1]);
+                } catch (\Exception $e) {
+                    $this->logger->warning('Failed to save file from: '.'https://www.ibpt.be'.$lang[1]);
                     continue;
                 }
             }
-
-
 
             if (\file_exists($path)) {
                 try {
@@ -466,15 +449,14 @@ class ImportCommand extends Command
                     if (!\in_array($path, $this->alreadyImported)) {
                         $this->alreadyImported[] = $path;
                     }
-                    $document['_source']['title_' . $lang[0]] = $relatedFile->getTitle();
-                    $document['_source']['body_' . $lang[0]] = $relatedFile->getDescription();
-                    $document['_source']['show_' . $lang[0]] = true;
-                }
-                catch (\Exception $e) {
-                    $this->style->warning('Not able to parse ' . $path);
+                    $document['_source']['title_'.$lang[0]] = $relatedFile->getTitle();
+                    $document['_source']['body_'.$lang[0]] = $relatedFile->getDescription();
+                    $document['_source']['show_'.$lang[0]] = true;
+                } catch (\Exception $e) {
+                    $this->style->warning('Not able to parse '.$path);
                 }
             } else {
-                $this->logger->warning('File not found ' . $fileNameOnDisk . ' for url ' . $lang[1]);
+                $this->logger->warning('File not found '.$fileNameOnDisk.' for url '.$lang[1]);
             }
         }
 
@@ -486,7 +468,7 @@ class ImportCommand extends Command
         if ($this->indexer->exists(self::INDEX)) {
             $this->indexer->delete(self::INDEX);
         }
-        $this->indexer->create(self::INDEX, [], \json_decode(\file_get_contents(__DIR__ . '/index_mapping.json'), true));
+        $this->indexer->create(self::INDEX, [], \json_decode(\file_get_contents(__DIR__.'/index_mapping.json'), true));
     }
 
     private function crawlFiles(array $filesNames): array
@@ -548,7 +530,7 @@ class ImportCommand extends Command
 
     private function getUrlVsHash(): array
     {
-        if ($this->urlVsHash !== []) {
+        if ([] !== $this->urlVsHash) {
             return $this->urlVsHash;
         }
 
@@ -558,6 +540,7 @@ class ImportCommand extends Command
             $hashesVsUrls[\hash('sha1', \strtolower(\str_getcsv($line)[0]))] = [\strtolower(\str_getcsv($line)[0])];
         }
         $this->urlVsHash = $hashesVsUrls;
+
         return $hashesVsUrls;
     }
 
@@ -570,14 +553,12 @@ class ImportCommand extends Command
         \array_shift($urlComponents); // Remove language
         \array_shift($urlComponents); // Remove target group
 
-        foreach($urlComponents as $key => $component) // Remove one letter taxonomies
-        {
-            if(\strlen($component) < 2){
+        foreach ($urlComponents as $key => $component) { // Remove one letter taxonomies
+            if (\strlen($component) < 2) {
                 unset($urlComponents[$key]);
             }
         }
+
         return $urlComponents;
     }
-
-
 }

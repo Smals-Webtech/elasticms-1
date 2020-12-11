@@ -44,7 +44,7 @@ final class ACTRIndexedMember
     {
         try {
             return $this->import->get($index, $id);
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             return null;
         }
     }

@@ -49,13 +49,13 @@ class DownloadCommand extends Command implements CommandInterface
         $csv = $input->getArgument('csv');
 
         if (!\file_exists($csv)) {
-            throw new \Error('File ' . $csv . ' does not exist');
+            throw new \Error('File '.$csv.' does not exist');
         }
 
         $this->downloadFolder = $input->getArgument('downloadFolder');
 
         if (!\file_exists($this->downloadFolder)) {
-            throw new \Error('Folder ' . $this->downloadFolder . ' does not exist');
+            throw new \Error('Folder '.$this->downloadFolder.' does not exist');
         }
     }
 
@@ -74,14 +74,14 @@ class DownloadCommand extends Command implements CommandInterface
         $pg->start();
 
         foreach ($data as $pageUrl) {
-            $fileNameOnDisk = \hash('sha1', \strtolower($pageUrl)) . '.html';
+            $fileNameOnDisk = \hash('sha1', \strtolower($pageUrl)).'.html';
             $pg->advance();
-            if (\file_exists($this->downloadFolder . $fileNameOnDisk)) {
+            if (\file_exists($this->downloadFolder.$fileNameOnDisk)) {
                 continue;
             }
 
             $response = $this->client->get($pageUrl);
-            \file_put_contents($this->downloadFolder . $fileNameOnDisk, $response->getBody()->getContents());
+            \file_put_contents($this->downloadFolder.$fileNameOnDisk, $response->getBody()->getContents());
         }
         $pg->finish();
     }
