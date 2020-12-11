@@ -1,3 +1,4502 @@
 parameters:
+	ignoreErrors:
+		-
+			message: "#^Method App\\\\Command\\\\AssetUploadCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
 
+		-
+			message: "#^Argument of an invalid type array\\<string\\>\\|string supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\AssetUploadCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^PHPDoc tag @var has invalid value \\(\\$file \\\\SplFileInfo\\)\\: Unexpected token \"\\$file\", expected type at offset 9$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$type of method EMS\\\\CoreBundle\\\\Service\\\\FileService\\:\\:uploadFile\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$hash of method EMS\\\\CoreBundle\\\\Service\\\\FileService\\:\\:head\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^Call to an undefined method EMS\\\\CoreBundle\\\\Service\\\\FileService\\:\\:create\\(\\)\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$hash of method EMS\\\\CoreBundle\\\\Service\\\\AssetExtractorService\\:\\:extractData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/AssetUploadCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Chamber\\\\AssetImportCommand\\:\\:\\$index has no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Chamber\\\\AssetImportCommand\\:\\:\\$conn \\(Doctrine\\\\DBAL\\\\Connection\\) does not accept object\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Class EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker constructor invoked with 2 parameters, 5 required\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$client of class EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker constructor expects Elastica\\\\Client, Elasticsearch\\\\Client given\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Call to an undefined method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:setSingleIndex\\(\\)\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\AssetImportCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\AssetImportCommand\\:\\:buildAssets\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Instantiated class App\\\\Command\\\\LaChambre\\\\Asset\\\\Asset not found\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$document of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:indexDocument\\(\\) expects EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document\\\\DocumentInterface, App\\\\Command\\\\LaChambre\\\\Asset\\\\Asset given\\.$#"
+			count: 1
+			path: src/Command/Chamber/AssetImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$path of method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:getSaveDir\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$type of method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:getSaveDir\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:scroll\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$messages of method Symfony\\\\Component\\\\Console\\\\Style\\\\SymfonyStyle\\:\\:writeln\\(\\) expects iterable\\|string, int given\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:download\\(\\) has parameter \\$endpoint with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:download\\(\\) has parameter \\$saveFilename with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:getJson\\(\\) has parameter \\$parms with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\DownloadCommand\\:\\:getJson\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Chamber/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\ImportCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\ImportCommand\\:\\:initialize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Return type \\(void\\) of method App\\\\Command\\\\Chamber\\\\ImportCommand\\:\\:execute\\(\\) should be compatible with return type \\(int\\) of method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:execute\\(\\)$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Call to an undefined method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:setSingleIndex\\(\\)\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$document of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:indexDocument\\(\\) expects EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document\\\\DocumentInterface, EMS\\\\CommonBundle\\\\Elasticsearch\\\\DocumentInterface given\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\ImportCommand\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function strtolower expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Cannot cast array\\<string\\>\\|bool\\|string\\|null to int\\.$#"
+			count: 4
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Cannot cast array\\<string\\>\\|bool\\|string\\|null to string\\.$#"
+			count: 2
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Chamber\\\\ImportCommand\\:\\:findFiles\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Command/Chamber/ImportCommand.php
+
+		-
+			message: "#^Method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:__construct\\(\\) invoked with 2 parameters, 0\\-1 required\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailGetListsCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:__construct\\(\\) expects string\\|null, Psr\\\\Log\\\\LoggerInterface given\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailGetListsCommand.php
+
+		-
+			message: "#^Cannot access property \\$categoryTypeItems on void\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailGetListsCommand.php
+
+		-
+			message: "#^Result of method Finlet\\\\flexmail\\\\FlexmailAPI\\\\Service\\\\FlexmailAPI_Category\\:\\:getAll\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailGetListsCommand.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Command\\\\Flexmail\\\\FlexmailGetListsCommand\\:\\:\\$logger\\.$#"
+			count: 2
+			path: src/Command/Flexmail/FlexmailGetListsCommand.php
+
+		-
+			message: "#^Access to property \\$mailingListTypeItems on an unknown class Finlet\\\\flexmail\\\\FlexmailAPI\\\\Service\\\\mailingListTypeItems\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailGetListsCommand.php
+
+		-
+			message: "#^Method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:__construct\\(\\) invoked with 2 parameters, 0\\-1 required\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:__construct\\(\\) expects string\\|null, Psr\\\\Log\\\\LoggerInterface given\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$ouuid \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$locale \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$listId \\(int\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 2
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$senderName \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$replyEmail \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$senderEmail \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Variable \\$template in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Template ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$logger\\.$#"
+			count: 3
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Variable \\$environment in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Environments ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Item with OUUID ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$title \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$ouuid of class EMS\\\\CommonBundle\\\\Common\\\\Document constructor expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function preg_replace expects array\\|string, string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:\\$description \\(string\\) does not accept string\\|null\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:create\\(\\)\\.$#"
+			count: 2
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Flexmail\\\\FlexmailSendCommand\\:\\:sendCampaign\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$parameters of method Finlet\\\\flexmail\\\\FlexmailAPI\\\\Service\\\\FlexmailAPI_Campaign\\:\\:send\\(\\) expects int, array\\<string, int\\|string\\> given\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Result of method Finlet\\\\flexmail\\\\FlexmailAPI\\\\Service\\\\FlexmailAPI_Campaign\\:\\:send\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: src/Command/Flexmail/FlexmailSendCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$urls type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$existingTaxonomies type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$treated type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$metaNotFound type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$notImported type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$frequencies type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$attributions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$frequencyBands type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Call to an undefined method EMS\\\\CoreBundle\\\\Service\\\\FileService\\:\\:getStorages\\(\\)\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$website \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:\\$skipDownload \\(bool\\) does not accept array\\<string\\>\\|bool\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot call method getAlias\\(\\) on EMS\\\\CoreBundle\\\\Entity\\\\Environment\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot call method getEnvironment\\(\\) on EMS\\\\CoreBundle\\\\Entity\\\\ContentType\\|false\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$csvPath of method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:loadUrls\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:updateFrequencyPlan\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Argument of an invalid type DOMNodeList\\|false supplied for foreach, only iterables are supported\\.$#"
+			count: 7
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Variable \\$li in PHPDoc tag @var does not match any variable in the foreach loop\\: \\$link$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:loadFrequencyPlan\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot access property \\$nextSibling on DOMElement\\|null\\.$#"
+			count: 7
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot call method getAttribute\\(\\) on DOMElement\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot access property \\$nodeValue on DOMElement\\|null\\.$#"
+			count: 3
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot access property \\$childNodes on DOMElement\\|null\\.$#"
+			count: 2
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:loadExistingCategories\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:loadUrls\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:convertLocale\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:convertLocale\\(\\) has parameter \\$label with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:getGroup\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:getCurrentLocale\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:getDetailMetas\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Cannot call method count\\(\\) on DOMNodeList\\|false\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:extractDataFromAsset\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:extractDataFromAsset\\(\\) has parameter \\$url with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function substr expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$hash of method EMS\\\\CoreBundle\\\\Service\\\\AssetExtractorService\\:\\:extractData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:getTranslationLinks\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:getValue\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:extractMeta\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function preg_replace expects array\\|string, string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Call to an undefined method EMS\\\\CoreBundle\\\\Twig\\\\AppExtension\\:\\:toAscii\\(\\)\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Call to sprintf contains 0 placeholders, 1 value given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Possibly invalid array key type array\\|string\\.$#"
+			count: 2
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Freq\\. spec\\. not…' and array\\|string results in an error\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:extractRawTaxonomies\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:extractRawTaxonomies\\(\\) has parameter \\$url with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:updateDocument\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DocumentUpdateCommand\\:\\:updateDocument\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DocumentUpdateCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DownloadCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DownloadCommand\\:\\:initialize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DownloadCommand\\:\\:interact\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of function file_exists expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'File ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\DownloadCommand\\:\\:\\$downloadFolder \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Folder ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of function file expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\DownloadCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Ibpt/DownloadCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:__construct\\(\\) has parameter \\$file with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:__construct\\(\\) has parameter \\$website with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Parameter \\#2 \\$length of function fread expects int, int\\|false given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:getFileRawContent\\(\\) should return string but returns string\\|false\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:setOriginalUrl\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:setOriginalUrl\\(\\) has parameter \\$originalUrl with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:getOriginalUrl\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:getAttachments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\File\\:\\:getOtherLanguages\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/File.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$alreadyImported type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$serializedDocuments type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$urlVsHash type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$urlInError type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$existingTaxonomies type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:initialize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:interact\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of function file_exists expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 3
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'File ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Folder ' and array\\<string\\>\\|string\\|null results in an error\\.$#"
+			count: 2
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$website \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$attachments \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:\\$csv \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:getHmlFilePaths\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$arr1 of function array_diff expects array, array\\<int, string\\>\\|false given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:escapefileUrl\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:escapefileUrl\\(\\) has parameter \\$url with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Cannot access offset 'path' on array\\(\\?'scheme' \\=\\> string, \\?'host' \\=\\> string, \\?'port' \\=\\> int, \\?'user' \\=\\> string, \\?'pass' \\=\\> string, \\?'path' \\=\\> string, \\?'query' \\=\\> string, \\?'fragment' \\=\\> string\\)\\|false\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Cannot access offset 'scheme' on array\\(\\?'scheme' \\=\\> string, \\?'host' \\=\\> string, \\?'port' \\=\\> int, \\?'user' \\=\\> string, \\?'pass' \\=\\> string, \\?'path' \\=\\> string, \\?'query' \\=\\> string, \\?'fragment' \\=\\> string\\)\\|false\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Cannot access offset 'host' on array\\(\\?'scheme' \\=\\> string, \\?'host' \\=\\> string, \\?'port' \\=\\> int, \\?'user' \\=\\> string, \\?'pass' \\=\\> string, \\?'path' \\=\\> string, \\?'query' \\=\\> string, \\?'fragment' \\=\\> string\\)\\|false\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:convertFileToDocument\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$time of function strtotime expects string, string\\|null given\\.$#"
+			count: 4
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int, int\\|false given\\.$#"
+			count: 4
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Argument of an invalid type array\\|null supplied for foreach, only iterables are supported\\.$#"
+			count: 2
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method EMS\\\\CommonBundle\\\\Storage\\\\StorageManager\\:\\:saveContents\\(\\) invoked with 3 parameters, 4 required\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$filename of method EMS\\\\CommonBundle\\\\Storage\\\\StorageManager\\:\\:saveContents\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:crawlFiles\\(\\) has parameter \\$filesNames with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:crawlFiles\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$document of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:indexDocument\\(\\) expects EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document\\\\DocumentInterface, EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document given\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:getUrlVsHash\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:extractRawTaxonomies\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\ImportCommand\\:\\:extractRawTaxonomies\\(\\) has parameter \\$url with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Ibpt\\\\Linker\\:\\:determineDossier\\(\\) has parameter \\$string with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Ibpt/Linker.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$contentTypes type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:initialize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$latestEnvironment \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$nextEnvironment \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$user \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$previewManageAlias \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$templateManageAlias \\(string\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:\\$contentTypes \\(array\\) does not accept array\\<string\\>\\|string\\|null\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Cannot call method find\\(\\) on Symfony\\\\Component\\\\Console\\\\Application\\|null\\.$#"
+			count: 4
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Cannot call method getAlias\\(\\) on EMS\\\\CoreBundle\\\\Entity\\\\Environment\\|false\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method EMS\\\\CoreBundle\\\\Service\\\\EnvironmentService\\:\\:getByName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Instructions\\\\PublishQuarterCommand\\:\\:generateNextSnapshotName\\(\\) never returns null so it can be removed from the return typehint\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getName\\(\\)\\.$#"
+			count: 1
+			path: src/Command/Instructions/PublishQuarterCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\ImportCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\ImportCommand\\:\\:initialize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$size of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:setSize\\(\\) expects int, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between array\\<string\\>\\|string\\|null and '/\\?' results in an error\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$path of method App\\\\Command\\\\Kennisbeheer\\\\ImportCommand\\:\\:getItem\\(\\) expects string, Psr\\\\Http\\\\Message\\\\ResponseInterface given\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$document of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:indexDocument\\(\\) expects EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document\\\\DocumentInterface, EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document given\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\ImportCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\ImportCommand\\:\\:getSearch\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\ImportCommand\\:\\:getItem\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function substr expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:\\$url has no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Instantiated class EMS\\\\CommonBundle\\\\Elasticsearch\\\\Bulk\\\\Bulker not found\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Call to method setSize\\(\\) on an unknown class EMS\\\\CommonBundle\\\\Elasticsearch\\\\Bulk\\\\Bulker\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Call to method index\\(\\) on an unknown class EMS\\\\CommonBundle\\\\Elasticsearch\\\\Bulk\\\\Bulker\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Call to method send\\(\\) on an unknown class EMS\\\\CommonBundle\\\\Elasticsearch\\\\Bulk\\\\Bulker\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:getDocument\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:getDocument\\(\\) has parameter \\$path with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 2
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function substr expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:searchXpath\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:searchXpath\\(\\) has parameter \\$limit with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Kennisbeheer\\\\KennisbeheerPocCommand\\:\\:searchXpath\\(\\) has parameter \\$xpath with no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Kennisbeheer/KennisbeheerPocCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:initialize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$size of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:setSize\\(\\) expects int, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$text of static method EMS\\\\CommonBundle\\\\Common\\\\EMSLink\\:\\:fromText\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Indexer\\:\\:exists\\(\\) expects string, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Indexer\\:\\:create\\(\\) expects string, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$index of method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:importXMLFiles\\(\\) expects string, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$index of method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:importCSVFile\\(\\) expects string, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$newIndex of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Indexer\\:\\:atomicSwitch\\(\\) expects string, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$document of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:indexDocument\\(\\) expects EMS\\\\CommonBundle\\\\Elasticsearch\\\\Document\\\\DocumentInterface, App\\\\Import\\\\SLM\\\\Document\\\\KPI given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) invoked with 3 parameters, 4\\-5 required\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$contentType of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, array\\<string, string\\> given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$ouuid of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, array\\<string, true\\> given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#3 \\$index of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, true given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Argument of an invalid type App\\\\Import\\\\SLM\\\\Document\\\\Child supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$contentType of method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:createNewChild\\(\\) expects EMS\\\\CoreBundle\\\\Entity\\\\ContentType, EMS\\\\CoreBundle\\\\Entity\\\\ContentType\\|false given\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Slm\\\\ImportCommand\\:\\:bulkCollection\\(\\) has parameter \\$collection with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Slm/ImportCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\TechSearch\\\\ImportSitemap\\:\\:\\$emsLinks type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\ImportSitemap\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Cannot call method getAlias\\(\\) on EMS\\\\CoreBundle\\\\Entity\\\\Environment\\|false\\.$#"
+			count: 2
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Parameter \\#1 \\$text of static method EMS\\\\CommonBundle\\\\Common\\\\EMSLink\\:\\:fromText\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\ImportSitemap\\:\\:convertUrl\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Cannot call method getBody\\(\\) on Psr\\\\Http\\\\Message\\\\ResponseInterface\\|null\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\ImportSitemap\\:\\:getFileInfoFromResponse\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) invoked with 2 parameters, 4\\-5 required\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Parameter \\#1 \\$contentType of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, array\\<string, string\\> given\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Parameter \\#2 \\$ouuid of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, array given\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/TechSearch/ImportSitemap.php
+
+		-
+			message: "#^Property App\\\\Command\\\\TechSearch\\\\Url\\:\\:\\$languages type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Property App\\\\Command\\\\TechSearch\\\\Url\\:\\:\\$facets type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Property App\\\\Command\\\\TechSearch\\\\Url\\:\\:\\$descriptions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:getLanguages\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:parseDataPropertyToArray\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:parseDataPropertyToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:setDescriptions\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\TechSearch\\\\Url\\:\\:setService\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/TechSearch/Url.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\ImportCPVCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$size of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:setSize\\(\\) expects int, array\\<string\\>\\|bool\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of method App\\\\Command\\\\Trade4u\\\\ImportCPVCommand\\:\\:readCSV\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) invoked with 2 parameters, 4\\-5 required\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$contentType of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, array\\<string, array\\<string\\>\\|string\\|null\\> given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$ouuid of method EMS\\\\CoreBundle\\\\Elasticsearch\\\\Bulker\\:\\:index\\(\\) expects string, array given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\ImportCPVCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\ImportCPVCommand\\:\\:readCSV\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$input1 of function array_map expects array, array\\|null given\\.$#"
+			count: 2
+			path: src/Command/Trade4u/ImportCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method EMS\\\\CoreBundle\\\\Service\\\\EnvironmentService\\:\\:getByName\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:matchProducts\\(\\) has parameter \\$cpv with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:matchProducts\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:getCPVs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$messages of method Symfony\\\\Component\\\\Console\\\\Style\\\\SymfonyStyle\\:\\:writeln\\(\\) expects iterable\\|string, int given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:getMatch\\(\\) has parameter \\$cpv with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:getMatch\\(\\) has parameter \\$product with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:save\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MatchCPVCommand\\:\\:save\\(\\) has parameter \\$product with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MatchCPVCommand.php
+
+		-
+			message: "#^Property App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:\\$formFactory has no typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:configure\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of method EMS\\\\CoreBundle\\\\Service\\\\EnvironmentService\\:\\:getByName\\(\\) expects string, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\<string\\>\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:execute\\(\\) should return int but empty return statement found\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Cannot access offset 0 on array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Cannot access offset 1 on array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:execute\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:match\\(\\) has parameter \\$match with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:match\\(\\) has parameter \\$opportunity with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:match\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$messages of method Symfony\\\\Component\\\\Console\\\\Output\\\\OutputInterface\\:\\:writeln\\(\\) expects iterable\\|string, string\\|false given\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:buildMatch\\(\\) has parameter \\$opportunityLinks with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:buildMatch\\(\\) has parameter \\$query with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:save\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:save\\(\\) has parameter \\$document with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Method App\\\\Command\\\\Trade4u\\\\MathJobCommand\\:\\:save\\(\\) has parameter \\$matches with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Command/Trade4u/MathJobCommand.php
+
+		-
+			message: "#^Cannot call method item\\(\\) on DOMNodeList\\|false\\.$#"
+			count: 2
+			path: src/ContentTransformer/Instructions/ContentRemover.php
+
+		-
+			message: "#^Cannot call method removeChild\\(\\) on DOMNode\\|null\\.$#"
+			count: 2
+			path: src/ContentTransformer/Instructions/ContentRemover.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\Elasticsearch\\\\ACTRIndexedMember\\:\\:\\$source type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Elasticsearch/ACTRIndexedMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Elasticsearch\\\\ACTRIndexedMember\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Elasticsearch/ACTRIndexedMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Elasticsearch\\\\ACTRIndexedMember\\:\\:getACTRMember\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Elasticsearch/ACTRIndexedMember.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\Import\\:\\:\\$legislatures type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\Import\\:\\:\\$parties has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:search\\(\\) has parameter \\$body with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:getLegislatureDates\\(\\) has parameter \\$legislatureIds with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:getLegislatureDates\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:getLegislaturesIds\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:getLegislature\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Class App\\\\Import\\\\Chamber\\\\Model referenced with incorrect case\\: App\\\\Import\\\\Chamber\\\\MODEL\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:getLegislatureByDate\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:getCommission\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Import\\:\\:buildLegislatures\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|false\\.$#"
+			count: 2
+			path: src/Import/Chamber/Import.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:\\$indexes type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:\\$required type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:\\$indexRollbackBlacklist type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Class App\\\\Import\\\\Chamber\\\\Model referenced with incorrect case\\: App\\\\Import\\\\Chamber\\\\MODEL\\.$#"
+			count: 3
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:getAppendIndex\\(\\) should return string but returns int\\|string\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:switchIndexes\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:rollbackIndexes\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:getRequired\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:getMappings\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 2
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\IndexHelper\\:\\:getSettings\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/IndexHelper.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\MergeInterface\\:\\:merge\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/MergeInterface.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\Model\\:\\:\\$source type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Parameter \\#1 \\$format of static method DateTime\\:\\:createFromFormat\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Model\\:\\:isAssoc\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Model\\:\\:isAssoc\\(\\) has parameter \\$arr with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Model\\:\\:arrayFilterFunction\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Model\\:\\:arrayFilterFunction\\(\\) has parameter \\$val with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\Model\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/Model.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\ModelFactory\\:\\:\\$children type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/ModelFactory.php
+
+		-
+			message: "#^Else branch is unreachable because ternary operator condition is always true\\.$#"
+			count: 1
+			path: src/Import/Chamber/ModelFactory.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\ModelFactory\\:\\:getChildren\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Import/Chamber/ModelFactory.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\ModelFactory\\:\\:createXML\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/ModelFactory.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:\\$parties has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:\\$allParties has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:\\$partiesLogs has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:parseActrroles\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Parameter \\#2 \\$legislature of method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:addTypes\\(\\) expects string\\|null, int\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Parameter \\#1 \\$emsLink of method App\\\\Import\\\\Chamber\\\\Import\\:\\:getParty\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:setSearch\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTR\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTR.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:\\$data has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:\\$parties has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:mergeCV\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:mergeCV\\(\\) has parameter \\$currentCV with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:merge\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:parseNavnaam\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:getCV\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:searchACTRByFullName\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMember\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMember.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:\\$collection has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:\\$counter has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRMembers\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRMembers.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:getSearchCategories\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:parseStatus\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:parseOrgnfunctionSummary\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:parseOrgnfunctionSummary\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:parseOrgnouSummary\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:parseOrgnouSummary\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ACTRRole\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ACTRRole.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:\\$data has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:\\$date \\(DateTime\\) does not accept DateTime\\|false\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|false\\.$#"
+			count: 9
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Parameter \\#1 \\$date of method App\\\\Import\\\\Chamber\\\\Import\\:\\:getLegislatureByDate\\(\\) expects DateTime, DateTime\\|false given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:parseTitle\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:parseBuilding\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:parseRoom\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:parseAgenda\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:normalize\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:normalize\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function substr expects string, int\\|string given\\.$#"
+			count: 2
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Agenda\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Agenda.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:\\$source type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:__construct\\(\\) has parameter \\$source with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:createDepartmentQRVA\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:createFLWBPdf\\(\\) has parameter \\$searchActorsTypes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:createFLWBPdf\\(\\) has parameter \\$source with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:createMOTI\\(\\) has parameter \\$searchActorsTypes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Child\\:\\:createKeyword\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Child.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:\\$children has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:\\$mainDocTypes has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:\\$docTypes has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:\\$status has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:\\$titles has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:createFileInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:inStatusChamber\\(\\) should return bool but returns int\\<0, max\\>\\|false\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseTITLE\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseTITLE_SHORT\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseTERMART\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseSITU\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseBICAM\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseCOMMISSIES\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseTREFWOORDEN\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parseCOMPET_BEVOEGD\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:parsePUBLIC\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:setSearch\\(\\) has parameter \\$legislature with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Offset 0 does not exist on array\\(\\?0 \\=\\> mixed, \\?1 \\=\\> mixed, \\?2 \\=\\> mixed, \\?3 \\=\\> mixed, \\?4 \\=\\> mixed, \\?5 \\=\\> mixed, \\?6 \\=\\> mixed\\)\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:indexAttachment\\(\\) has parameter \\$source with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getFileWithPath\\(\\) has parameter \\$source with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:createMotion\\(\\) has parameter \\$source with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWB.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:\\$source has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:__construct\\(\\) has parameter \\$flwb with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseCOMMISSIE_NAAM\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseCOMMISSIE_TYPE\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseCOMMISSIE_CLASS\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseKALENDER\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseINCIDENTEN\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseRAPPORT\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:parseRAPPORTEUR\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBCommission\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBCommission.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:\\$source has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:\\$subDocTypes type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getDocTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Import\\\\Chamber\\\\Model\\:\\:createFileInfo\\(\\)\\.$#"
+			count: 2
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseMAIN_PDFDOC\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseOWNER\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseMAINDOC_TYPE\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseVOTE\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseCOMMENTS\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseMAINDOC_JOINTDOCS\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseAUTEURM\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Import\\\\Chamber\\\\Model\\:\\:getActor\\(\\)\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:parseSUBDOCS\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDoc\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDoc.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:\\$source has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:\\$flwb \\(App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\) does not accept App\\\\Import\\\\Chamber\\\\Model\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:parseSUB_PDFDOC\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:parseSUBDOC_TYPE\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:parseSUBDOC_COMMENTS\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:parseAUTEURS\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBDocSub\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBDocSub.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:\\$source type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:__construct\\(\\) has parameter \\$source with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:\\$filename\\.$#"
+			count: 2
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:\\$filepath\\.$#"
+			count: 2
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:\\$filelabel\\.$#"
+			count: 2
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Parameter \\#1 \\$hash of method EMS\\\\CoreBundle\\\\Service\\\\AssetExtractorService\\:\\:extractData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getContent\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getSearchTypes\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getHash\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getId\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getSubDocs\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getFileName\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getFilePath\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\FLWBPdf\\:\\:getFileLabel\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/FLWBPdf.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:\\$children has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:\\$mainDocTypes has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:\\$docTypes has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:\\$status has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:\\$titles has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:parseCOMMISSIES\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:parseCOMPET_BEVOEGD\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:setSearch\\(\\) has parameter \\$legislature with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:parseTITLE\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:parseBICAM\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:inStatusChamber\\(\\) should return bool but returns int\\<0, max\\>\\|false\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:createFileInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getActor\\(\\) has parameter \\$party with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Parameter \\#5 \\$party of method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:get\\(\\) expects string\\|null, array\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:parseTREFWOORDEN\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\GENESIS\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/GENESIS.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$children has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$annals has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$keywordsData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$keywordsMainData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$keywordsCandidateData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$keywordsFreeData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$type has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$fileMoti has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:\\$docTypes has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Cannot call method format\\(\\) on DateTime\\|false\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseAUT\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseDOCMOTI\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseTHESAF\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseTHESAN\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseTHESAD\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMINASK\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMINANSW\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseINQOJOINTKEYS\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMOTILIST\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMontionAuthorList\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMontionAuthorList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMinister\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseMinister\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:parseKeywords\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:extractThesaurus\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:extractThesaurus\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Call to sprintf contains 2 placeholders, 3 values given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Call to sprintf contains 1 placeholder, 2 values given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function strlen expects string, int given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:setSearch\\(\\) has parameter \\$legislature with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:createMotion\\(\\) has parameter \\$source with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getFileWithPath\\(\\) has parameter \\$source with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\INQO\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/INQO.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:\\$keywords has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:add\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:addFLWB\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:all\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:getKeywordsText\\(\\) has parameter \\$locale with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:getKeywordsText\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Keywords\\:\\:getEmsIds\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Keywords.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:\\$source type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:__construct\\(\\) has parameter \\$source with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:\\$parentDocument \\(App\\\\Import\\\\Chamber\\\\XML\\\\FLWB\\) does not accept EMS\\\\CoreBundle\\\\Elasticsearch\\\\ParentDocument\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Parameter \\#1 \\$hash of method EMS\\\\CoreBundle\\\\Service\\\\AssetExtractorService\\:\\:extractData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getContent\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getSearchTypes\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getHash\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getId\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getTitleNl\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getTitleFr\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getSearchDateSort\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getDatePublication\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getActors\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getActorTypes\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getDateEnd\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getDateCommunication\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getFileName\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getFilePath\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MOTI\\:\\:getFileLabel\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MOTI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:findFiles\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:addModel\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:addModel\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:addModel\\(\\) has parameter \\$import with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:find\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\MTNG\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/MTNG.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:\\$children has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:\\$data has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:parseActrchildren\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:parseOrgnparentsummary\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:parseOrgnmemberships\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:parseOrgnmemberships\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:setSearch\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGN\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGN.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\ORGNCode\\:\\:\\$translations has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGNCode.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Import\\\\Chamber\\\\XML\\\\ORGNCode\\:\\:\\$element\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGNCode.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Import\\\\Chamber\\\\XML\\\\ORGNCode\\:\\:\\$subRoot\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGNCode.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGNCode\\:\\:getRoot\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGNCode.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGNParty\\:\\:getSeed\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGNParty.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\ORGNParty\\:\\:merge\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/ORGNParty.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$departmentData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$publicationData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$answersData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$keywordsData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$keywordsMainData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$keywordsCandidateData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$keywordsFreeData has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:\\$actors has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getSource\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:parseAUT\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getActor\\(\\) has parameter \\$raw with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getActor\\(\\) has parameter \\$type with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getPublication\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\QRVA\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/QRVA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Parameter \\#1 \\$hash of method EMS\\\\CoreBundle\\\\Service\\\\AssetExtractorService\\:\\:extractData\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Caught class App\\\\Import\\\\Chamber\\\\XML\\\\Exception not found\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Call to method getMessage\\(\\) on an unknown class App\\\\Import\\\\Chamber\\\\XML\\\\Exception\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:parseDATEF\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:parseDATEN\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Parameter \\#2 \\$str of function explode expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:\\$date \\(DateTime\\) does not accept DateTime\\|false\\.$#"
+			count: 2
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:parseDOCNAME\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:parseMHREDAT\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:setDate\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getPrefix\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getFilename\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\Report\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/Report.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:\\$emsLinks has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:\\$types has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:\\$cache has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:getEmsLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:getTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:getFilteredTypes\\(\\) has parameter \\$authors with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:getFilteredTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:get\\(\\) has parameter \\$ksegna with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:result\\(\\) has parameter \\$result with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:addType\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchActor\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchActor.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:forFLWB\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:forGENESIS\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbLawProposal\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbLawProject\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbResolutionProposal\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbNaturalization\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbBudget\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbTextAdopted\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbLawPublication\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbStateAdvise\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbMotion\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbGovernmentStatement\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchCategories\\:\\:catFlwbNominationCandidate\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchCategories.php
+
+		-
+			message: "#^Property App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:\\$types has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:single\\(\\) has parameter \\$type with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:single\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:getTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:addTypes\\(\\) has parameter \\$types with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:mergeTypes\\(\\) has parameter \\$current with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:mergeTypes\\(\\) has parameter \\$merge with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\SearchTypes\\:\\:mergeTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/SearchTypes.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRA\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\CCRI\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/CCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRA\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRA.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:clean\\(\\) has parameter \\$key with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:clean\\(\\) has parameter \\$value with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:getRootElements\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:getCallbacks\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:getCallbacksHTML\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:process\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Parameter \\#1 \\$dom of method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:getRawHTML\\(\\) expects DOMDocument, DOMDocument\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:xmlToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:getRawHTML\\(\\) has parameter \\$tag with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Parameter \\#1 \\$str of function trim expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:recursive\\(\\) has parameter \\$array with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:recursive\\(\\) has parameter \\$callback with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:recursive\\(\\) has parameter \\$remove with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\Chamber\\\\XML\\\\PCRI\\:\\:recursive\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/Chamber/XML/PCRI.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\CSVImporter\\:\\:\\$missingSLAs has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\CSVImporter\\:\\:\\$handle \\(resource\\) does not accept resource\\|false\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\CSVImporter\\:\\:getMissingSLAs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Yield can be used only with these return types\\: Generator, Iterator, Traversable, iterable\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\CSVImporter\\:\\:createKPI\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Cannot access offset string on App\\\\Import\\\\SLM\\\\Document\\\\Child\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\CSVImporter\\:\\:read\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Parameter \\#2 \\$input1 of function array_map expects array, array\\|null given\\.$#"
+			count: 2
+			path: src/Import/SLM/CSVImporter.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\CSM\\:\\:createID\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/CSM.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\Client\\:\\:createID\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Client.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:\\$slo has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:\\$b has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:\\$c1 has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:\\$c2 has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:\\$endToEnd has no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:\\$result type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:__construct\\(\\) has parameter \\$info with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:sanitizeInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:calculate\\(\\) has parameter \\$c1 with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:calculate\\(\\) has parameter \\$c2 with no typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\Data\\:\\:calculate\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/Data.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:__construct\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Parameter \\#3 \\$year of method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:setKPIData\\(\\) expects string, int given\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Property App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:\\$type \\(App\\\\Import\\\\SLM\\\\Document\\\\Child\\) does not accept App\\\\Import\\\\SLM\\\\Document\\\\Child\\|null\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Cannot call method getEMSId\\(\\) on App\\\\Import\\\\SLM\\\\Document\\\\Child\\|null\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:getData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:createID\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:calculateAverages\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:calculateAverage\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:setKPIData\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Parameter \\#3 \\$year of class App\\\\Import\\\\SLM\\\\Document\\\\Data constructor expects int, string given\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:getMonthsInfo\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
+
+		-
+			message: "#^Method App\\\\Import\\\\SLM\\\\Document\\\\KPI\\:\\:getMonthsInfo\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Import/SLM/Document/KPI.php
 
