@@ -23,7 +23,7 @@ class MathJobCommand extends Command
     private $envService;
     /** @var ContentTypeService */
     private $contentTypeService;
-    /** @var FormFactoryInterface $formFactory */
+    /** @var FormFactoryInterface */
     protected $formFactory;
 
     public function __construct(

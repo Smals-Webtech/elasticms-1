@@ -22,7 +22,7 @@ class MatchCPVCommand extends Command implements CommandInterface
     private $environmentService;
     /** @var DataService */
     private $dataService;
-    /** @var FormFactoryInterface $formFactory */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
     protected static $defaultName = 'trade4u:match:cpv';
