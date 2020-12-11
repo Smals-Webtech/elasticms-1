@@ -2,7 +2,7 @@
 
 namespace App\Command\Trade4u;
 
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CoreBundle\Form\Form\RevisionType;
 use EMS\CoreBundle\Service\DataService;

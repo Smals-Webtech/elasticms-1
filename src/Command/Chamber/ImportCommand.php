@@ -7,7 +7,7 @@ use App\Import\Chamber\IndexHelper;
 use App\Import\Chamber\Model;
 use App\Import\Chamber\ModelFactory;
 use App\Import\Chamber\XML\MTNG;
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Storage\StorageManager;
 use EMS\CoreBundle\Elasticsearch\Bulker;

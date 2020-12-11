@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Command\Instructions;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CoreBundle\Service\DataService;
 use EMS\CoreBundle\Service\EnvironmentService;
 use Psr\Log\LoggerInterface;

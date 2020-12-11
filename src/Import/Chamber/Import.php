@@ -3,7 +3,7 @@
 namespace App\Import\Chamber;
 
 use App\Import\Chamber\XML\SearchActor;
-use Elasticsearch\Client;
+use Elastica\Client;
 use Psr\Log\LoggerInterface;
 
 class Import

@@ -4,7 +4,7 @@ namespace App\Command\Chamber;
 
 use App\Command\LaChambre\Asset\Asset;
 use Doctrine\DBAL\Connection;
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Service\AssetExtractorService;

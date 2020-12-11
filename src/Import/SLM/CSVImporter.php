@@ -5,7 +5,7 @@ namespace App\Import\SLM;
 use App\Import\SLM\Document\Child;
 use App\Import\SLM\Document\KPI;
 use App\Import\SLM\Document\SLA;
-use Elasticsearch\Client;
+use Elastica\Client;
 
 class CSVImporter
 {

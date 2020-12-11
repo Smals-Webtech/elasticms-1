@@ -2,7 +2,7 @@
 
 namespace App\Command\Ibpt;
 
-use Elasticsearch\Client;
+use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Storage\NotFoundException;
 use EMS\CommonBundle\Storage\Service\FileSystemStorage;
