@@ -16,7 +16,7 @@ class CPV
     /** @var string division|group|class|category */
     private $type;
 
-    /** @var array */
+    /** @var array<mixed> */
     private $body;
 
     const REGEX = "/^(?'category'(?'class'(?'group'(?'division'\d{2})\d{1})\d{1})\d{1})(?'id'\d{3})-\d{1}$/";
@@ -27,6 +27,9 @@ class CPV
         'class' => 'category'
     ];
 
+    /**
+     * @param array<mixed> $body
+     */
     public function __construct(array $body)
     {
         \preg_match(self::REGEX, $body['code'], $code);
@@ -50,6 +53,9 @@ class CPV
         return sha1('cpv'.$this->body['code']);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getBody(): array
     {
         return  array_merge($this->body, ['cpv_type' => $this->type]);
@@ -91,7 +97,7 @@ class CPV
     /**
      * @param CPV[] $items
      */
-    public function setChildren(array $items)
+    public function setChildren(array $items): void
     {
         $childType = self::CHILD_TYPES[$this->type] ?? false;
 
@@ -103,7 +109,7 @@ class CPV
     /**
      * @param CPV[] $items
      */
-    private function addChildByType(array $items, string $childType)
+    private function addChildByType(array $items, string $childType): void
     {
         $get = 'get'.\ucfirst($this->type);
 
