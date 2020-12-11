@@ -2,27 +2,31 @@
 
 namespace App\Twig;
 
-class Trade4uExtension extends \Twig_Extension
+use Twig\TwigFilter;
+use Twig\Extension\AbstractExtension;
+
+
+class Trade4uExtension extends AbstractExtension
 {
     /**
-     * @return array
+     * @return TwigFilter[]
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return array(
-            new \Twig_SimpleFilter('trade4uMatch', array($this, 'trade4uMatch')),
+            new TwigFilter('trade4uMatch', array($this, 'trade4uMatch')),
         );
     }
 
     /**
      * Returns contact information foreach matching company domain
      *
-     * @param array $company
-     * @param array $opportunity
+     * @param array<mixed> $company
+     * @param array<mixed> $opportunity
      *
-     * @return null|array
+     * @return array<mixed>
      */
-    public function trade4uMatch(array $company, array $opportunity)
+    public function trade4uMatch(array $company, array $opportunity): array
     {
         $contacts = $this->getContacts($company);
 
@@ -55,11 +59,11 @@ class Trade4uExtension extends \Twig_Extension
     /**
      * Filter out invalid contacts
      *
-     * @param array $company
+     * @param array<mixed> $company
      *
-     * @return array
+     * @return array<mixed>
      */
-    private function getContacts(array $company)
+    private function getContacts(array $company): array
     {
         if(! isset($company['contacts'])) {
             return  [];
@@ -83,12 +87,10 @@ class Trade4uExtension extends \Twig_Extension
     }
 
     /**
-     * @param array $domain
-     * @param array $opportunity
-     *
-     * @return bool
+     * @param array<mixed> $domain
+     * @param array<mixed> $opportunity
      */
-    private function domainMatchOpportunity(array $domain, array $opportunity)
+    private function domainMatchOpportunity(array $domain, array $opportunity): bool
     {
         if (false === $this->match($domain, $opportunity, 'products')) {
             return false;
@@ -106,13 +108,11 @@ class Trade4uExtension extends \Twig_Extension
     }
 
     /**
-     * @param array  $opportunity
-     * @param array  $domain
+     * @param array<mixed>  $opportunity
+     * @param array<mixed>  $domain
      * @param string $field       products, activities, countries_active
-     *
-     * @return bool
      */
-    private function match(array $domain, array $opportunity, $field)
+    private function match(array $domain, array $opportunity, $field): bool
     {
         if (!isset($opportunity[$field]) || null == $opportunity[$field]) {
             return true;
@@ -121,6 +121,7 @@ class Trade4uExtension extends \Twig_Extension
         if (!isset($domain[$field])) {
             return false;
         }
+
 
         foreach ($opportunity[$field] as $link) {
             if (in_array($link, $domain[$field])) {
