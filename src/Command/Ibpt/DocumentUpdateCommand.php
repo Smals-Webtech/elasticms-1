@@ -3,7 +3,9 @@
 namespace App\Command\Ibpt;
 
 use Elastica\Client;
+use Elasticsearch\Endpoints\Index;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CommonBundle\Storage\NotFoundException;
 use EMS\CommonBundle\Storage\Service\FileSystemStorage;
 use EMS\CoreBundle\Service\AssetExtractorService;
@@ -58,7 +60,9 @@ class DocumentUpdateCommand extends Command implements CommandInterface
     /** @var bool */
     private $skipDownload;
 
-    public function __construct(Client $client, ContentTypeService $contentTypeService, AppExtension $appExtension, AssetExtractorService $assetExtractorService, FileService $fileService)
+    private ElasticaService $elasticaService;
+
+    public function __construct(Client $client, ContentTypeService $contentTypeService, AppExtension $appExtension, AssetExtractorService $assetExtractorService, FileService $fileService, ElasticaService $elasticaService)
     {
         parent::__construct();
         $this->contentTypeService = $contentTypeService;
@@ -66,6 +70,7 @@ class DocumentUpdateCommand extends Command implements CommandInterface
         $this->appExtension = $appExtension;
         $this->fileService = $fileService;
         $this->assetExtractorService = $assetExtractorService;
+        $this->elasticaService = $elasticaService;
         $this->fileSystemStorage = $fileService->getStorages()[0];
         $this->treated = [];
         $this->notImported = [];
@@ -273,11 +278,13 @@ class DocumentUpdateCommand extends Command implements CommandInterface
     private function loadExistingCategories(string $index)
     {
         $this->existingTaxonomies = [];
-        $tempTaxo = $this->client->search([
+        $search = $this->elasticaService->convertElasticsearchSearch([
             'index' => $index,
             'type' => 'taxonomy',
+            'body' => [],
             'size' => 1000,
         ]);
+        $tempTaxo = $this->elasticaService->search($search)->getResponse()->getData();
         foreach ($tempTaxo['hits']['hits'] as $item) {
             $this->existingTaxonomies[$item['_source']['title_fr']] = $item['_id'];
             $this->existingTaxonomies[$item['_source']['title_nl']] = $item['_id'];
@@ -620,12 +627,12 @@ class DocumentUpdateCommand extends Command implements CommandInterface
             }
             $this->treated[] = $fileHash;
 
-            $this->client->index([
-                'index' => 'ibport_ibpt_mdk',
-                'type' => 'doc',
-                'id' => $documentId,
-                'body' => $source,
-            ]);
+            $endPoint = new Index();
+            $endPoint->setType($this->elasticaService->getTypePath('doc'));
+            $endPoint->setBody($source);
+            $endPoint->setIndex('ibport_ibpt_mdk');
+            $endPoint->setID($documentId);
+            $this->client->requestEndpoint($endPoint);
         } else {
             $this->notImported[] = $line;
         }

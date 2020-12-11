@@ -6,6 +6,8 @@ use App\Import\SLM\Document\Child;
 use App\Import\SLM\Document\KPI;
 use App\Import\SLM\Document\SLA;
 use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Exception\NotFoundException;
+use EMS\CommonBundle\Service\ElasticaService;
 
 class CSVImporter
 {
@@ -21,10 +23,13 @@ class CSVImporter
     private $children = [];
     private $missingSLAs = [];
 
-    public function __construct(Client $client, ImportDocument $importDocument, string $index)
+    private ElasticaService $elasticaService;
+
+    public function __construct(Client $client, ImportDocument $importDocument, string $index, ElasticaService $elasticaService)
     {
         $this->client = $client;
         $this->index = $index;
+        $this->elasticaService = $elasticaService;
         $this->year = $importDocument->getYear();
         $this->handle = \fopen($importDocument->getCSVFile(), 'r');
 
@@ -86,9 +91,13 @@ class CSVImporter
 
     public function existsSLA(int $id): bool
     {
-        $exists = $this->client->exists(['index' => $this->index, 'type' => 'sla', 'id' => SLA::createID($id)]);
+        try {
+            $this->elasticaService->getDocument($this->index, null, SLA::createID($id));
 
-        return \is_bool($exists) ? $exists : false;
+            return true;
+        } catch (NotFoundException $e) {
+            return false;
+        }
     }
 
     private function read(): \Generator
