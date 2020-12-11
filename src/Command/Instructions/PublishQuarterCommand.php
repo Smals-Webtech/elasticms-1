@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Command\Instructions;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Elastica\Client;
+use EMS\CoreBundle\Service\AliasService;
 use EMS\CoreBundle\Service\DataService;
 use EMS\CoreBundle\Service\EnvironmentService;
 use Psr\Log\LoggerInterface;
@@ -26,8 +26,6 @@ final class PublishQuarterCommand extends Command
     private $doctrine;
     /** @var EnvironmentService */
     private $environmentService;
-    /** @var Client */
-    private $client;
     /** @var DataService */
     private $dataService;
     /** @var SymfonyStyle */
@@ -45,6 +43,8 @@ final class PublishQuarterCommand extends Command
     /** @var array */
     private $contentTypes;
 
+    private AliasService $aliasService;
+
     const ARGUMENT_LATEST_ENVIRONMENT = 'latest-environment';
     const ARGUMENT_NEXT_ENVIRONMENT = 'next-environment';
     const ARGUMENT_USER = 'user';
@@ -59,13 +59,13 @@ final class PublishQuarterCommand extends Command
     const DEFAULT_TEMPLATE_MANAGE_ALIAS = 'poc_instructions_front_ma_template';
     const DEFAULT_CONTENT_TYPES = ['instruction'];
 
-    public function __construct(LoggerInterface $logger, Registry $doctrine, EnvironmentService $environmentService, Client $client, DataService $dataService)
+    public function __construct(LoggerInterface $logger, Registry $doctrine, EnvironmentService $environmentService, DataService $dataService, AliasService $aliasService)
     {
         $this->logger = $logger;
         $this->doctrine = $doctrine;
         $this->environmentService = $environmentService;
-        $this->client = $client;
         $this->dataService = $dataService;
+        $this->aliasService = $aliasService;
 
         parent::__construct();
     }
@@ -129,6 +129,7 @@ final class PublishQuarterCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->logger->info('Execute the PublishQuarter command');
+        $this->aliasService->build();
 
         $this->io->section('0.1. Check if draft(s) exist');
         $draftedRevisions = $this->dataService->getAllDrafts();
@@ -203,25 +204,11 @@ final class PublishQuarterCommand extends Command
         }
 
         $snapshotIndex = $this->findIndexNameByAlias($snapshotAlias);
+        if (null === $snapshotIndex) {
+            throw new \RuntimeException('Unexpected null index');
+        }
         try {
-            $this->client->indices()->updateAliases([
-                'body' => [
-                    'actions' => [
-                        [
-                            'add' => [
-                                'index' => $snapshotIndex,
-                                'alias' => $this->previewManageAlias,
-                            ],
-                        ],
-                        [
-                            'add' => [
-                                'index' => $snapshotIndex,
-                                'alias' => $this->templateManageAlias,
-                            ],
-                        ],
-                    ],
-                ],
-            ]);
+            $this->aliasService->updateAlias($snapshotIndex, ['add' => $this->previewManageAlias, 'remove' => $this->templateManageAlias]);
         } catch (\Exception $e) {
             $this->io->error($e->getMessage());
             $this->logger->error($e->getMessage());
@@ -315,11 +302,9 @@ final class PublishQuarterCommand extends Command
 
     private function findIndexNameByAlias(string $aliasName): ?string
     {
-        $aliases = $this->client->indices()->getAliases();
-        foreach ($aliases as $index => $aliasMapping) {
-            if (\array_key_exists($aliasName, $aliasMapping['aliases'])) {
-                return $index;
-            }
+        $alias = $this->aliasService->getAlias($aliasName);
+        foreach ($alias['indexes'] as $index) {
+            return $index;
         }
 
         return null;
