@@ -10,7 +10,7 @@ use EMS\CoreBundle\Elasticsearch\ParentDocument;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * Example http://data.dekamer.be/v0/actr/1
+ * Example http://data.dekamer.be/v0/actr/1.
  */
 class ACTR extends Model implements ParentDocument
 {
@@ -20,7 +20,7 @@ class ACTR extends Model implements ParentDocument
     private $parties = [];
     private $allParties = [];
     private $partiesLogs = [];
-    /** @var IndexHelper  */
+    /** @var IndexHelper */
     private $indexHelper;
 
     public function __construct(SplFileInfo $file, Import $import, IndexHelper $indexHelper)
@@ -33,12 +33,12 @@ class ACTR extends Model implements ParentDocument
         $processData = $data['items']['actr:person'] ?? $data;
         $this->process($processData);
 
-        $this->source['full_name'] = trim(vsprintf('%s %s', [
+        $this->source['full_name'] = \trim(\vsprintf('%s %s', [
             $this->source['first_name'] ?? '',
-            $this->source['last_name'] ?? ''
+            $this->source['last_name'] ?? '',
         ]));
 
-        $this->source['title_nl'] = \trim($this->source['last_name'] ?? '') . ' ' . \trim($this->source['first_name'] ?? '');
+        $this->source['title_nl'] = \trim($this->source['last_name'] ?? '').' '.\trim($this->source['first_name'] ?? '');
         $this->source['title_fr'] = $this->source['title_nl'];
 
         if (\preg_match('/^n\d$/i', $this->source['last_name'] ?? '')) {
@@ -55,7 +55,7 @@ class ACTR extends Model implements ParentDocument
             return;
         }
 
-        $member =  new ACTRIndexedMember($import, $indexHelper->getIndex($this), $this->source['id_actr']);
+        $member = new ACTRIndexedMember($import, $indexHelper->getIndex($this), $this->source['id_actr']);
         if ($member->isValid()) {
             $this->source = \array_merge($this->source, $member->getSource());
         }
@@ -63,7 +63,7 @@ class ACTR extends Model implements ParentDocument
 
     public function isValid(): bool
     {
-        return $this->roles != null;
+        return null != $this->roles;
     }
 
     public function getChildren(): array
@@ -73,7 +73,7 @@ class ACTR extends Model implements ParentDocument
 
     protected function clean($value, $key): bool
     {
-        if (is_string($value) && trim($value) == '') {
+        if (\is_string($value) && '' == \trim($value)) {
             return true;
         }
 
@@ -90,14 +90,14 @@ class ACTR extends Model implements ParentDocument
             'actr:initOtherForeName',
             'actr:otherForeName',
             'actr:languageCode',
-            'actr:roles'
+            'actr:roles',
         ];
     }
 
     protected function getCallbacks(): array
     {
         $intCallback = function (string $value) { return (int) $value; };
-        $stringCallback = function (string $value) { return trim($value); };
+        $stringCallback = function (string $value) { return \trim($value); };
         $languages = ['N' => 'NL', 'F' => 'FR', 'D' => 'DE', 'A' => 'DE'];
         $languageCallback = function (string $value) use ($languages) { return $languages[$value]; };
 
@@ -116,7 +116,7 @@ class ACTR extends Model implements ParentDocument
         $nested = isset($value['actr:role']['@id']) ? [$value['actr:role']] : $value['actr:role'];
         $emsLinkActr = self::createEmsId(Model::TYPE_ACTR, $this->source['id_actr']);
 
-        $notAssigned = isset($this->source['last_name']) && $this->source['last_name'] === 'N' && isset($this->source['first_name']) && $this->source['first_name'] === 'N';
+        $notAssigned = isset($this->source['last_name']) && 'N' === $this->source['last_name'] && isset($this->source['first_name']) && 'N' === $this->source['first_name'];
 
         $legislatures = [];
 
@@ -131,9 +131,9 @@ class ACTR extends Model implements ParentDocument
                     $this->searchTypes->addTypes($categories, $role->getLegislature());
                 }
 
-                if ($role->getOrgnType() === 'political_group') {
+                if ('political_group' === $role->getOrgnType()) {
                     $partyId = $this->import->getParty($role->getOrgn());
-                    if ($partyId === null) {
+                    if (null === $partyId) {
                         continue;
                     }
 
@@ -147,7 +147,6 @@ class ACTR extends Model implements ParentDocument
                         'party_nl' => $this->import->getPartyName($partyId, 'nl'),
                         'party_fr' => $this->import->getPartyName($partyId, 'fr'),
                     ];
-
                 }
             }
         }
@@ -156,8 +155,8 @@ class ACTR extends Model implements ParentDocument
             $this->searchTypes->addTypes([SearchCategories::CAT_ACTR_OTHER]);
         }
 
-        $legislatures = array_unique(array_filter($legislatures));
-        sort($legislatures);
+        $legislatures = \array_unique(\array_filter($legislatures));
+        \sort($legislatures);
         $this->source['legislature'] = \array_values($legislatures);
     }
 
@@ -167,9 +166,9 @@ class ACTR extends Model implements ParentDocument
 
         $parties = \array_filter($this->parties);
 
-        if ($parties != null) {
-            krsort($parties);
-            $current = array_shift($parties);
+        if (null != $parties) {
+            \krsort($parties);
+            $current = \array_shift($parties);
 
             $this->source['party'] = $current;
             $this->source['party_nl'] = $this->import->getPartyName($current, 'nl');
@@ -191,7 +190,7 @@ class ACTR extends Model implements ParentDocument
         $this->source['search_actors'] = [$actrId];
         $this->source['search_actors_types'] = [['actr' => $actrId]];
 
-        if (isset($this->source['last_name']) && in_array($this->source['last_name'], ['N', 'N1', 'N2', 'N3', 'N4'])) {
+        if (isset($this->source['last_name']) && \in_array($this->source['last_name'], ['N', 'N1', 'N2', 'N3', 'N4'])) {
             $this->source['show_fr'] = false;
             $this->source['show_nl'] = false;
         }

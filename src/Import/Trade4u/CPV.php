@@ -24,7 +24,7 @@ class CPV
     const CHILD_TYPES = [
         'division' => 'group',
         'group' => 'class',
-        'class' => 'category'
+        'class' => 'category',
     ];
 
     /**
@@ -50,7 +50,7 @@ class CPV
 
     public function getId(): string
     {
-        return sha1('cpv'.$this->body['code']);
+        return \sha1('cpv'.$this->body['code']);
     }
 
     /**
@@ -58,7 +58,7 @@ class CPV
      */
     public function getBody(): array
     {
-        return  array_merge($this->body, ['cpv_type' => $this->type]);
+        return \array_merge($this->body, ['cpv_type' => $this->type]);
     }
 
     public function getDivision(): string
@@ -83,11 +83,11 @@ class CPV
 
     private function setType(): void
     {
-        if ($this->category === $this->division . '000') {
+        if ($this->category === $this->division.'000') {
             $this->type = 'division';
-        } elseif ($this->category === $this->group . '00') {
+        } elseif ($this->category === $this->group.'00') {
             $this->type = 'group';
-        } elseif ($this->category === $this->class . '0') {
+        } elseif ($this->category === $this->class.'0') {
             $this->type = 'class';
         } else {
             $this->type = 'category';

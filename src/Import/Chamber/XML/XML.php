@@ -37,30 +37,30 @@ trait XML
         $clean = $this->recursive($data, [$this, 'clean'], true);
 
         foreach ($clean as $element => $value) {
-            if (!in_array($element, $rootElements)) {
+            if (!\in_array($element, $rootElements)) {
                 continue;
             }
 
             if (isset($callbacks[$element])) {
-                list($array, $property, $callback) = array_values($callbacks[$element]);
-                $this->$array[$property] = call_user_func($callback, $value);
+                list($array, $property, $callback) = \array_values($callbacks[$element]);
+                $this->$array[$property] = \call_user_func($callback, $value);
                 continue;
             }
 
             if (isset($callbacksHTML[$element])) {
-                list($array, $property) = array_values($callbacksHTML[$element]);
+                list($array, $property) = \array_values($callbacksHTML[$element]);
                 $this->$array[$property] = $this->getRawHTML($dom, $element);
                 continue;
             }
 
-            $element = ucfirst(str_replace([':', '@'], '', $element));
-            if (method_exists($this, 'parse' . $element)) {
-                $this->{'parse' . $element}($value);
+            $element = \ucfirst(\str_replace([':', '@'], '', $element));
+            if (\method_exists($this, 'parse'.$element)) {
+                $this->{'parse'.$element}($value);
                 continue;
             }
 
-            if ($dom && method_exists($this, 'parseHtml' . $element)) {
-                $this->{'parseHtml' . $element}($this->getRawHTML($dom, $element));
+            if ($dom && \method_exists($this, 'parseHtml'.$element)) {
+                $this->{'parseHtml'.$element}($this->getRawHTML($dom, $element));
             }
         }
     }
@@ -90,13 +90,13 @@ trait XML
         $doc = new \DOMDocument('1.0', 'UTF-8');
 
         foreach ($domElements as $element) {
-            $cloned = array_map(function($value){
-                /** @var $value \DOMNode */
-                return $value->cloneNode(TRUE);
-            }, iterator_to_array($element->childNodes));
+            $cloned = \array_map(function ($value) {
+                /* @var $value \DOMNode */
+                return $value->cloneNode(true);
+            }, \iterator_to_array($element->childNodes));
 
-            array_map(function($clone) use ($doc){
-                $doc->appendChild($doc->importNode($clone,TRUE));
+            \array_map(function ($clone) use ($doc) {
+                $doc->appendChild($doc->importNode($clone, true));
             }, $cloned);
         }
 
@@ -105,22 +105,23 @@ trait XML
             $raw .= $doc->saveHTML($x);
         }
 
-        return trim($raw);
+        return \trim($raw);
     }
 
     private function recursive($array, $callback, $remove = false): array
     {
         foreach ($array as $key => &$value) { // mind the reference
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $value = $this->recursive($value, $callback, $remove);
                 if ($remove && $callback($value, $key)) {
                     unset($array[$key]);
                 }
-            } else if ($callback($value, $key)) {
+            } elseif ($callback($value, $key)) {
                 unset($array[$key]);
             }
         }
         unset($value); // kill the reference
+
         return $array;
     }
 }

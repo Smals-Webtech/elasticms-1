@@ -107,7 +107,7 @@ class DownloadCommand extends Command implements CommandInterface
 
     private function download($endpoint, $saveFilename): void
     {
-        $response = $this->client->get(sprintf('/v0/%s', $endpoint));
+        $response = $this->client->get(\sprintf('/v0/%s', $endpoint));
 
         \file_put_contents($saveFilename, $response->getBody()->getContents());
     }
@@ -115,7 +115,7 @@ class DownloadCommand extends Command implements CommandInterface
     private function getJson(string $endpoint, array $parms = []): array
     {
         $endpoint = \sprintf('/v0/%s?%s', $endpoint, \http_build_query($parms));
-        $response = $this->client->get($endpoint, ['headers' => ['Accept' =>  'application/json']]);
+        $response = $this->client->get($endpoint, ['headers' => ['Accept' => 'application/json']]);
 
         return \json_decode($response->getBody()->getContents(), true);
     }

@@ -30,22 +30,22 @@ class FLWBCommission
     {
         $source = $this->source;
 
-        ksort($source);
+        \ksort($source);
 
         return \array_filter($source, [Model::class, 'arrayFilterFunction']);
     }
 
     protected function clean($value, $key): bool
     {
-        if ($key === 'RAPPORT_KODE' && $value === 'Z') {
+        if ('RAPPORT_KODE' === $key && 'Z' === $value) {
             return true;
         }
 
-        if ($key === 'RAPPORTEUR_ACTIVE' && $value === '0') {
+        if ('RAPPORTEUR_ACTIVE' === $key && '0' === $value) {
             return true;
         }
 
-        if (\in_array($key, ['RAPPORTEUR', 'RAPPORT']) && \array_filter($value, [Model::class, 'arrayFilterFunction']) == null) {
+        if (\in_array($key, ['RAPPORTEUR', 'RAPPORT']) && null == \array_filter($value, [Model::class, 'arrayFilterFunction'])) {
             return true;
         }
 
@@ -56,7 +56,7 @@ class FLWBCommission
     {
         return [
             'SLEUTEL', 'COMMISSIE_TYPE', 'COMMISSIE_NAAM', 'COMMISSIE_CLASS',
-            'KALENDER', 'INCIDENTEN', 'RAPPORT', 'RAPPORTEUR', 'REMARK'
+            'KALENDER', 'INCIDENTEN', 'RAPPORT', 'RAPPORTEUR', 'REMARK',
         ];
     }
 
@@ -65,7 +65,7 @@ class FLWBCommission
         $intCallback = function (int $value) { return $value; };
 
         return [
-            'SLEUTEL' => ['source', 'key_commission', $intCallback]
+            'SLEUTEL' => ['source', 'key_commission', $intCallback],
         ];
     }
 
@@ -94,7 +94,7 @@ class FLWBCommission
         $nested = isset($value['KALENDER_kode']) ? [$value] : $value;
 
         foreach ($nested as $item) {
-            $this->source['calendar'][] = array_filter([
+            $this->source['calendar'][] = \array_filter([
                 'code' => (int) $item['KALENDER_kode'],
                 'title_fr' => $item['KALENDER_textF'],
                 'title_nl' => $item['KALENDER_textN'],
@@ -109,7 +109,7 @@ class FLWBCommission
         $nested = isset($value['INCIDENT']['INCIDENTEN_DATUM']) ? [$value['INCIDENT']] : $value['INCIDENT'];
 
         foreach ($nested as $item) {
-            $this->source['incidents'][] = array_filter([
+            $this->source['incidents'][] = \array_filter([
                 'title_fr' => $item['INCIDENTEN_textF'],
                 'title_nl' => $item['INCIDENTEN_textN'],
                 'date' => Model::createDate($item['INCIDENTEN_DATUM']),

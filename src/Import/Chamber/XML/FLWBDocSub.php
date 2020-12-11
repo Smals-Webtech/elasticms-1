@@ -29,7 +29,8 @@ class FLWBDocSub
     public function getSource(): array
     {
         $source = $this->source;
-        ksort($source);
+        \ksort($source);
+
         return \array_filter($source, [Model::class, 'arrayFilterFunction']);
     }
 
@@ -44,7 +45,7 @@ class FLWBDocSub
             'SUBDOCNR', 'SUBDOC_TYPE',
             'SUBDOC_DATE', 'SUBDOC_DISTRIBUTION_DATE',
             'AUTEURS', 'SUBDOC_COMMENTS',
-            'SUB_PDFDOC','SUBDOC_JOINTDOCS',
+            'SUB_PDFDOC', 'SUBDOC_JOINTDOCS',
         ];
     }
 
@@ -62,7 +63,7 @@ class FLWBDocSub
 
     protected function parseSUB_PDFDOC(array $value): void
     {
-        if(isset($value['SUB_PDFDOC_DOCLINK'])){
+        if (isset($value['SUB_PDFDOC_DOCLINK'])) {
             $this->source['file'] = $this->flwb->createFileInfo($value['SUB_PDFDOC_DOCLINK']);
         }
     }
@@ -74,7 +75,7 @@ class FLWBDocSub
 
     protected function parseSUBDOC_COMMENTS(array $value): void
     {
-        if(isset($value['SUBDOC_COMMENTS_textF']) && isset($value['SUBDOC_COMMENTS_textN']) && !is_array($value['SUBDOC_COMMENTS_textF']) && !is_array($value['SUBDOC_COMMENTS_textN'])){
+        if (isset($value['SUBDOC_COMMENTS_textF']) && isset($value['SUBDOC_COMMENTS_textN']) && !\is_array($value['SUBDOC_COMMENTS_textF']) && !\is_array($value['SUBDOC_COMMENTS_textN'])) {
             $this->source['comments_fr'] = $value['SUBDOC_COMMENTS_textF'];
             $this->source['comments_nl'] = $value['SUBDOC_COMMENTS_textN'];
         }
@@ -82,10 +83,10 @@ class FLWBDocSub
 
     protected function parseAUTEURS(array $value): void
     {
-        $nested = isset($value['AUTEURS_SLEUTEL']) ? [$value] : $value ;
+        $nested = isset($value['AUTEURS_SLEUTEL']) ? [$value] : $value;
 
         foreach ($nested as $item) {
-            if(isset($item['AUTEURS_FAMNAAM']) && $item['AUTEURS_FAMNAAM'] == 'NOT FOUND'){
+            if (isset($item['AUTEURS_FAMNAAM']) && 'NOT FOUND' == $item['AUTEURS_FAMNAAM']) {
                 continue;
             }
 

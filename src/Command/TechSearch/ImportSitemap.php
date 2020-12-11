@@ -24,7 +24,7 @@ final class ImportSitemap extends Command implements CommandInterface
 {
     /** @var Bulker */
     private $bulker;
-    /**@var Client */
+    /** @var Client */
     private $client;
     /** @var EnvironmentService */
     private $environmentService;
@@ -77,7 +77,7 @@ final class ImportSitemap extends Command implements CommandInterface
                 self::OPTION_RESET,
                 null,
                 InputOption::VALUE_NONE,
-                sprintf('start fresh will drop index : %s', self::INDEX))
+                \sprintf('start fresh will drop index : %s', self::INDEX))
             ->addOption(
                 self::OPTION_NO_SSL,
                 null,
@@ -92,11 +92,11 @@ final class ImportSitemap extends Command implements CommandInterface
         $this->io = new SymfonyStyle($input, $output);
         $this->io->title('Tech Search import');
 
-        $this->httpClient = new HttpClient(['verify' => (!$input->getOption(self::OPTION_NO_SSL)) ]);
+        $this->httpClient = new HttpClient(['verify' => (!$input->getOption(self::OPTION_NO_SSL))]);
         $this->tikaClient = new HttpClient(['base_uri' => $this->tikaServer, 'timeout' => 30]);
 
         if (200 !== $hello = $this->tikaClient->get('/tika')->getStatusCode()) {
-            throw new \RuntimeException(sprintf('Tika server (%s) down ? [%d]', $this->tikaServer, $hello));
+            throw new \RuntimeException(\sprintf('Tika server (%s) down ? [%d]', $this->tikaServer, $hello));
         }
 
         $environment = $this->environmentService->getByName('preview');
@@ -110,12 +110,12 @@ final class ImportSitemap extends Command implements CommandInterface
         $document = $this->client->get([
             'index' => $environment->getAlias(),
             'type' => $emsLink->getContentType(),
-            'id' => $emsLink->getOuuid()]
+            'id' => $emsLink->getOuuid(), ]
         );
 
         $sitemapResponse = $this->download($document['_source']['url']);
         $this->setUrls($sitemapResponse);
-        $this->io->section(sprintf('Parsed %d urls', \count($this->urls)));
+        $this->io->section(\sprintf('Parsed %d urls', \count($this->urls)));
 
         if ($input->getOption(self::OPTION_RESET)) {
             $this->reset();
@@ -124,7 +124,7 @@ final class ImportSitemap extends Command implements CommandInterface
         $this->bulker->setLogger(new ConsoleLogger($output));
         $this->bulker->setSize(1);
 
-        $emsLinkSitemap = sprintf('%s:%s', $emsLink->getContentType(), $emsLink->getOuuid());
+        $emsLinkSitemap = \sprintf('%s:%s', $emsLink->getContentType(), $emsLink->getOuuid());
         $this->import($emsLinkSitemap);
 
         $this->io->newLine();
@@ -138,7 +138,7 @@ final class ImportSitemap extends Command implements CommandInterface
 
         $data['owner'] = $this->getEMSLink('owner', $data['owner']);
         $data['type'] = $this->getEMSLink('type', $data['type']);
-        $data['facets'] = array_map(function ($facet) {
+        $data['facets'] = \array_map(function ($facet) {
             return $this->getEMSLink('facet', $facet);
         }, $data['facets']);
 
@@ -150,16 +150,16 @@ final class ImportSitemap extends Command implements CommandInterface
             $data['content_'.$language] = $content;
         }
 
-        return array_filter($data);
+        return \array_filter($data);
     }
 
     private function download(string $url): ResponseInterface
     {
-        $this->io->write(sprintf('Downloading %s', $url));
+        $this->io->write(\sprintf('Downloading %s', $url));
         $response = $this->httpClient->get($url);
 
         if (200 !== $statusCode = $response->getStatusCode()) {
-            throw new \RuntimeException(sprintf('%s resulted in %s', $url, $statusCode));
+            throw new \RuntimeException(\sprintf('%s resulted in %s', $url, $statusCode));
         }
 
         return $response;
@@ -170,10 +170,11 @@ final class ImportSitemap extends Command implements CommandInterface
         try {
             return $this->tikaClient->put('/tika', [
                 'body' => $response->getBody()->__toString(),
-                'headers' => ['Accept' => 'text/plain']
+                'headers' => ['Accept' => 'text/plain'],
             ]);
         } catch (\Exception $e) {
-            $this->io->error(sprintf('Failed to extract content: %s', $e->getMessage()));
+            $this->io->error(\sprintf('Failed to extract content: %s', $e->getMessage()));
+
             return null;
         }
     }
@@ -184,42 +185,42 @@ final class ImportSitemap extends Command implements CommandInterface
         $contentDisposition = $response->getHeaderLine('Content-Disposition');
 
         if ($contentDisposition) {
-            preg_match('/filename="(?\'filename\'.+)"/', $contentDisposition, $matches);
+            \preg_match('/filename="(?\'filename\'.+)"/', $contentDisposition, $matches);
             $filename = $matches['filename'];
         } else {
             $filename = null;
         }
 
-        return array_filter([
+        return \array_filter([
             'filename' => $filename,
-            'filesize' => $contentLength != '' ? $contentLength : $response->getBody()->getSize(),
+            'filesize' => '' != $contentLength ? $contentLength : $response->getBody()->getSize(),
             'mimetype' => $response->getHeader('Content-Type'),
         ]);
     }
 
     private function getEMSLink(string $contentType, string $identifier): ?string
     {
-        if (array_key_exists($identifier, $this->emsLinks)) {
+        if (\array_key_exists($identifier, $this->emsLinks)) {
             return $this->emsLinks[$identifier];
         }
 
         $result = $this->client->search([
             'type' => $contentType,
             'index' => $this->searchIndex,
-            'body' => ['query' => ['term' => ['identifier' => $identifier]]]
+            'body' => ['query' => ['term' => ['identifier' => $identifier]]],
         ]);
 
         if (1 === $result['hits']['total']) {
-            $emsLink = EMSLink::fromDocument(array_pop($result['hits']['hits']));
-            $this->emsLinks[$identifier] = sprintf('%s:%s', $emsLink->getContentType(), $emsLink->getOuuid());
+            $emsLink = EMSLink::fromDocument(\array_pop($result['hits']['hits']));
+            $this->emsLinks[$identifier] = \sprintf('%s:%s', $emsLink->getContentType(), $emsLink->getOuuid());
 
             return $this->emsLinks[$identifier];
         }
 
-        $this->io->warning(vsprintf('Creation ems link failed result (%d) for "%s:%s"', [
+        $this->io->warning(\vsprintf('Creation ems link failed result (%d) for "%s:%s"', [
             $result['hits']['total'],
             $contentType,
-            $identifier
+            $identifier,
         ]));
 
         return null;
@@ -237,12 +238,12 @@ final class ImportSitemap extends Command implements CommandInterface
                 $data['sitemap'] = $emsLinkSitemap;
 
                 $this->bulker->index(
-                    ['_index' => self::INDEX, '_type' => 'url', '_id' => sha1('url_'.$url->getUrl())],
+                    ['_index' => self::INDEX, '_type' => 'url', '_id' => \sha1('url_'.$url->getUrl())],
                     $data
                 );
                 $progressBar->advance();
             } catch (\Exception $e) {
-                $this->io->error(sprintf('Failed importing %s : %s', $url->getUrl(), $e->getMessage()));
+                $this->io->error(\sprintf('Failed importing %s : %s', $url->getUrl(), $e->getMessage()));
             }
         }
 
@@ -252,7 +253,7 @@ final class ImportSitemap extends Command implements CommandInterface
 
     private function reset(): void
     {
-        $this->io->section(sprintf('Resetting index %s', self::INDEX));
+        $this->io->section(\sprintf('Resetting index %s', self::INDEX));
         $indices = $this->client->indices();
 
         if ($indices->exists(['index' => self::INDEX])) {
@@ -261,7 +262,7 @@ final class ImportSitemap extends Command implements CommandInterface
 
         $indices->create([
             'index' => self::INDEX,
-            'body' => json_decode(file_get_contents(__DIR__ . '/tech_search_mapping.json'), true),
+            'body' => \json_decode(\file_get_contents(__DIR__.'/tech_search_mapping.json'), true),
         ]);
     }
 
@@ -276,7 +277,7 @@ final class ImportSitemap extends Command implements CommandInterface
             try {
                 $this->urls[] = new Url($data);
             } catch (\Exception $e) {
-                $this->io->error(sprintf('Error %s parsing data %s', $e->getMessage(), \json_encode($data)));
+                $this->io->error(\sprintf('Error %s parsing data %s', $e->getMessage(), \json_encode($data)));
             }
         }
     }

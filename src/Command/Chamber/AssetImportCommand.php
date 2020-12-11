@@ -4,10 +4,10 @@ namespace App\Command\Chamber;
 
 use App\Command\LaChambre\Asset\Asset;
 use Doctrine\DBAL\Connection;
-use EMS\CommonBundle\Command\CommandInterface;
 use Elasticsearch\Client;
-use EMS\CoreBundle\Service\AssetExtractorService;
+use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CoreBundle\Elasticsearch\Bulker;
+use EMS\CoreBundle\Service\AssetExtractorService;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,13 +17,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AssetImportCommand extends Command implements CommandInterface
 {
-    /**@var Client */
+    /** @var Client */
     private $client;
     /** @var Bulker */
     private $bulker;
     /** @var Connection */
     private $conn;
-    /** @var AssetExtractorService  */
+    /** @var AssetExtractorService */
     private $extractorService;
     /** @var \Psr\Log\LoggerInterface */
     private $logger;
@@ -31,7 +31,6 @@ class AssetImportCommand extends Command implements CommandInterface
     private $index = 'webchamber_import';
 
     protected static $defaultName = 'ems:job:chamber:import:files';
-
 
     public function __construct(Client $client, AssetExtractorService $extractorService, RegistryInterface $doctrine)
     {
@@ -50,7 +49,6 @@ class AssetImportCommand extends Command implements CommandInterface
 
         $this->conn->getConfiguration()->setSQLLogger(null);
 
-
         $this->bulker = new Bulker($this->client, $this->logger);
         $this->bulker->setLogger($this->logger)->setSingleIndex(true)->setSize(5);
 
@@ -61,8 +59,6 @@ class AssetImportCommand extends Command implements CommandInterface
         $sfStyle->writeln('');
         $sfStyle->success('done');
     }
-
-
 
     private function buildAssets(SymfonyStyle $sfStyle)
     {
@@ -84,26 +80,25 @@ QUERY;
                 continue;
             }
 
-            $sfStyle->section(sprintf('Processing files for id %s', $id));
+            $sfStyle->section(\sprintf('Processing files for id %s', $id));
             $processBar = $sfStyle->createProgressBar();
             $processBar->start();
 
             foreach ($files as $file) {
                 $processBar->advance();
-                $extract = json_decode($file['extract_data'], true);
+                $extract = \json_decode($file['extract_data'], true);
 
                 if (null === $extract) {
                     continue;
                 }
 
-                $asset = array_filter([
+                $asset = \array_filter([
                     'filename' => $file['filename'],
                     'filesize' => $file['filesize'],
                     'mimetype' => $file['mimetype'],
-                    'sha1'     => $file['sha1'],
+                    'sha1' => $file['sha1'],
                     'legislature' => $id,
                 ]);
-
 
                 if (isset($extract['date']) && $extract['date']) {
                     $asset['_date'] = $extract['date'];
@@ -132,5 +127,4 @@ QUERY;
 
         return $stmt->rowCount();
     }
-
 }

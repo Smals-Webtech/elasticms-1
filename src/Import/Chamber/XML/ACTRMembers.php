@@ -18,10 +18,10 @@ class ACTRMembers implements CollectionInterface
 
     public function __construct(SplFileInfo $file, Import $import)
     {
-        preg_match('/.*(?<legislature>\d{2}).*/', $file->getFilename(), $matches);
+        \preg_match('/.*(?<legislature>\d{2}).*/', $file->getFilename(), $matches);
 
         if (!isset($matches['legislature'])) {
-            throw new \LogicException(sprintf('Invalid file name %s', $file->getFilename()));
+            throw new \LogicException(\sprintf('Invalid file name %s', $file->getFilename()));
         }
 
         $legislature = (int) $matches['legislature'];
@@ -31,7 +31,7 @@ class ACTRMembers implements CollectionInterface
         foreach ($data['DEPUTE'] as $depute) {
             try {
                 $this->collection[] = new ACTRMember($import, $depute, $legislature);
-                $this->counter++;
+                ++$this->counter;
             } catch (\LogicException $e) {
                 $this->import->getLogger()->error($e->getMessage());
             }

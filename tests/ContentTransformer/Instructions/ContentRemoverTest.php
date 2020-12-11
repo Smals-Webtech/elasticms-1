@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Tests\ContentTransformer\Instructions;
 
+use App\ContentTransformer\Instructions\ContentRemover;
 use EMS\CoreBundle\ContentTransformer\ContentTransformContext;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use App\ContentTransformer\Instructions\ContentRemover;
 
 class ContentRemoverTest extends WebTestCase
 {

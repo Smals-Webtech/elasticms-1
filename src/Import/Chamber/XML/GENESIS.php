@@ -11,7 +11,7 @@ use EMS\CoreBundle\Service\FileService;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * GENESIS = archived FLWB (NL: Wetsvoorstel, FR: Propoistion de loi, EN: Legislation)
+ * GENESIS = archived FLWB (NL: Wetsvoorstel, FR: Propoistion de loi, EN: Legislation).
  */
 class GENESIS extends Model implements ParentDocument
 {
@@ -42,7 +42,6 @@ class GENESIS extends Model implements ParentDocument
 
     public function __construct(SplFileInfo $file, Import $import, StorageManager $storageManager, AssetExtractorService $extractorService, FileService $fileService)
     {
-
         $this->import = $import;
         $this->storageManager = $storageManager;
         $this->extractorService = $extractorService;
@@ -59,7 +58,7 @@ class GENESIS extends Model implements ParentDocument
             $this->source['search_date_sort'] = $this->source['date_submission'] ?? null;
         }
 
-        if (!isset($this->source['search_dates']) && $this->source['search_date_sort'] !== null) {
+        if (!isset($this->source['search_dates']) && null !== $this->source['search_date_sort']) {
             $this->source['search_dates'] = [$this->source['search_date_sort']];
         }
 
@@ -80,7 +79,7 @@ class GENESIS extends Model implements ParentDocument
     {
         return [
             'MAIN_DEPOTDAT', 'COPY', 'SDOCNAME', 'TITLE', 'TITLE_SHORT', 'SITU', 'LEG', 'STATUSOLD', 'BICAM',
-            'COMMISSIES', 'COMPET_BEVOEGD', 'TREFWOORDEN', 'VOTEKAMER', 'VOTESENAAT', 'VOTEMOT', 'VOTECAN', 'PUBLIC'
+            'COMMISSIES', 'COMPET_BEVOEGD', 'TREFWOORDEN', 'VOTEKAMER', 'VOTESENAAT', 'VOTEMOT', 'VOTECAN', 'PUBLIC',
         ];
     }
 
@@ -89,7 +88,7 @@ class GENESIS extends Model implements ParentDocument
         $nested = isset($value['COMMISSIE']['SLEUTEL']) ? [$value['COMMISSIE']] : $value['COMMISSIE'];
 
         foreach ($nested as $data) {
-            if (isset($data['SLEUTEL']) && $data['SLEUTEL'] === 0) {
+            if (isset($data['SLEUTEL']) && 0 === $data['SLEUTEL']) {
                 continue;
             }
             if (!isset($data['COMMISSIE_CLASS']) || !isset($data['COMMISSIE_NAAM'])) {
@@ -103,13 +102,13 @@ class GENESIS extends Model implements ParentDocument
             $commission['title_fr'] = $data['COMMISSIE_NAAM']['COMMISSIE_NAAM_textF'] ?? null;
             $commission['title_nl'] = $data['COMMISSIE_NAAM']['COMMISSIE_NAAM_textN'] ?? null;
             $commission['type'] = $data['COMMISSIE_TYPE']['COMMISSIE_TYPE_KODE'] ?? null;
-            $commission = array_filter($commission);
+            $commission = \array_filter($commission);
 
             if (isset($data['KALENDER'])) {
                 foreach ($data['KALENDER'] as $item) {
                     if (isset($item['KALENDER_kode']) && isset($item['KALENDER_textN']) && isset($item['KALENDER_textF'])) {
-                        $commission['calendar'][] = array_filter([
-                            'code' => (int)$item['KALENDER_kode'],
+                        $commission['calendar'][] = \array_filter([
+                            'code' => (int) $item['KALENDER_kode'],
                             'title_fr' => $item['KALENDER_textF'],
                             'title_nl' => $item['KALENDER_textN'],
                             'date' => Model::createDate($item['KALENDER_DATUM']),
@@ -128,7 +127,7 @@ class GENESIS extends Model implements ParentDocument
         $nested = isset($value['COMPET_BEVOEGD_KODE']) ? [$value] : $value;
 
         foreach ($nested as $data) {
-            $this->source['jurisdictions'][] = array_filter([
+            $this->source['jurisdictions'][] = \array_filter([
                 'code' => $data['COMPET_BEVOEGD_KODE'],
                 'date' => self::createDate($data['COMPET_BEVOEGD_DATUM']),
                 'text_fr' => $data['COMPET_BEVOEGD_textF'],
@@ -152,7 +151,7 @@ class GENESIS extends Model implements ParentDocument
             return Model::createDate($value);
         };
         $notYesCallback = function (string $value) {
-            return strtoupper($value) !== 'N';
+            return 'N' !== \strtoupper($value);
         };
 
         return [
@@ -185,16 +184,15 @@ class GENESIS extends Model implements ParentDocument
             $this->source['keywords_nl'] = $this->keywords->getKeywordsText('nl');
             $this->source['search_keywords'] = $this->keywords->getEmsIds();
         }
-
     }
 
     protected function parseSDOCNAME(string $value): void
     {
-        preg_match('/(\d+)(?P<type>K|S|R)(?P<id>\d+)/', $value, $match);
+        \preg_match('/(\d+)(?P<type>K|S|R)(?P<id>\d+)/', $value, $match);
 
         $this->source['id_genesis'] = $value;
-        $this->source['id_genesis_short'] = substr($value, -4);
-        $this->source['legislature'] = substr($value, 0, 2);
+        $this->source['id_genesis_short'] = \substr($value, -4);
+        $this->source['legislature'] = \substr($value, 0, 2);
         $this->source['is_first_born'] = true;
     }
 
@@ -221,7 +219,7 @@ class GENESIS extends Model implements ParentDocument
             $titles['version_code_nl'] = $value['VERSION']['VERSION_KODE_NL'] ?? null;
             $titles['version_code_fr'] = $value['VERSION']['VERSION_KODE_FR'] ?? null;
 
-            $this->source['titles'] = array_filter($titles);
+            $this->source['titles'] = \array_filter($titles);
         }
     }
 
@@ -229,7 +227,7 @@ class GENESIS extends Model implements ParentDocument
     {
         $types = ['K' => self::BICAM_TYPE_CHAMBER, 'S' => self::BICAM_TYPE_SENATE, 'R' => self::BICAM_TYPE_UNITED];
         $owner = isset($value['MAINDOC']['OWNER']['OWNER_KODE']['OWNER']) ? $value['MAINDOC']['OWNER']['OWNER_KODE']['OWNER'] : self::BICAM_DEFAULT_CODE;
-        if (!in_array($owner, $types)) {
+        if (!\in_array($owner, $types)) {
             $owner = self::BICAM_DEFAULT_CODE;
         }
         $this->source['types_genesis'] = $types[$owner];
@@ -239,30 +237,29 @@ class GENESIS extends Model implements ParentDocument
 
         foreach ($nested as $data) {
             // A string is always invalid
-            if (is_string($data)) {
+            if (\is_string($data)) {
                 continue;
             }
             // Skip empty or invalid legislatures
-            if (isset($data['LEGISL']) && ($data['LEGISL'] === '' || !is_numeric($data['LEGISL']))) {
+            if (isset($data['LEGISL']) && ('' === $data['LEGISL'] || !\is_numeric($data['LEGISL']))) {
                 unset($data['LEGISL']);
             }
             // Skip subdoc distribution date if it's an array (always empty and invalid)
-            if (isset($data['SUBDOCS']['SUBDOC']['SUBDOC_DISTRIBUTION_DATE']) && is_array($data['SUBDOCS']['SUBDOC']['SUBDOC_DISTRIBUTION_DATE'])) {
+            if (isset($data['SUBDOCS']['SUBDOC']['SUBDOC_DISTRIBUTION_DATE']) && \is_array($data['SUBDOCS']['SUBDOC']['SUBDOC_DISTRIBUTION_DATE'])) {
                 unset($data['SUBDOCS']['SUBDOC']['SUBDOC_DISTRIBUTION_DATE']);
             }
             // Skip AUTEURM if it's empty (invalid)
-            if (isset($data['AUTEURM']['AUTEURM_TYPE']['AUTEURM_TYPE_KODE']) && $data['AUTEURM']['AUTEURM_TYPE']['AUTEURM_TYPE_KODE'] === '') {
+            if (isset($data['AUTEURM']['AUTEURM_TYPE']['AUTEURM_TYPE_KODE']) && '' === $data['AUTEURM']['AUTEURM_TYPE']['AUTEURM_TYPE_KODE']) {
                 unset($data['AUTEURM']);
             }
             // Don't import empty
-            if (isset($data['EDESCRIPTOR']['EDESCRIPTOR_kode']) && $data['EDESCRIPTOR']['EDESCRIPTOR_kode'] === ' ') {
+            if (isset($data['EDESCRIPTOR']['EDESCRIPTOR_kode']) && ' ' === $data['EDESCRIPTOR']['EDESCRIPTOR_kode']) {
                 unset($data['EDESCRIPTOR']);
             }
             // Don't import empty
-            if (isset($data['EKANDIDAAT']['EKANDIDAAT_kode']) && $data['EKANDIDAAT']['EKANDIDAAT_kode'] === ' ') {
+            if (isset($data['EKANDIDAAT']['EKANDIDAAT_kode']) && ' ' === $data['EKANDIDAAT']['EKANDIDAAT_kode']) {
                 unset($data['EKANDIDAAT']);
             }
-
 
             $doc = new FLWBDoc($this, $this->import, $data);
 
@@ -271,12 +268,11 @@ class GENESIS extends Model implements ParentDocument
                 $this->mainDocTypes = $doc->getDocTypes();
             }
 
-            $docTypes = array_merge($docTypes, $doc->getDocTypes());
+            $docTypes = \array_merge($docTypes, $doc->getDocTypes());
             $this->source['docs'][] = $doc->getSource();
         }
 
-        $this->docTypes = array_values(array_unique($docTypes));
-
+        $this->docTypes = \array_values(\array_unique($docTypes));
     }
 
     public function isNotFirstBornOrCopy(): bool
@@ -296,11 +292,11 @@ class GENESIS extends Model implements ParentDocument
 
     public function inTitle(string $search): bool
     {
-        $titles = array_unique(array_filter($this->titles));
-        $pattern = sprintf('/.*%s.*/i', $search);
+        $titles = \array_unique(\array_filter($this->titles));
+        $pattern = \sprintf('/.*%s.*/i', $search);
 
         foreach ($titles as $title) {
-            if (preg_match($pattern, $title)) {
+            if (\preg_match($pattern, $title)) {
                 return true;
             }
         }
@@ -310,11 +306,11 @@ class GENESIS extends Model implements ParentDocument
 
     public function inStatusChamber(string $locale, string $search): bool
     {
-        if (!isset($this->source['status_chamber_' . $locale])) {
+        if (!isset($this->source['status_chamber_'.$locale])) {
             return false;
         }
 
-        return strpos(strtoupper($this->source['status_chamber_' . $locale]), strtoupper($search));
+        return \strpos(\strtoupper($this->source['status_chamber_'.$locale]), \strtoupper($search));
     }
 
     public function hasPublicationDate(): bool
@@ -329,7 +325,7 @@ class GENESIS extends Model implements ParentDocument
 
     public function createFileInfo(string $name): array
     {
-        $info = ['label' => $name, 'filename' => sprintf('%s.pdf', $name)];
+        $info = ['label' => $name, 'filename' => \sprintf('%s.pdf', $name)];
 
         // @TODO import PDFs
 
@@ -338,31 +334,32 @@ class GENESIS extends Model implements ParentDocument
 
     public function getActor(string $type, string $ksegna, string $firstName, string $lastName, ?array $party): string
     {
-        $fullName = sprintf('%s %s', $firstName, $lastName);
-        if (isset($party) && $party[0] === '') {
+        $fullName = \sprintf('%s %s', $firstName, $lastName);
+        if (isset($party) && '' === $party[0]) {
             $party = '';
         }
+
         return $this->import->searchActor->get($this->source['legislature'], $type, $ksegna, $fullName, $party);
     }
 
     protected function parseTREFWOORDEN(array $value): void
     {
         foreach ($value as $type => $keywords) {
-            $nested = isset($keywords[$type . '_kode']) ? [$keywords] : $keywords;
+            $nested = isset($keywords[$type.'_kode']) ? [$keywords] : $keywords;
             foreach ($nested as $data) {
-                if (isset($data['IMPORTANT_kode']) && ($data['IMPORTANT_kode'] === '' || $data['IMPORTANT_kode'] === ' ')) {
+                if (isset($data['IMPORTANT_kode']) && ('' === $data['IMPORTANT_kode'] || ' ' === $data['IMPORTANT_kode'])) {
                     continue;
                 }
-                if (isset($data['EDESCRIPTOR_kode']) && ($data['EDESCRIPTOR_kode'] === 0 || $data['EDESCRIPTOR_kode'] === '' || $data['EDESCRIPTOR_kode'] === ' ')) {
+                if (isset($data['EDESCRIPTOR_kode']) && (0 === $data['EDESCRIPTOR_kode'] || '' === $data['EDESCRIPTOR_kode'] || ' ' === $data['EDESCRIPTOR_kode'])) {
                     continue;
                 }
-                if (isset($data['EKANDIDAAT_kode']) && ($data['EKANDIDAAT_kode'] === 0 || $data['EKANDIDAAT_kode'] === '' || $data['EKANDIDAAT_kode'] === ' ')) {
+                if (isset($data['EKANDIDAAT_kode']) && (0 === $data['EKANDIDAAT_kode'] || '' === $data['EKANDIDAAT_kode'] || ' ' === $data['EKANDIDAAT_kode'])) {
                     continue;
                 }
-                if (isset($data['FREE_kode']) && ($data['FREE_kode'] === 0 || $data['FREE_kode'] === '')) {
+                if (isset($data['FREE_kode']) && (0 === $data['FREE_kode'] || '' === $data['FREE_kode'])) {
                     continue;
                 }
-                if (isset($data['FREE_textF']) && ($data['FREE_textF'] === 'NOT FOUND' || empty($data['FREE_textF']) || $data['FREE_textF'] === ' ')) {
+                if (isset($data['FREE_textF']) && ('NOT FOUND' === $data['FREE_textF'] || empty($data['FREE_textF']) || ' ' === $data['FREE_textF'])) {
                     continue;
                 }
                 $this->keywords->addFLWB($type, $data);

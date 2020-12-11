@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Download cpv xls from https://simap.ted.europa.eu/fr/web/simap/cpv and convert to csv
+ * Download cpv xls from https://simap.ted.europa.eu/fr/web/simap/cpv and convert to csv.
  */
 class ImportCPVCommand extends Command implements CommandInterface
 {
@@ -35,7 +35,7 @@ class ImportCPVCommand extends Command implements CommandInterface
         $this
             ->setDescription('Import cpv from csv')
             ->addArgument('csv', InputArgument::REQUIRED, 'path to csv')
-            ->addArgument('index', InputArgument::OPTIONAL, '', 'trade4u_import_cpv_'.time())
+            ->addArgument('index', InputArgument::OPTIONAL, '', 'trade4u_import_cpv_'.\time())
             ->addOption('bulkSize', null, InputOption::VALUE_REQUIRED, 'bulk size', 500)
         ;
     }
@@ -55,10 +55,10 @@ class ImportCPVCommand extends Command implements CommandInterface
 
         $index = $input->getArgument('index');
         $config = ['_index' => $index, '_type' => 'cpv'];
-        $style->section(sprintf('start importing on index "%s"', $index));
+        $style->section(\sprintf('start importing on index "%s"', $index));
 
         foreach ($items as $cpv) {
-            /** @var $cpv CPV */
+            /* @var $cpv CPV */
             $cpv->setChildren($items);
             $config['_id'] = $cpv->getId();
             $this->bulker->index($config, $cpv->getBody());
@@ -69,26 +69,26 @@ class ImportCPVCommand extends Command implements CommandInterface
 
     private function readCSV(string $filename)
     {
-        if(!($handle = fopen($filename, 'r'))){
+        if (!($handle = \fopen($filename, 'r'))) {
             return;
         }
 
         $keys = [];
         $row = 0;
-        while(($rawData = fgetcsv($handle, 100000, ';')) !== false) {
-            $row ++;
-            if ($row === 1) {
-                $keys = array_map(function ($key) {
-                    if ($key !== 'CODE') {
+        while (($rawData = \fgetcsv($handle, 100000, ';')) !== false) {
+            ++$row;
+            if (1 === $row) {
+                $keys = \array_map(function ($key) {
+                    if ('CODE' !== $key) {
                         $key = 'title_'.$key;
                     }
 
-                    return \strtolower(trim($key));
+                    return \strtolower(\trim($key));
                 }, $rawData);
                 continue;
             }
 
-            yield array_combine($keys, array_map("utf8_encode", $rawData));
+            yield \array_combine($keys, \array_map('utf8_encode', $rawData));
         }
     }
 }

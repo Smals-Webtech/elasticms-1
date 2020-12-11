@@ -26,7 +26,7 @@ class ModelFactory
     private $import;
     /** @var array */
     private $children = [];
-    /**@var StorageManager */
+    /** @var StorageManager */
     private $storageManager;
     /** @var AssetExtractorService */
     private $extractorService;
@@ -75,42 +75,43 @@ class ModelFactory
     private function createXML(SplFileInfo $xml, string $type)
     {
         try {
-            if (strpos($type, '_')) {
-                $explodeType = array_map('ucfirst', \explode('_', $type));
-                $explodeType[0] = strtoupper($explodeType[0]);
+            if (\strpos($type, '_')) {
+                $explodeType = \array_map('ucfirst', \explode('_', $type));
+                $explodeType[0] = \strtoupper($explodeType[0]);
                 $class = 'App\Import\Chamber\XML\\'.\implode('', $explodeType);
             } else {
                 $class = 'App\Import\Chamber\XML\\'.\strtoupper($type);
             }
 
-            if (in_array($class, [FLWB::class,INQO::class, GENESIS::class])) {
+            if (\in_array($class, [FLWB::class, INQO::class, GENESIS::class])) {
                 return new $class($xml, $this->import, $this->storageManager, $this->extractorService, $this->fileService);
             }
 
-            if ($class === ACTR::class) {
+            if (ACTR::class === $class) {
                 return new $class($xml, $this->import, $this->indexHelper);
             }
 
-            if (in_array($class, [PCRI::class, CCRI::class, PCRA::class, CCRA::class, QRVA::class])) {
+            if (\in_array($class, [PCRI::class, CCRI::class, PCRA::class, CCRA::class, QRVA::class])) {
                 return new $class($xml, $this->import, $this->extractorService);
             }
 
             return new $class($xml, $this->import);
         } catch (\LogicException $e) {
             $this->import->getLogger()->critical($e->getMessage());
+
             return null;
         } catch (\Exception $e) {
-            throw new \Exception(sprintf('%s : %s', $xml->getFilename(), $e->getMessage()), 0, $e);
+            throw new \Exception(\sprintf('%s : %s', $xml->getFilename(), $e->getMessage()), 0, $e);
         }
     }
 
     private function checkRequired(Model $model): bool
     {
         $required = $this->indexHelper->getRequired($model->getType());
-        $keys = array_keys($model->getSource());
+        $keys = \array_keys($model->getSource());
 
         if ($diffRequired = \array_diff($required, $keys)) {
-            throw new \LogicException(sprintf("Required fields '%s'", \implode("', '", $diffRequired)));
+            throw new \LogicException(\sprintf("Required fields '%s'", \implode("', '", $diffRequired)));
         }
 
         return true;

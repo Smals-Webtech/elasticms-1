@@ -33,7 +33,7 @@ class MTNG implements CollectionInterface
     }
 
     /** @return Model[] */
-    public function getCollection() : array
+    public function getCollection(): array
     {
         return $this->collection;
     }
@@ -53,7 +53,7 @@ class MTNG implements CollectionInterface
         $this->collection[] = new Agenda($data, $import);
     }
 
-    private static function find(SymfonyStyle $style, string $dir,  string $regex): \Generator
+    private static function find(SymfonyStyle $style, string $dir, string $regex): \Generator
     {
         $files = Finder::create()->in($dir)->files()->name($regex);
 
@@ -61,8 +61,8 @@ class MTNG implements CollectionInterface
         $progress->start();
 
         foreach ($files as $file) {
-            /** @var $file SplFileInfo */
-            $style->write('   ' . $file->getRelativePathname());
+            /* @var $file SplFileInfo */
+            $style->write('   '.$file->getRelativePathname());
             yield $file;
             $progress->advance();
         }
@@ -70,5 +70,4 @@ class MTNG implements CollectionInterface
         $progress->finish();
         $style->newLine(1);
     }
-
 }

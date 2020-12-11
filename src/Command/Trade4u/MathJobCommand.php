@@ -15,15 +15,15 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class MathJobCommand extends Command
 {
-    /**@var Client*/
+    /** @var Client */
     private $client;
-    /**@var DataService */
+    /** @var DataService */
     private $dataService;
-    /**@var EnvironmentService*/
+    /** @var EnvironmentService */
     private $envService;
-    /**@var ContentTypeService */
+    /** @var ContentTypeService */
     private $contentTypeService;
-    /**@var FormFactoryInterface $formFactory*/
+    /** @var FormFactoryInterface $formFactory */
     protected $formFactory;
 
     public function __construct(
@@ -32,7 +32,7 @@ class MathJobCommand extends Command
         EnvironmentService $envService,
         ContentTypeService $contentTypeService,
         FormFactoryInterface $formFactory
-    ){
+    ) {
         parent::__construct();
         $this->dataService = $dataService;
         $this->client = $client;
@@ -65,7 +65,7 @@ class MathJobCommand extends Command
         $environment = $this->envService->getByName($environmentName);
 
         if (!$environment) {
-            throw new \RuntimeException(sprintf('environment %s not found', $environmentName));
+            throw new \RuntimeException(\sprintf('environment %s not found', $environmentName));
         }
 
         $index = $environment->getAlias();
@@ -79,7 +79,7 @@ class MathJobCommand extends Command
         $matches = [];
 
         foreach ($source['linked_opportunities'] as $opportunityId) {
-            $split = preg_split('/:/', $opportunityId);
+            $split = \preg_split('/:/', $opportunityId);
             $opportunity = $this->client->get(['index' => $index, 'id' => $split[1], 'type' => $split[0]]);
 
             $matches[] = [
@@ -94,9 +94,8 @@ class MathJobCommand extends Command
     }
 
     /**
-     * @param array  $opportunity
-     * @param array  $match
      * @param string $index
+     *
      * @return array
      */
     private function match(array $opportunity, array $match, $index, OutputInterface $output)
@@ -105,9 +104,9 @@ class MathJobCommand extends Command
         $shouldCountries = [];
 
         $activities = isset($opportunity['activities']) ? $opportunity['activities'] : [];
-        $products   = isset($opportunity['products']) ? $opportunity['products'] : [];
-        $cpv   = isset($opportunity['cpv']) ? $opportunity['cpv'] : [];
-        $countries  = isset($opportunity['countries_active']) ? $opportunity['countries_active'] : [];
+        $products = isset($opportunity['products']) ? $opportunity['products'] : [];
+        $cpv = isset($opportunity['cpv']) ? $opportunity['cpv'] : [];
+        $countries = isset($opportunity['countries_active']) ? $opportunity['countries_active'] : [];
         $abonnements = isset($match['match_domain_abonnement']) ? $match['match_domain_abonnement'] : [];
 
         $this->buildMatch($queryMust, $match['match_activities'], $activities, 'domains.activities');
@@ -120,47 +119,47 @@ class MathJobCommand extends Command
             $queryMust[] = ['bool' => ['should' => $shouldCountries]];
         }
 
-		$query = [
-			'bool' => [
-				'must' => [
-					[
-						'nested' => [
-							'path' => 'domains',
-							'query' => [
-								'bool' => [
-									'must' => $queryMust
-								]
-							]
-						]
-					],
-                    [ 'terms' => ['domain' => ['company_domain:ac17d74d76b73ef59f672e500931602d', 'company_domain:AWy0ZX2floHTbBW_vL0h']] ],
-                    [ 'term' => ['legal_status' => 'legal_status:11e80d063b64e630dac8af80e6cff910'] ],
-				]
-			]
-		];
-		
-        if(! empty($abonnements)) {
-			$query['bool']['must'][]  = [ 'terms' => ['trade4u_abonnement' => $abonnements] ];
+        $query = [
+            'bool' => [
+                'must' => [
+                    [
+                        'nested' => [
+                            'path' => 'domains',
+                            'query' => [
+                                'bool' => [
+                                    'must' => $queryMust,
+                                ],
+                            ],
+                        ],
+                    ],
+                    ['terms' => ['domain' => ['company_domain:ac17d74d76b73ef59f672e500931602d', 'company_domain:AWy0ZX2floHTbBW_vL0h']]],
+                    ['term' => ['legal_status' => 'legal_status:11e80d063b64e630dac8af80e6cff910']],
+                ],
+            ],
+        ];
+
+        if (!empty($abonnements)) {
+            $query['bool']['must'][] = ['terms' => ['trade4u_abonnement' => $abonnements]];
         }
 
-        $output->writeln(json_encode($query));
+        $output->writeln(\json_encode($query));
 
         $scrollTimeout = '5s';
         $params = [
-            "index" => $index,
+            'index' => $index,
             'type' => 'company',
-            "scroll" => $scrollTimeout,
-            "size" => 50,               // how many results *per shard* you want back
+            'scroll' => $scrollTimeout,
+            'size' => 50,               // how many results *per shard* you want back
             '_source' => false,
             'body' => [
                 'query' => $query,
-            ]
+            ],
         ];
 
         $companies = [];
         $response = $this->client->search($params);
 
-        while (isset($response['hits']['hits']) && count($response['hits']['hits']) > 0) {
+        while (isset($response['hits']['hits']) && \count($response['hits']['hits']) > 0) {
             foreach ($response['hits']['hits'] as $hit) {
                 $companies[] = 'company:'.$hit['_id'];
             }
@@ -168,7 +167,7 @@ class MathJobCommand extends Command
             $scrollId = $response['_scroll_id'];
             $response = $this->client->scroll([
                 'scroll_id' => $scrollId,
-                'scroll' => $scrollTimeout
+                'scroll' => $scrollTimeout,
             ]);
         }
 
@@ -176,10 +175,10 @@ class MathJobCommand extends Command
     }
 
     /**
-     * @param array  $query
-     * @param bool   $doMatch           checkbox value CT match
-     * @param array  $opportunityLinks  linked children in opportunity
-     * @param string $relation          property name CT company
+     * @param bool   $doMatch          checkbox value CT match
+     * @param array  $opportunityLinks linked children in opportunity
+     * @param string $relation         property name CT company
+     *
      * @return bool
      */
     private function buildMatch(array &$query, $doMatch, $opportunityLinks, $relation)
@@ -189,20 +188,17 @@ class MathJobCommand extends Command
         }
 
         $query[] = ['terms' => [$relation => $opportunityLinks]];
+
         return true;
     }
 
-    /**
-     * @param array $document
-     * @param array $matches
-     */
     private function save(array $document, array $matches)
     {
         $revision = $this->dataService->initNewDraft('match', $document['_id'], null, 'MATCH_JOB');
         $rawData = $revision->getRawData();
         $rawData['matches'] = $matches;
 
-        if( $revision->getDatafield() == NULL){
+        if (null == $revision->getDatafield()) {
             $this->dataService->loadDataStructure($revision);
         }
 

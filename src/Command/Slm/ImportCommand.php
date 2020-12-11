@@ -99,7 +99,7 @@ class ImportCommand extends Command implements CommandInterface
         $index = $input->getOption('index');
 
         if (!$this->indexer->exists($index)) {
-            $mapping = \json_decode(\file_get_contents(__DIR__ . '/../../Import/SLM/index_mapping.json'), true);
+            $mapping = \json_decode(\file_get_contents(__DIR__.'/../../Import/SLM/index_mapping.json'), true);
             $this->indexer->create($index, [], $mapping);
         }
 
@@ -115,7 +115,7 @@ class ImportCommand extends Command implements CommandInterface
     }
 
     /**
-     * Step 1) Get the import document from EMS
+     * Step 1) Get the import document from EMS.
      */
     private function getImportDocument(EMSLink $emsLink): ImportDocument
     {
@@ -129,7 +129,7 @@ class ImportCommand extends Command implements CommandInterface
     }
 
     /**
-     * Step 2) Import the xml files and create SLA's, Clients, CMS's documents
+     * Step 2) Import the xml files and create SLA's, Clients, CMS's documents.
      */
     private function importXMLFiles(ImportDocument $importDocument, string $index): void
     {
@@ -147,7 +147,7 @@ class ImportCommand extends Command implements CommandInterface
     }
 
     /**
-     * Step 3) Import the csv files for KPI's and there data
+     * Step 3) Import the csv files for KPI's and there data.
      */
     private function importCSVFile(ImportDocument $importDocument, string $index): CSVImporter
     {
@@ -179,7 +179,7 @@ class ImportCommand extends Command implements CommandInterface
 
     /**
      * Step 4) Ask the csv importer for managed children, if they don't exists we create them.
-     * This way we don't need to migrate after importing, because the client can trigger imports
+     * This way we don't need to migrate after importing, because the client can trigger imports.
      */
     private function importChildren(CSVImporter $CSVImporter): void
     {
@@ -189,7 +189,7 @@ class ImportCommand extends Command implements CommandInterface
             $contentType = $this->contentTypeService->getByName($type);
 
             foreach ($children as $child) {
-                /** @var $child Child */
+                /* @var $child Child */
                 try {
                     $this->dataService->getNewestRevision($type, $child->getId());
                 } catch (NotFoundHttpException $e) {
@@ -211,14 +211,15 @@ class ImportCommand extends Command implements CommandInterface
             ]);
             $this->dataService->finalizeDraft($revision);
         } catch (DuplicateOuuidException $e) {
-            $this->logger->error(sprintf('Error creating revision for ouuid %s:%s', $contentType->getName(), $child->getId()));
+            $this->logger->error(\sprintf('Error creating revision for ouuid %s:%s', $contentType->getName(), $child->getId()));
+
             return; //revision deleted but not cleaned?
         }
     }
 
     private function bulkCollection(string $type, string $index, array $collection): void
     {
-        $this->style->writeln(sprintf('Bulking %d %s documents', \count($collection), $type));
+        $this->style->writeln(\sprintf('Bulking %d %s documents', \count($collection), $type));
         $progressBar = $this->style->createProgressBar(\count($collection));
 
         foreach ($collection as $document) {

@@ -32,19 +32,19 @@ abstract class Model implements DocumentInterface
         self::TYPE_QRVA => 'QRVA',
     ];
 
-    public const TYPE_ACTR        = 'actr';
-    public const TYPE_ACTR_ROLE   = 'actr_role';
+    public const TYPE_ACTR = 'actr';
+    public const TYPE_ACTR_ROLE = 'actr_role';
     public const TYPE_ACTR_MEMBER = 'actr_member';
-    public const TYPE_FLWB        = 'flwb';
-    public const TYPE_GENESIS     = 'genesis';
-    public const TYPE_CCRA        = 'ccra';
-    public const TYPE_CCRI        = 'ccri';
-    public const TYPE_INQO        = 'inqo';
-    public const TYPE_MTNG        = 'mtng';
-    public const TYPE_ORGN        = 'orgn';
-    public const TYPE_PCRA        = 'pcra';
-    public const TYPE_PCRI        = 'pcri';
-    public const TYPE_QRVA        = 'qrva';
+    public const TYPE_FLWB = 'flwb';
+    public const TYPE_GENESIS = 'genesis';
+    public const TYPE_CCRA = 'ccra';
+    public const TYPE_CCRI = 'ccri';
+    public const TYPE_INQO = 'inqo';
+    public const TYPE_MTNG = 'mtng';
+    public const TYPE_ORGN = 'orgn';
+    public const TYPE_PCRA = 'pcra';
+    public const TYPE_PCRI = 'pcri';
+    public const TYPE_QRVA = 'qrva';
 
     public const COLLECTION_ACTR_MEMBERS = 'actr_members';
 
@@ -57,7 +57,7 @@ abstract class Model implements DocumentInterface
         $this->source['show_fr'] = true;
         $this->source['show_de'] = false;
         $this->source['show_en'] = false;
-        $this->source['last_import'] = date('c');
+        $this->source['last_import'] = \date('c');
     }
 
     public function isValid(): bool
@@ -67,12 +67,12 @@ abstract class Model implements DocumentInterface
 
     public static function createId(string $type, string $id): string
     {
-        return sha1($type.$id);
+        return \sha1($type.$id);
     }
 
     public static function createEmsId(string $type, string $id): string
     {
-        return $type . ':' . self::createId($type, $id);
+        return $type.':'.self::createId($type, $id);
     }
 
     public static function createDate(string $value, ?string $format = 'Ymd'): ?string
@@ -84,9 +84,11 @@ abstract class Model implements DocumentInterface
 
     public static function isAssoc(array $arr)
     {
-        if (array() === $arr) return false;
+        if ([] === $arr) {
+            return false;
+        }
 
-        return array_keys($arr) !== range(0, count($arr) - 1);
+        return \array_keys($arr) !== \range(0, \count($arr) - 1);
     }
 
     public function getId(): string
@@ -101,24 +103,22 @@ abstract class Model implements DocumentInterface
 
     public function getEmsId(): string
     {
-        return EMSLink::fromText($this->getType() . ':' . $this->getId());
+        return EMSLink::fromText($this->getType().':'.$this->getId());
     }
 
-
-
-    public static function arrayFilterFunction($val) {
-        if (is_array($val)) {
+    public static function arrayFilterFunction($val)
+    {
+        if (\is_array($val)) {
             return !empty($val);
         } else {
-            return ($val !== null && $val !== '');
+            return null !== $val && '' !== $val;
         }
     }
-
 
     public function getSource(): array
     {
         $source = $this->source;
-        ksort($source);
+        \ksort($source);
 
         return \array_filter($source, [Model::class, 'arrayFilterFunction']);
     }

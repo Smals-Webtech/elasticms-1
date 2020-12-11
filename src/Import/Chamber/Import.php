@@ -30,7 +30,6 @@ class Import
 
     const EMS_INSTANCE_ID = 'webchamber_';
 
-
     public function __construct(Client $client, LoggerInterface $logger, string $dir, string $type, string $environment, bool $dryPdf, bool $keepCv)
     {
         $this->client = $client;
@@ -38,7 +37,7 @@ class Import
         $this->dryPdf = $dryPdf;
         $this->keepCv = $keepCv;
         $this->type = $type;
-        $this->rootDir = ($type === Model::TYPE_ACTR) ? $dir.'/../../' : $dir.'/../../..';
+        $this->rootDir = (Model::TYPE_ACTR === $type) ? $dir.'/../../' : $dir.'/../../..';
 
         $this->environment = $environment;
         $this->legislatures = $this->buildLegislatures();
@@ -50,7 +49,7 @@ class Import
     public function search(array $body): array
     {
         return $this->client->search([
-            'index' => self::EMS_INSTANCE_ID . 'ma_' . $this->environment,
+            'index' => self::EMS_INSTANCE_ID.'ma_'.$this->environment,
             'type' => 'doc',
             'body' => $body,
         ]);
@@ -100,64 +99,64 @@ class Import
     public function getActiveLegislatureId(): int
     {
         $legislatures = $this->legislatures;
-        $first = array_shift($legislatures);
+        $first = \array_shift($legislatures);
 
         return (int) $first['id'];
     }
 
     public function getLegislature(int $id): array
     {
-        if($this->type === MODEL::TYPE_GENESIS){
+        if (MODEL::TYPE_GENESIS === $this->type) {
             return [];
         }
 
         if (!$this->existLegislature($id)) {
-            throw new \Exception(sprintf('Legislature unknown %s', $id));
+            throw new \Exception(\sprintf('Legislature unknown %s', $id));
         }
 
         return $this->legislatures[$id];
     }
-    
+
     public function getLegislatureByDate(\DateTime $date): array
     {
         foreach ($this->legislatures as $legislature) {
-            $start = \DateTime::createFromFormat( 'Y-m-d', $legislature['start']);
-            $end = \DateTime::createFromFormat('Y-m-d', $legislature['end'] );
+            $start = \DateTime::createFromFormat('Y-m-d', $legislature['start']);
+            $end = \DateTime::createFromFormat('Y-m-d', $legislature['end']);
 
             if ($date >= $start && $date <= $end) {
                 return $legislature;
             }
         }
 
-        throw new \Exception(sprintf('Legislature unknown for date %s', $date->format('d-m-Y')));
+        throw new \Exception(\sprintf('Legislature unknown for date %s', $date->format('d-m-Y')));
     }
 
     public function getCommission(string $docName, int $legislature)
     {
         $result = $this->client->search([
-            'index' => self::EMS_INSTANCE_ID . 'ma_' . $this->environment,
+            'index' => self::EMS_INSTANCE_ID.'ma_'.$this->environment,
             'type' => 'doc',
             'body' => [
                 'size' => 1,
                 'query' => [
                     'bool' => [
                         'must' => [
-                            ['term' => ['_contenttype' => ['value' => 'orgn' ]]],
-                            ['term' => ['type_orgn' => ['value' => 'commission' ]]],
-                            ['term' => ['doc_name' => ['value' => $docName ]]],
-                            ['term' => ['legislature' => ['value' => $legislature ]]],
-                        ]
-                    ]
-                ]
+                            ['term' => ['_contenttype' => ['value' => 'orgn']]],
+                            ['term' => ['type_orgn' => ['value' => 'commission']]],
+                            ['term' => ['doc_name' => ['value' => $docName]]],
+                            ['term' => ['legislature' => ['value' => $legislature]]],
+                        ],
+                    ],
+                ],
             ],
         ]);
 
-        return (int) $result['hits']['total'] === 0 ? null :  'orgn:'.$result['hits']['hits'][0]['_id'];
+        return 0 === (int) $result['hits']['total'] ? null : 'orgn:'.$result['hits']['hits'][0]['_id'];
     }
 
     public function getParty(string $emsLink): ?string
     {
-        if ($this->parties == null) {
+        if (null == $this->parties) {
             $this->buildParties();
         }
 
@@ -166,7 +165,7 @@ class Import
 
     public function getPartyName(string $id, string $locale): ?string
     {
-        if ($this->parties == null) {
+        if (null == $this->parties) {
             $this->buildParties();
         }
 
@@ -175,7 +174,7 @@ class Import
 
     private function buildParties(): void
     {
-        $search = $this->search(['size' => 1000, 'query' => ['term' => ['type_orgn' => ['value' => 'party'] ]]]);
+        $search = $this->search(['size' => 1000, 'query' => ['term' => ['type_orgn' => ['value' => 'party']]]]);
 
         foreach ($search['hits']['hits'] as $hit) {
             $this->parties['orgn:'.$hit['_id']] = [
@@ -196,7 +195,7 @@ class Import
         $this->logger->info('Getting legislations');
 
         $result = $this->client->search([
-            'index' => self::EMS_INSTANCE_ID . $this->environment,
+            'index' => self::EMS_INSTANCE_ID.$this->environment,
             'type' => 'legislature',
             'size' => 100,
             'body' => ['sort' => ['date_start' => 'desc']],
@@ -207,7 +206,7 @@ class Import
             $legislatures[$hit['_id']] = [
                 'id' => $hit['_id'],
                 'start' => \DateTime::createFromFormat('Y/m/d', $hit['_source']['date_start'])->format('Y-m-d'),
-                'end' => \DateTime::createFromFormat('Y/m/d', $hit['_source']['date_end'])->format('Y-m-d')
+                'end' => \DateTime::createFromFormat('Y/m/d', $hit['_source']['date_end'])->format('Y-m-d'),
             ];
         }
 

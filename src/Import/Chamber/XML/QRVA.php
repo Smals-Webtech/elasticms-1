@@ -34,16 +34,16 @@ class QRVA extends Model implements ParentDocument
     public function __construct(SplFileInfo $file, Import $import, AssetExtractorService $extractorService)
     {
         $this->extractorService = $extractorService;
-        $this->source['id_qrva'] = $file->getBasename('.' . $file->getExtension());
+        $this->source['id_qrva'] = $file->getBasename('.'.$file->getExtension());
 
         $this->import = $import;
         $this->process($this->xmlToArray($file), $this->xmlToDom($file));
 
-        $this->source['id_qrva_short'] = substr($this->source['question_number'] ?? $this->source['id_qrva'], -4);
-        $this->source['id_number'] = intval($this->source['id_qrva_short']);
+        $this->source['id_qrva_short'] = \substr($this->source['question_number'] ?? $this->source['id_qrva'], -4);
+        $this->source['id_number'] = \intval($this->source['id_qrva_short']);
         $this->source['question_number'] = $this->source['question_number'] ?? 'NULL';
-        $this->source['title_fr'] = $this->source['title_fr'] ?? sprintf('Question');
-        $this->source['title_nl'] = $this->source['title_nl'] ?? sprintf('Vraag');
+        $this->source['title_fr'] = $this->source['title_fr'] ?? \sprintf('Question');
+        $this->source['title_nl'] = $this->source['title_nl'] ?? \sprintf('Vraag');
 
         $this->department = Child::createDepartmentQRVA($this->departmentData);
 
@@ -80,7 +80,7 @@ class QRVA extends Model implements ParentDocument
             if (!isset($source[$statusField])) {
                 continue;
             }
-            if ($source[$statusField] === 'archivedCanceled' || $source[$statusField] === 'canceled') {
+            if ('archivedCanceled' === $source[$statusField] || 'canceled' === $source[$statusField]) {
                 return false;
             }
         }
@@ -90,7 +90,7 @@ class QRVA extends Model implements ParentDocument
 
     public function getSource(): array
     {
-        $this->source = array_filter(array_merge(
+        $this->source = \array_filter(\array_merge(
             $this->source,
             ['department' => $this->department->getEmsId()],
             $this->keywords->getSource()
@@ -101,7 +101,7 @@ class QRVA extends Model implements ParentDocument
 
     public function getChildren(): array
     {
-        return array_filter(array_merge(
+        return \array_filter(\array_merge(
             [$this->department],
             $this->keywords->all()
         ));
@@ -109,7 +109,7 @@ class QRVA extends Model implements ParentDocument
 
     protected function clean($value, $key): bool
     {
-        if ($value === "") {
+        if ('' === $value) {
             return true;
         }
 
@@ -120,7 +120,7 @@ class QRVA extends Model implements ParentDocument
     {
         return [
             '@xmlns:ns0', '@xmlns:ns1', '@ns0:xsi', '@ns1:noNamespaceSchemaLocation', '@xmlns:xsi', '@xsi:noNamespaceSchemaLocation',
-            'ID', 'SDOCNAME', 'DOCNAME','LEGISL', 'AUT', 'QUESTNUM', 'DEPOTDAT',
+            'ID', 'SDOCNAME', 'DOCNAME', 'LEGISL', 'AUT', 'QUESTNUM', 'DEPOTDAT',
             'PUBLIDAT', 'STATUSQ', 'STATUS_SL', 'STATUS_OL', 'DELAIDAT',
             'TITF', 'TITN', 'DEPTPRES', 'DEPTNUM', 'DEPTF', 'DEPTN', 'SUBDEPTF', 'SUBDEPTN',
             'PUBLICQ', 'LANG', 'TEXTQF', 'TEXTQN',
@@ -141,13 +141,14 @@ class QRVA extends Model implements ParentDocument
         $stringCallback = function (string $value) { return $value; };
 
         $stringOneLineCallback = function (string $value) {
-            return preg_replace('/\s+/', ' ', $value);
+            return \preg_replace('/\s+/', ' ', $value);
         };
         $dateCallback = function (string $value) { return Model::createDate($value); };
-        $keywordMainCallback = function (string $value) { return [trim($value)]; };
+        $keywordMainCallback = function (string $value) { return [\trim($value)]; };
         $keywordCallback = function ($value) {
             $value = \is_array($value) ? \implode(', ', $value['#text']) : $value;
-            return is_string($value) ? preg_split('/(,\s+|\s+\|\s+)/', trim($value)) : null;
+
+            return \is_string($value) ? \preg_split('/(,\s+|\s+\|\s+)/', \trim($value)) : null;
         };
 
         return [
@@ -227,9 +228,9 @@ class QRVA extends Model implements ParentDocument
 
     private function getActor($raw, $type): string
     {
-        $raw = preg_replace('/\s+/', ' ', $raw);
+        $raw = \preg_replace('/\s+/', ' ', $raw);
         \preg_match('/^(?<fullname>.*),((?<party>.*)\((?<ksegna>.*)\)|(?<only_party>.*))$/', $raw, $matches);
-        $data = array_map('trim', $matches);
+        $data = \array_map('trim', $matches);
         $party = $data['only_party'] ?? ($data['party'] ?? null);
 
         return $this->import->searchActor->get($this->source['legislature'], $type, $data['ksegna'] ?? '', $data['fullname'] ?? '', $party);
@@ -237,13 +238,13 @@ class QRVA extends Model implements ParentDocument
 
     private function setAnswers(int $number): void
     {
-        if (!preg_grep(sprintf('/^answer_%d/', $number), array_keys($this->answersData))) {
+        if (!\preg_grep(\sprintf('/^answer_%d/', $number), \array_keys($this->answersData))) {
             return;
         }
 
         $publication = $this->getPublication($this->answersData['answer_'.$number.'_publication']);
 
-        $this->source['answers'][] = array_filter(array_merge([
+        $this->source['answers'][] = \array_filter(\array_merge([
             'type' => $this->answersData['answer_'.$number.'_type'] ?? null,
             'status' => $this->answersData['answer_'.$number.'_status'] ?? null,
             'text_fr' => $this->answersData['answer_'.$number.'_fr'] ?? null,
@@ -253,7 +254,7 @@ class QRVA extends Model implements ParentDocument
 
     private function setPublication(): void
     {
-        $this->source = array_merge($this->source, $this->getPublication($this->publicationData['question']));
+        $this->source = \array_merge($this->source, $this->getPublication($this->publicationData['question']));
     }
 
     private function getPublication(string $value): array
@@ -261,16 +262,16 @@ class QRVA extends Model implements ParentDocument
         $leg = $this->source['legislature'];
         $exploded = \explode(',', $value);
 
-        $id = str_pad(\substr($exploded[0], 1), 4, '0', \STR_PAD_LEFT);
-        $page = \trim($exploded[1]) != null ? (int) substr(\trim($exploded[1]), 1) : null;
+        $id = \str_pad(\substr($exploded[0], 1), 4, '0', \STR_PAD_LEFT);
+        $page = null != \trim($exploded[1]) ? (int) \substr(\trim($exploded[1]), 1) : null;
 
         $publication = [
             'publication_period' => isset($exploded[3]) ? (int) $exploded[3] : null,
-            'publication_file' => array_filter([
+            'publication_file' => \array_filter([
                 'label' => $exploded[0],
                 'page' => $page,
-                'filename' => sprintf('%dK%s.pdf', $leg, $id),
-                'path' => sprintf('QRVA/pdf/%d/', $leg),
+                'filename' => \sprintf('%dK%s.pdf', $leg, $id),
+                'path' => \sprintf('QRVA/pdf/%d/', $leg),
             ]),
         ];
 
@@ -279,7 +280,7 @@ class QRVA extends Model implements ParentDocument
             $publication['date_publication'] = self::createDate($stringDate, 'd/m/Y');
         }
 
-        return array_filter($publication);
+        return \array_filter($publication);
     }
 
     private function setSearch(): void
@@ -290,7 +291,7 @@ class QRVA extends Model implements ParentDocument
         $this->source['search_actors'] = $this->import->searchActor->getEmsLinks();
         $this->source['search_actors_types'] = $this->import->searchActor->getTypes();
 
-        $dates = array_filter([
+        $dates = \array_filter([
             $this->source['date_submission'] ?? null,
             $this->source['date_publication'] ?? null,
         ]);

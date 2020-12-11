@@ -44,7 +44,7 @@ class ImportDocument
     public function getCSVFile(): string
     {
         foreach ($this->files as $file) {
-            if ($file['extension'] === 'csv') {
+            if ('csv' === $file['extension']) {
                 return $file['file'];
             }
         }
@@ -59,7 +59,7 @@ class ImportDocument
     {
         $files = $this->files;
 
-        return array_filter($files, function (array $file) use ($extension) {
+        return \array_filter($files, function (array $file) use ($extension) {
             return $file['extension'] === $extension;
         });
     }

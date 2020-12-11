@@ -11,7 +11,7 @@ use EMS\CoreBundle\Service\FileService;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * INQO (NL: Mondelinge vragen in de commissie, FR: Questions orales en commission, EN: Oral Question)
+ * INQO (NL: Mondelinge vragen in de commissie, FR: Questions orales en commission, EN: Oral Question).
  */
 class INQO extends Model implements ParentDocument
 {
@@ -60,30 +60,29 @@ class INQO extends Model implements ParentDocument
         $this->setFiles();
         $this->setSearch($import->getLegislature($this->source['legislature']));
 
-
         $output_array = [];
-        if (preg_match('/^[A-Z](?P<legislature>[0-9]{2})[A-Z]?(?P<identifier>[0-9]*)[A-Z]?$/', \trim($this->source['id_inqo']), $output_array)) {
+        if (\preg_match('/^[A-Z](?P<legislature>[0-9]{2})[A-Z]?(?P<identifier>[0-9]*)[A-Z]?$/', \trim($this->source['id_inqo']), $output_array)) {
             $identifier = $output_array['identifier'];
-        }
-        else {
-            $identifier = substr($this->source['id_inqo'], -5);
+        } else {
+            $identifier = \substr($this->source['id_inqo'], -5);
         }
 
         $this->source['id_inqo_short'] = $identifier;
-        $this->source['id_number'] = intval($identifier);
+        $this->source['id_number'] = \intval($identifier);
 
         parent::__construct($import, Model::TYPE_INQO, $this->source['legislature'].$this->source['id_inqo']);
     }
 
     public function getSource(): array
     {
-        $this->source = array_filter(array_merge($this->source, $this->keywords->getSource()), [Model::class, 'arrayFilterFunction']);
+        $this->source = \array_filter(\array_merge($this->source, $this->keywords->getSource()), [Model::class, 'arrayFilterFunction']);
+
         return parent::getSource();
     }
 
     public function getChildren(): array
     {
-        return array_filter(array_merge(
+        return \array_filter(\array_merge(
             $this->children,
             $this->keywords->all()
         ), [Model::class, 'arrayFilterFunction']);
@@ -91,7 +90,7 @@ class INQO extends Model implements ParentDocument
 
     protected function clean($value, $key): bool
     {
-        if ($key === 'DOSSIERNR' && 0 === (int)$value) {
+        if ('DOSSIERNR' === $key && 0 === (int) $value) {
             return true;
         }
 
@@ -113,17 +112,18 @@ class INQO extends Model implements ParentDocument
         $intCallback = function (int $value) { return $value; };
         $numberCaseCallback = function (string $value) {
             $output_array = [];
-            if (preg_match('/^[0-9]{2}(?P<ID>[0-9]{6})CJ$/', $value, $output_array)) {
-                return intval($output_array['ID']);
-            };
-            return intval($value);
+            if (\preg_match('/^[0-9]{2}(?P<ID>[0-9]{6})CJ$/', $value, $output_array)) {
+                return \intval($output_array['ID']);
+            }
+
+            return \intval($value);
         };
         $stringCallback = function (string $value) { return $value; };
         $dateCallback = function (string $value) {
             return (\DateTime::createFromFormat('Ymd', $value))->format('Y-m-d');
         };
 
-        $keywordCallback = function ($value) { return !is_array($value) ? [$value] : $value; };
+        $keywordCallback = function ($value) { return !\is_array($value) ? [$value] : $value; };
 
         return [
             'LEGISL' => ['source', 'legislature', $intCallback],
@@ -209,21 +209,21 @@ class INQO extends Model implements ParentDocument
 
     protected function parseINQOJOINTKEYS($value): void
     {
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             return;
         }
-        $data = is_array($value['BR']) ? $value['BR'] : [$value['BR']];
+        $data = \is_array($value['BR']) ? $value['BR'] : [$value['BR']];
 
-        $this->source['inqo_related'] =  array_map(function (string $id) {
+        $this->source['inqo_related'] = \array_map(function (string $id) {
             return self::createEmsId(Model::TYPE_INQO, $this->source['legislature'].$id);
         }, $data);
     }
 
     protected function parseJOINT(string $value): void
     {
-        $exploded = explode(',', $value);
+        $exploded = \explode(',', $value);
 
-        $this->source['inqo_added'] =  array_map(function (string $id) {
+        $this->source['inqo_added'] = \array_map(function (string $id) {
             return self::createEmsId(Model::TYPE_INQO, $this->source['legislature'].$id);
         }, $exploded);
     }
@@ -231,7 +231,7 @@ class INQO extends Model implements ParentDocument
     protected function parseMOTILIST(array $value): void
     {
         $motions = [];
-        $value = isset($value['MOTI']['MOTI_NUMBER']) ? [$value['MOTI']] : $value['MOTI'] ;
+        $value = isset($value['MOTI']['MOTI_NUMBER']) ? [$value['MOTI']] : $value['MOTI'];
 
         foreach ($value as $data) {
             $motion = [
@@ -243,7 +243,7 @@ class INQO extends Model implements ParentDocument
                 'remarks' => $data['MOTI_REMARK'] ?? null,
             ];
             if (isset($data['MOTI_VOTE'])) {
-                $vote = array_filter([
+                $vote = \array_filter([
                     'vote' => true,
                     'date_vote' => self::createDate($data['MOTI_VOTE']['MOTI_VOTE_DATE']),
                     'vote_positive' => (int) $data['MOTI_VOTE']['MOTI_VOTE_POSITIVE'],
@@ -252,13 +252,13 @@ class INQO extends Model implements ParentDocument
                     'vote_total' => (int) $data['MOTI_VOTE']['MOTI_VOTE_TOTAL'],
                 ]);
                 if (isset($data['MOTI_VOTE']['MOTI_VOTE_RESULT'])) {
-                    $result = explode(' / ', $data['MOTI_VOTE']['MOTI_VOTE_RESULT']);
-                    $vote['vote_result_fr'] = trim($result[0]);
-                    $vote['vote_result_nl'] = trim($result[1]);
+                    $result = \explode(' / ', $data['MOTI_VOTE']['MOTI_VOTE_RESULT']);
+                    $vote['vote_result_fr'] = \trim($result[0]);
+                    $vote['vote_result_nl'] = \trim($result[1]);
                 }
-                $motion = array_merge($motion, $vote);
+                $motion = \array_merge($motion, $vote);
             }
-            $motions[] = array_filter($motion);
+            $motions[] = \array_filter($motion);
         }
 
         $this->source['motions'] = $motions;
@@ -266,7 +266,7 @@ class INQO extends Model implements ParentDocument
 
     private function parseMontionAuthorList(array $data): array
     {
-        $data = isset($data['MOTI_AUTEUR']['MOTI_AUTEUR_KEY']) ? [$data['MOTI_AUTEUR']] : $data['MOTI_AUTEUR'] ;
+        $data = isset($data['MOTI_AUTEUR']['MOTI_AUTEUR_KEY']) ? [$data['MOTI_AUTEUR']] : $data['MOTI_AUTEUR'];
 
         $list = [];
         foreach ($data as $author) {
@@ -294,7 +294,7 @@ class INQO extends Model implements ParentDocument
             $department = Child::createDepartmentINQO($value[$d.'N'.$i], $value[$d.'F'.$i]);
             $ministers[] = [
                 'actor' => $this->getActor($value[$m.$i], $type),
-                'department' => $department->getEmsId()
+                'department' => $department->getEmsId(),
             ];
             $this->children[] = $department;
         }
@@ -304,37 +304,38 @@ class INQO extends Model implements ParentDocument
 
     private function parseKeywords(string $locale, $value): void
     {
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             $value = [$value]; //transform if only one is present
         }
 
         $this->keywordsData[$locale] = $this->extractThesaurus($value);
-        $this->keywordsMainData[$locale]  = $this->extractThesaurus($value, true);
+        $this->keywordsMainData[$locale] = $this->extractThesaurus($value, true);
     }
 
     private function extractThesaurus(array $values, bool $important = false): array
     {
         $list = [];
         foreach ($values as $thesaurus) {
-            $word = is_string($thesaurus) ? $thesaurus : $thesaurus['#'];
+            $word = \is_string($thesaurus) ? $thesaurus : $thesaurus['#'];
             $importantValue = false;
-            if (is_array($thesaurus) && isset($thesaurus['@IMPORTANT'])) {
+            if (\is_array($thesaurus) && isset($thesaurus['@IMPORTANT'])) {
                 $importantValue = $thesaurus['@IMPORTANT'];
             }
-            if (is_array($thesaurus) && isset($thesaurus['@important'])) {
+            if (\is_array($thesaurus) && isset($thesaurus['@important'])) {
                 $importantValue = $thesaurus['@important'];
             }
-            if ($important && $importantValue !== 'Y') {
+            if ($important && 'Y' !== $importantValue) {
                 continue;
             }
             $list[] = $word;
         }
+
         return $list;
     }
 
     private function getActor(string $raw, string $type): string
     {
-        if ($raw === 'Catherine, Doyen-Fonck, cdH, 01204') {
+        if ('Catherine, Doyen-Fonck, cdH, 01204' === $raw) {
             $raw = \str_replace('01204', '01076', $raw);
         }
 
@@ -342,7 +343,7 @@ class INQO extends Model implements ParentDocument
             $explode = \explode(', ', $raw);
 
             list($firstName, $lastName, $party, $ksegna) = \array_values($explode);
-            $fullName = sprintf('%s %s', $firstName, $lastName);
+            $fullName = \sprintf('%s %s', $firstName, $lastName);
 
             return $this->import->searchActor->get($this->source['legislature'], $type, $ksegna, $fullName, $party);
         } catch (\Exception $e) {
@@ -357,28 +358,27 @@ class INQO extends Model implements ParentDocument
 
         if (isset($this->source['motions'])) {
             if (null === $this->fileMoti && $legislature >= 51) {
-                $this->fileMoti = sprintf('%dM%s', $legislature, $numberDoc);
+                $this->fileMoti = \sprintf('%dM%s', $legislature, $numberDoc);
             }
 
-            \preg_match(sprintf('/^%d(?P<type>M|K)(?P<id>.*)/', $legislature), $this->fileMoti, $matches);
+            \preg_match(\sprintf('/^%d(?P<type>M|K)(?P<id>.*)/', $legislature), $this->fileMoti, $matches);
             $type = $matches['type'] ?? false;
 
             if ('K' === $type) {
-                $folder = \substr($matches['id'], 0, 4 );
+                $folder = \substr($matches['id'], 0, 4);
                 $this->source['file_motion'] = [
                     'label' => $this->fileMoti,
                     'filename' => \sprintf('%s.pdf', $this->fileMoti),
-                    'path' => \sprintf('FLWB/PDF/%d/%s/', $legislature, $folder, $this->fileMoti)
+                    'path' => \sprintf('FLWB/PDF/%d/%s/', $legislature, $folder, $this->fileMoti),
                 ];
                 $this->docTypes[] = 'MOTI';
 
                 $this->createMotion($this->source['file_motion']);
-
             } elseif ('M' === $type) {
                 $this->source['file_motion'] = [
                     'label' => $this->fileMoti,
                     'filename' => \sprintf('%s001.pdf', $this->fileMoti),
-                    'path' => \sprintf('MOTI/pdf/%d/', $legislature, $this->fileMoti)
+                    'path' => \sprintf('MOTI/pdf/%d/', $legislature, $this->fileMoti),
                 ];
                 $this->docTypes[] = 'MOTI';
 
@@ -389,12 +389,12 @@ class INQO extends Model implements ParentDocument
         if (null != $this->annals) {
             $unique = [];
 
-            if ($this->type === 'plenary') {
-                $path = sprintf('PCRI/pdf/%d/', $legislature);
+            if ('plenary' === $this->type) {
+                $path = \sprintf('PCRI/pdf/%d/', $legislature);
                 $prefix = ($legislature < 50 ? $legislature.'KP' : 'ip');
                 $this->docTypes[] = 'PCRI';
             } else {
-                $path = sprintf('CCRI/pdf/%d/', $legislature);
+                $path = \sprintf('CCRI/pdf/%d/', $legislature);
                 $prefix = ($legislature < 50 ? $legislature.'KC' : 'ic');
                 $this->docTypes[] = 'CCRI';
             }
@@ -410,9 +410,9 @@ class INQO extends Model implements ParentDocument
 
                 $unique[] = $filename;
 
-                if (\strtolower(\substr($filename, 0, 1)) === 'c') {
+                if ('c' === \strtolower(\substr($filename, 0, 1))) {
                     $onlyNumber = (int) \substr($filename, 1);
-                    $number = (\strlen($onlyNumber) == 2 ? '0'.$onlyNumber : $onlyNumber);
+                    $number = (2 == \strlen($onlyNumber) ? '0'.$onlyNumber : $onlyNumber);
                 } else {
                     $number = $filename;
                 }
@@ -425,7 +425,7 @@ class INQO extends Model implements ParentDocument
                     'label' => $filename,
                     'page' => $page,
                     'filename' => \sprintf('%s%s.pdf', $prefix, $number),
-                    'path' => $path
+                    'path' => $path,
                 ];
                 $this->docTypes[] = 'IC';
             }
@@ -484,15 +484,15 @@ class INQO extends Model implements ParentDocument
         $leg = $this->source['legislature'];
         $sdocname = $this->source['sdoc_name'];
 
-        if (\preg_match(sprintf('/^V%d.*/', $leg), $sdocname)) {
+        if (\preg_match(\sprintf('/^V%d.*/', $leg), $sdocname)) {
             $this->source['types_inqo'][] = 'oral';
-        } elseif (\preg_match(sprintf('/^I%d.*/', $leg), $sdocname)) {
+        } elseif (\preg_match(\sprintf('/^I%d.*/', $leg), $sdocname)) {
             $this->source['types_inqo'][] = 'interpellation';
         }
 
         $meeting = $this->source['meeting_name_fr'] ?? '';
 
-        if (strpos($meeting, 'PLENIERE') !== false) {
+        if (false !== \strpos($meeting, 'PLENIERE')) {
             $this->type = 'plenary';
             $this->source['types_inqo'][] = 'plenary';
         } else {
@@ -503,11 +503,11 @@ class INQO extends Model implements ParentDocument
 
     protected function createMotion($source): void
     {
-        if(!$this->import->isAttachmentIndexingEnabled()){
+        if (!$this->import->isAttachmentIndexingEnabled()) {
             return;
         }
 
-        if(!file_exists($this->getFileWithPath($source))){
+        if (!\file_exists($this->getFileWithPath($source))) {
             return;
         }
 
@@ -517,6 +517,6 @@ class INQO extends Model implements ParentDocument
 
     protected function getFileWithPath(array $source): string
     {
-        return $this->import->getRootDir() . '/' . $source['path'] . $source['filename'];
+        return $this->import->getRootDir().'/'.$source['path'].$source['filename'];
     }
 }
