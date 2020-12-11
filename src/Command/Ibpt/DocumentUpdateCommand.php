@@ -59,7 +59,7 @@ class DocumentUpdateCommand extends Command implements CommandInterface
     private $fileSystemStorage;
     /** @var bool */
     private $skipDownload;
-    /** @var ElasticaService */
+
     private ElasticaService $elasticaService;
 
     public function __construct(Client $client, ContentTypeService $contentTypeService, AppExtension $appExtension, AssetExtractorService $assetExtractorService, FileService $fileService, ElasticaService $elasticaService)
