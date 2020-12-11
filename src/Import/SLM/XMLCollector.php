@@ -9,9 +9,12 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class XMLCollector
 {
-    private $collectionClients = [];
+    /** @var array<mixed> */
     private $collectionCSM     = [];
+    /** @var array<mixed> */
     private $collectionSLA     = [];
+    /** @var array<mixed> */
+    private $collectionClients = [];
 
     const MAPPING_CLIENT = [
         'ClientNR'     => 'id',
@@ -42,10 +45,17 @@ class XMLCollector
         'ClientName'   => 'client_name',
     ];
 
+    /**
+     * @param array<mixed> $xml
+     */
     public function collect(array $xml): void
     {
         $crawler = new Crawler();
-        $crawler->addXmlContent(file_get_contents($xml['file']));
+        $fileContent = \file_get_contents($xml['file']);
+        if ($fileContent === false) {
+            throw new \RuntimeException(sprintf('Unexpected false on file_get_contents(""%s)', $fileContent));
+        }
+        $crawler->addXmlContent($fileContent);
         $elements = $crawler->filterXPath('//default:Detail');
 
         foreach ($elements as $element) {
@@ -63,6 +73,9 @@ class XMLCollector
         }
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getClients(): array
     {
         return array_map(function (array $client) {
@@ -70,6 +83,9 @@ class XMLCollector
         }, $this->collectionClients);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getCSMs(): array
     {
         return array_map(function (array $csm){
@@ -77,6 +93,9 @@ class XMLCollector
         }, $this->collectionCSM);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getSLAs(): array
     {
         return array_map(function (array $sla) {
@@ -84,11 +103,18 @@ class XMLCollector
         }, $this->collectionSLA);
     }
 
-    private function getElementData(\DOMElement $element, array $mapping): array
+    /**
+     * @param array<mixed> $mapping
+     * @return array<mixed>
+     */
+    private function getElementData(\DOMNode $element, array $mapping): array
     {
         $data = [];
 
         foreach ($mapping as $attr => $property) {
+            if (!$element instanceof \DOMElement){
+                continue;
+            }
             $value = $element->getAttribute($attr);
 
             if (!isset($data[$property]) && null != $value) {
@@ -99,6 +125,9 @@ class XMLCollector
         return $data;
     }
 
+    /**
+     * @param array<mixed> $data
+     */
     private function add(string $collection, string $id, array $data): void
     {
         if (\array_key_exists($id, $this->{$collection})) {

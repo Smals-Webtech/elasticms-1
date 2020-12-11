@@ -6,6 +6,9 @@ use EMS\CommonBundle\Elasticsearch\Document;
 
 class SLA extends Document
 {
+    /**
+     * @param array<mixed> $row
+     */
     public function __construct(array $row)
     {
         $client = sprintf('client:%s', Client::createID($row['client_id']));
@@ -28,8 +31,8 @@ class SLA extends Document
         ]);
     }
 
-    public static function createID(int $id)
+    public static function createID(int $id): string
     {
-        return sha1('sla'.$id);
+        return \sha1('sla'.$id);
     }
 }
