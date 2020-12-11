@@ -3,13 +3,14 @@
 namespace App\Import\Chamber;
 
 use App\Import\Chamber\XML\SearchActor;
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Document\Document;
+use EMS\CommonBundle\Elasticsearch\Exception\NotSingleResultException;
+use EMS\CommonBundle\Elasticsearch\Response\Response;
+use EMS\CommonBundle\Service\ElasticaService;
 use Psr\Log\LoggerInterface;
 
 class Import
 {
-    /** @var Client */
-    private $client;
     /** @var LoggerInterface */
     private $logger;
     /** @var string */
@@ -29,14 +30,16 @@ class Import
     private $keepCv;
 
     const EMS_INSTANCE_ID = 'webchamber_';
+    /** @var ElasticaService */
+    private ElasticaService $elasticaService;
 
-    public function __construct(Client $client, LoggerInterface $logger, string $dir, string $type, string $environment, bool $dryPdf, bool $keepCv)
+    public function __construct(ElasticaService $elasticaService, LoggerInterface $logger, string $dir, string $type, string $environment, bool $dryPdf, bool $keepCv)
     {
-        $this->client = $client;
         $this->logger = $logger;
         $this->dryPdf = $dryPdf;
         $this->keepCv = $keepCv;
         $this->type = $type;
+        $this->elasticaService = $elasticaService;
         $this->rootDir = (Model::TYPE_ACTR === $type) ? $dir.'/../../' : $dir.'/../../..';
 
         $this->environment = $environment;
@@ -48,20 +51,13 @@ class Import
 
     public function search(array $body): array
     {
-        return $this->client->search([
-            'index' => self::EMS_INSTANCE_ID.'ma_'.$this->environment,
-            'type' => 'doc',
-            'body' => $body,
-        ]);
+        $search = $this->elasticaService->convertElasticsearchBody([self::EMS_INSTANCE_ID.'ma_'.$this->environment], [], $body);
+        return $this->elasticaService->search($search)->getResponse()->getData();
     }
 
     public function get(string $index, string $id): array
     {
-        return $this->client->get([
-            'index' => $index,
-            'type' => 'doc',
-            'id' => Model::createId(Model::TYPE_ACTR, $id),
-        ]);
+        return $this->elasticaService->getDocument($index, null, Model::createId(Model::TYPE_ACTR, $id))->getRaw();
     }
 
     public function existLegislature(int $id): bool
@@ -133,7 +129,9 @@ class Import
 
     public function getCommission(string $docName, int $legislature)
     {
-        $result = $this->client->search([
+        $search =$this->elasticaService->convertElasticsearchBody([
+            self::EMS_INSTANCE_ID.'ma_'.$this->environment
+        ], [], [
             'index' => self::EMS_INSTANCE_ID.'ma_'.$this->environment,
             'type' => 'doc',
             'body' => [
@@ -151,7 +149,11 @@ class Import
             ],
         ]);
 
-        return 0 === (int) $result['hits']['total'] ? null : 'orgn:'.$result['hits']['hits'][0]['_id'];
+        try {
+            return \sprintf('orgn:%s', $this->elasticaService->singleSearch($search)->getId());
+        } catch (NotSingleResultException $e) {
+            return null;
+        }
     }
 
     public function getParty(string $emsLink): ?string
@@ -193,8 +195,7 @@ class Import
     private function buildLegislatures(): array
     {
         $this->logger->info('Getting legislations');
-
-        $result = $this->client->search([
+        $search = $this->elasticaService->convertElasticsearchSearch([
             'index' => self::EMS_INSTANCE_ID.$this->environment,
             'type' => 'legislature',
             'size' => 100,
@@ -202,11 +203,13 @@ class Import
         ]);
         $legislatures = [];
 
-        foreach ($result['hits']['hits'] as $hit) {
-            $legislatures[$hit['_id']] = [
-                'id' => $hit['_id'],
-                'start' => \DateTime::createFromFormat('Y/m/d', $hit['_source']['date_start'])->format('Y-m-d'),
-                'end' => \DateTime::createFromFormat('Y/m/d', $hit['_source']['date_end'])->format('Y-m-d'),
+        $response = Response::fromResultSet($this->elasticaService->search($search));
+        /** @var Document $document */
+        foreach ($response->getDocuments() as $document) {
+            $legislatures[$document->getId()] = [
+                'id' => $document->getId(),
+                'start' => \DateTime::createFromFormat('Y/m/d', $document->getSource()['date_start'])->format('Y-m-d'),
+                'end' => \DateTime::createFromFormat('Y/m/d', $document->getSource()['date_end'])->format('Y-m-d'),
             ];
         }
 

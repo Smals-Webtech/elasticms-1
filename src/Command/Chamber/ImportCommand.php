@@ -7,8 +7,8 @@ use App\Import\Chamber\IndexHelper;
 use App\Import\Chamber\Model;
 use App\Import\Chamber\ModelFactory;
 use App\Import\Chamber\XML\MTNG;
-use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CommonBundle\Storage\StorageManager;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Elasticsearch\Indexer;
@@ -30,8 +30,6 @@ class ImportCommand extends Command implements CommandInterface
     private $bulker;
     /** @var Indexer */
     private $indexer;
-    /** @var Client */
-    private $client;
 
     protected static $defaultName = 'ems:job:chamber';
     private const REGEX = [
@@ -46,13 +44,15 @@ class ImportCommand extends Command implements CommandInterface
     private $storageManager;
     /** @var FileService */
     private $fileService;
+    /** @var ElasticaService */
+    private ElasticaService $elasticaService;
 
-    public function __construct(Bulker $bulker, Indexer $indexer, Client $client, StorageManager $storageManager, AssetExtractorService $extractorService, FileService $fileService)
+    public function __construct(ElasticaService $elasticaService, Bulker $bulker, Indexer $indexer, StorageManager $storageManager, AssetExtractorService $extractorService, FileService $fileService)
     {
         parent::__construct();
         $this->bulker = $bulker;
+        $this->elasticaService = $elasticaService;
         $this->indexer = $indexer;
-        $this->client = $client;
         $this->extractorService = $extractorService;
         $this->storageManager = $storageManager;
         $this->fileService = $fileService;
@@ -105,7 +105,7 @@ class ImportCommand extends Command implements CommandInterface
         $this->bulker->setLogger($logger)->setSingleIndex(true)->setSize($bulkSize);
 
         $indexHelper = new IndexHelper($this->indexer, $environment, $importId);
-        $import = new Import($this->client, $logger, $dir, $type, $environment, $dryPdf, $keepCv);
+        $import = new Import($this->elasticaService, $logger, $dir, $type, $environment, $dryPdf, $keepCv);
         $factory = new ModelFactory($indexHelper, $import, $this->storageManager, $this->extractorService, $this->fileService);
 
         foreach ($this->findFiles($style, $dir, $type, $pattern) as $file) {
