@@ -30,7 +30,7 @@ class Import
     private $keepCv;
 
     const EMS_INSTANCE_ID = 'webchamber_';
-    /** @var ElasticaService */
+
     private ElasticaService $elasticaService;
 
     public function __construct(ElasticaService $elasticaService, LoggerInterface $logger, string $dir, string $type, string $environment, bool $dryPdf, bool $keepCv)
@@ -52,6 +52,7 @@ class Import
     public function search(array $body): array
     {
         $search = $this->elasticaService->convertElasticsearchBody([self::EMS_INSTANCE_ID.'ma_'.$this->environment], [], $body);
+
         return $this->elasticaService->search($search)->getResponse()->getData();
     }
 
@@ -129,8 +130,8 @@ class Import
 
     public function getCommission(string $docName, int $legislature)
     {
-        $search =$this->elasticaService->convertElasticsearchBody([
-            self::EMS_INSTANCE_ID.'ma_'.$this->environment
+        $search = $this->elasticaService->convertElasticsearchBody([
+            self::EMS_INSTANCE_ID.'ma_'.$this->environment,
         ], [], [
             'index' => self::EMS_INSTANCE_ID.'ma_'.$this->environment,
             'type' => 'doc',

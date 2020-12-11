@@ -23,7 +23,7 @@ class MathJobCommand extends Command
     private $contentTypeService;
     /** @var FormFactoryInterface */
     protected $formFactory;
-    /** @var ElasticaService */
+
     private ElasticaService $elasticaService;
 
     public function __construct(
@@ -161,7 +161,6 @@ class MathJobCommand extends Command
         $companies = [];
         $search = $this->elasticaService->convertElasticsearchSearch($params);
         $scroll = $this->elasticaService->scroll($search, '5s');
-
 
         foreach ($scroll as $resultSet) {
             foreach ($resultSet as $result) {

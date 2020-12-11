@@ -44,7 +44,7 @@ class ImportCommand extends Command implements CommandInterface
     private $storageManager;
     /** @var FileService */
     private $fileService;
-    /** @var ElasticaService */
+
     private ElasticaService $elasticaService;
 
     public function __construct(ElasticaService $elasticaService, Bulker $bulker, Indexer $indexer, StorageManager $storageManager, AssetExtractorService $extractorService, FileService $fileService)
