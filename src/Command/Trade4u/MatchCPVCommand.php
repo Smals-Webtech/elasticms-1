@@ -3,7 +3,11 @@
 namespace App\Command\Trade4u;
 
 use Elastica\Client;
+use Elasticsearch\Endpoints\Indices\Analyze;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Elasticsearch\Document\Document;
+use EMS\CommonBundle\Elasticsearch\Response\Response;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CoreBundle\Form\Form\RevisionType;
 use EMS\CoreBundle\Service\DataService;
 use EMS\CoreBundle\Service\EnvironmentService;
@@ -27,17 +31,21 @@ class MatchCPVCommand extends Command implements CommandInterface
 
     protected static $defaultName = 'trade4u:match:cpv';
 
+    private ElasticaService $elasticaService;
+
     public function __construct(
         Client $client,
         EnvironmentService $environmentService,
         DataService $dataService,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ElasticaService $elasticaService
     ) {
         parent::__construct();
         $this->client = $client;
         $this->environmentService = $environmentService;
         $this->dataService = $dataService;
         $this->formFactory = $formFactory;
+        $this->elasticaService = $elasticaService;
     }
 
     protected function configure()
@@ -93,20 +101,20 @@ class MatchCPVCommand extends Command implements CommandInterface
                 ],
             ],
         ];
-        $result = $this->client->search(['index' => $index, 'type' => 'product', 'body' => $body]);
+        $search = $this->elasticaService->convertElasticsearchBody([$index], ['product'], $body);
+        $response = Response::fromResultSet($this->elasticaService->search($search));
 
-        foreach ($result['hits']['hits'] as $product) {
-            yield $product;
+        /** @var Document $product */
+        foreach ($response->getDocuments() as $product) {
+            yield $product->getRaw();
         }
     }
 
     private function getCPVs(SymfonyStyle $style, string $index): array
     {
-        $scrollTimeout = '5s';
         $params = [
             'index' => $index,
             'type' => 'cpv',
-            'scroll' => $scrollTimeout,
             'size' => 50,
             '_source' => ['title_nl', 'title_fr', 'title_en'],
         ];
@@ -116,30 +124,31 @@ class MatchCPVCommand extends Command implements CommandInterface
         $pg->start();
 
         $result = [];
-        $response = $this->client->search($params);
+        $search = $this->elasticaService->convertElasticsearchSearch($params);
+        $scroll = $this->elasticaService->scroll($search, '5s');
         $languages = ['nl', 'fr', 'en'];
 
-        while (isset($response['hits']['hits']) && \count($response['hits']['hits']) > 0) {
-            foreach ($response['hits']['hits'] as &$hit) {
+        foreach ($scroll as $resultSet) {
+            foreach ($resultSet as $item) {
+                if (false === $item) {
+                    continue;
+                }
                 foreach ($languages as $lang) {
-                    $analyze = $this->client->indices()->analyze([
-                        'body' => [
-                            'tokenizer' => 'keyword',
-                            'char_filter' => ['html_strip'],
-                            'filter' => ['lowercase', 'asciifolding'],
-                            'text' => $hit['_source']['title_'.$lang],
-                        ],
+                    $endpoint = new Analyze();
+                    $endpoint->setBody([
+                        'tokenizer' => 'keyword',
+                        'char_filter' => ['html_strip'],
+                        'filter' => ['lowercase', 'asciifolding'],
+                        'text' => $item->getSource()['title_'.$lang],
                     ]);
+                    $analyze = $this->client->requestEndpoint($endpoint);
 
-                    $hit['_source']['title_'.$lang] = $analyze['tokens'][0]['token'];
+                    $hit['_source']['title_'.$lang] = $analyze->getData()['tokens'][0]['token'];
                 }
 
                 $result[] = $hit;
                 $pg->advance();
             }
-
-            $scrollId = $response['_scroll_id'];
-            $response = $this->client->scroll(['scroll_id' => $scrollId, 'scroll' => $scrollTimeout]);
         }
 
         $pg->finish();
