@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78b9f64ddcde36b03aa5e5f5baa9a8d1",
+    "content-hash": "41c89f80b0d5b62b8ca813c53c5bd1a5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2154,6 +2154,39 @@
                 "html"
             ],
             "time": "2020-06-29T00:56:53+00:00"
+        },
+        {
+            "name": "finlet/flexmail",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Finlet/flexmail.git",
+                "reference": "458b08560a704e14e24165892caff3bf14993b00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Finlet/flexmail/zipball/458b08560a704e14e24165892caff3bf14993b00",
+                "reference": "458b08560a704e14e24165892caff3bf14993b00",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Finlet\\flexmail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Rico van de Vin",
+                    "email": "rico@finlet.eu"
+                }
+            ],
+            "description": "Flexmail API PHP Wrapper.",
+            "time": "2016-01-11T10:04:22+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -12365,6 +12398,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "finlet/flexmail": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,
