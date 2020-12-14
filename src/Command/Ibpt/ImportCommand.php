@@ -5,6 +5,8 @@ namespace App\Command\Ibpt;
 use Elastica\Client;
 use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
 use EMS\CommonBundle\Elasticsearch\Document;
+use EMS\CommonBundle\Elasticsearch\Response\Response;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CommonBundle\Storage\StorageManager;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Elasticsearch\Indexer;
@@ -30,6 +32,8 @@ class ImportCommand extends Command
     private $style;
     /** @var Client */
     private $client;
+
+    private ElasticaService $elasticaService;
 
     /** @var array */
     private $alreadyImported = [];
@@ -173,12 +177,13 @@ class ImportCommand extends Command
 
     protected static $defaultName = 'ems:job:ibpt:import';
 
-    public function __construct(Bulker $bulker, Indexer $indexer, StorageManager $storageManager, Client $client)
+    public function __construct(Bulker $bulker, Indexer $indexer, StorageManager $storageManager, Client $client, ElasticaService $elasticaService)
     {
         $this->bulker = $bulker;
         $this->indexer = $indexer;
         $this->storageManager = $storageManager;
         $this->client = $client;
+        $this->elasticaService = $elasticaService;
         parent::__construct();
     }
 
@@ -267,16 +272,14 @@ class ImportCommand extends Command
 
         if (!$this->existingTaxonomies) {
             $this->existingTaxonomies = [];
-            $tempTaxo = $this->client->search([
-                'index' => self::SEARCH_INDEX,
-                'type' => 'taxonomy',
-                'size' => 1000,
-            ]);
-            foreach ($tempTaxo['hits']['hits'] as $item) {
-                $this->existingTaxonomies[$item['_source']['title_fr']] = $item['_id'];
-                $this->existingTaxonomies[$item['_source']['title_nl']] = $item['_id'];
-                $this->existingTaxonomies[$item['_source']['title_de']] = $item['_id'];
-                $this->existingTaxonomies[$item['_source']['title_en']] = $item['_id'];
+            $search = $this->elasticaService->convertElasticsearchBody([self::SEARCH_INDEX], ['taxonomy'], []);
+            $search->setSize(1000);
+            $tempTaxo = Response::fromResultSet($this->elasticaService->search($search));
+            foreach ($tempTaxo->getDocuments() as $document) {
+                $this->existingTaxonomies[$document->getSource()['title_fr']] = $document->getId();
+                $this->existingTaxonomies[$document->getSource()['title_nl']] = $document->getId();
+                $this->existingTaxonomies[$document->getSource()['title_de']] = $document->getId();
+                $this->existingTaxonomies[$document->getSource()['title_en']] = $document->getId();
             }
         }
 
@@ -336,21 +339,20 @@ class ImportCommand extends Command
 
         if (\strpos($file->getOriginalUrl(), 'interface')) {
             $document['_source']['frequency'] = [];
-            $params = [
-                'index' => self::SEARCH_INDEX,
-                'type' => 'frequency',
-                'body' => [
+            $search = $this->elasticaService->convertElasticsearchBody(
+                [self::SEARCH_INDEX],
+                ['frequency'],
+                [
                     'query' => [
                         'match_phrase' => [
                             'filename' => \basename($file->getOriginalUrl()),
                         ],
                     ],
-                ],
-            ];
+                ]);
 
-            $response = $this->client->search($params);
-            foreach ($response['hits']['hits'] as $hit) {
-                $document['_source']['frequency'][] = 'frequency:'.$hit['_id'];
+            $response = Response::fromResultSet($this->elasticaService->search($search));
+            foreach ($response->getDocuments() as $hit) {
+                $document['_source']['frequency'][] = 'frequency:'.$hit->getId();
             }
         }
 

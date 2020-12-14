@@ -2,7 +2,7 @@
 
 namespace App\Command\Trade4u;
 
-use Elastica\Client;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CoreBundle\Form\Form\RevisionType;
 use EMS\CoreBundle\Service\ContentTypeService;
 use EMS\CoreBundle\Service\DataService;
@@ -15,8 +15,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class MathJobCommand extends Command
 {
-    /** @var Client */
-    private $client;
     /** @var DataService */
     private $dataService;
     /** @var EnvironmentService */
@@ -26,19 +24,21 @@ class MathJobCommand extends Command
     /** @var FormFactoryInterface */
     protected $formFactory;
 
+    private ElasticaService $elasticaService;
+
     public function __construct(
-        Client $client,
         DataService $dataService,
         EnvironmentService $envService,
         ContentTypeService $contentTypeService,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        ElasticaService $elasticaService
     ) {
         parent::__construct();
         $this->dataService = $dataService;
-        $this->client = $client;
         $this->envService = $envService;
         $this->contentTypeService = $contentTypeService;
         $this->formFactory = $formFactory;
+        $this->elasticaService = $elasticaService;
     }
 
     /**
@@ -67,10 +67,13 @@ class MathJobCommand extends Command
         if (!$environment) {
             throw new \RuntimeException(\sprintf('environment %s not found', $environmentName));
         }
-
+        $matchId = $input->getArgument('matchId');
+        if (!\is_string($matchId)) {
+            throw new \RuntimeException('Unexpected not string match id');
+        }
         $index = $environment->getAlias();
-        $document = $this->client->get(['index' => $index, 'id' => $input->getArgument('matchId'), 'type' => 'match']);
-        $source = $document['_source'];
+        $document = $this->elasticaService->getDocument($index, 'match', $matchId);
+        $source = $document->getSource();
 
         if (!$source['match_activities'] && !$source['match_products'] && !$source['match_cpv'] && !$source['match_countries'] && !$source['match_domain_abonnement']) {
             return; //nothing to match;
@@ -80,16 +83,16 @@ class MathJobCommand extends Command
 
         foreach ($source['linked_opportunities'] as $opportunityId) {
             $split = \preg_split('/:/', $opportunityId);
-            $opportunity = $this->client->get(['index' => $index, 'id' => $split[1], 'type' => $split[0]]);
+            $opportunity = $this->elasticaService->getDocument($index, $split[0], $split[1]);
 
             $matches[] = [
                 'opportunity' => $opportunityId,
-                'companies' => $this->match($opportunity['_source'], $source, $index, $output),
+                'companies' => $this->match($opportunity->getSource(), $source, $index, $output),
             ];
         }
 
         if ($matches) {
-            $this->save($document, $matches);
+            $this->save($document->getRaw(), $matches);
         }
     }
 
@@ -148,7 +151,6 @@ class MathJobCommand extends Command
         $params = [
             'index' => $index,
             'type' => 'company',
-            'scroll' => $scrollTimeout,
             'size' => 50,               // how many results *per shard* you want back
             '_source' => false,
             'body' => [
@@ -157,18 +159,16 @@ class MathJobCommand extends Command
         ];
 
         $companies = [];
-        $response = $this->client->search($params);
+        $search = $this->elasticaService->convertElasticsearchSearch($params);
+        $scroll = $this->elasticaService->scroll($search, '5s');
 
-        while (isset($response['hits']['hits']) && \count($response['hits']['hits']) > 0) {
-            foreach ($response['hits']['hits'] as $hit) {
-                $companies[] = 'company:'.$hit['_id'];
+        foreach ($scroll as $resultSet) {
+            foreach ($resultSet as $result) {
+                if (false === $result) {
+                    continue;
+                }
+                $companies[] = 'company:'.$result->getId();
             }
-
-            $scrollId = $response['_scroll_id'];
-            $response = $this->client->scroll([
-                'scroll_id' => $scrollId,
-                'scroll' => $scrollTimeout,
-            ]);
         }
 
         return $companies;

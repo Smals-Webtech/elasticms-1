@@ -7,8 +7,12 @@ namespace App\Command\TechSearch;
 use Elastica\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Common\EMSLink;
+use EMS\CommonBundle\Elasticsearch\Exception\NotSingleResultException;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Service\EnvironmentService;
+use EMS\CoreBundle\Service\IndexService;
+use EMS\CoreBundle\Service\Mapping;
 use GuzzleHttp\Client as HttpClient;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Console\Command\Command;
@@ -50,10 +54,19 @@ final class ImportSitemap extends Command implements CommandInterface
     private const OPTION_NO_SSL = 'dontVerifySsl';
     private const INDEX = 'job_tech_search_sitemap';
 
+    private ElasticaService $elasticaService;
+
+    private IndexService $indexService;
+
+    private Mapping $mapping;
+
     public function __construct(
         Bulker $bulker,
         Client $client,
         EnvironmentService $environmentService,
+        ElasticaService $elasticaService,
+        IndexService $indexService,
+        Mapping $mapping,
         string $tikaServer
     ) {
         parent::__construct();
@@ -61,6 +74,9 @@ final class ImportSitemap extends Command implements CommandInterface
         $this->bulker = $bulker;
         $this->environmentService = $environmentService;
         $this->tikaServer = $tikaServer;
+        $this->elasticaService = $elasticaService;
+        $this->indexService = $indexService;
+        $this->mapping = $mapping;
     }
 
     protected function configure()
@@ -107,13 +123,9 @@ final class ImportSitemap extends Command implements CommandInterface
     {
         $emsLink = EMSLink::fromText($input->getArgument('emsLink'));
         $environment = $this->environmentService->getByName('preview');
-        $document = $this->client->get([
-            'index' => $environment->getAlias(),
-            'type' => $emsLink->getContentType(),
-            'id' => $emsLink->getOuuid(), ]
-        );
+        $document = $this->elasticaService->getDocument($environment->getAlias(), $emsLink->getContentType(), $emsLink->getOuuid());
 
-        $sitemapResponse = $this->download($document['_source']['url']);
+        $sitemapResponse = $this->download($document->getSource()['url']);
         $this->setUrls($sitemapResponse);
         $this->io->section(\sprintf('Parsed %d urls', \count($this->urls)));
 
@@ -204,24 +216,20 @@ final class ImportSitemap extends Command implements CommandInterface
             return $this->emsLinks[$identifier];
         }
 
-        $result = $this->client->search([
-            'type' => $contentType,
-            'index' => $this->searchIndex,
-            'body' => ['query' => ['term' => ['identifier' => $identifier]]],
-        ]);
+        $search = $this->elasticaService->convertElasticsearchBody([$this->searchIndex], [$contentType], ['query' => ['term' => ['identifier' => $identifier]]]);
 
-        if (1 === $result['hits']['total']) {
-            $emsLink = EMSLink::fromDocument(\array_pop($result['hits']['hits']));
-            $this->emsLinks[$identifier] = \sprintf('%s:%s', $emsLink->getContentType(), $emsLink->getOuuid());
+        try {
+            $result = $this->elasticaService->singleSearch($search);
+            $this->emsLinks[$identifier] = $result->getEmsId();
 
             return $this->emsLinks[$identifier];
+        } catch (NotSingleResultException $e) {
+            $this->io->warning(\vsprintf('Creation ems link failed result (%d) for "%s:%s"', [
+                $e->getTotal(),
+                $contentType,
+                $identifier,
+            ]));
         }
-
-        $this->io->warning(\vsprintf('Creation ems link failed result (%d) for "%s:%s"', [
-            $result['hits']['total'],
-            $contentType,
-            $identifier,
-        ]));
 
         return null;
     }
@@ -237,10 +245,7 @@ final class ImportSitemap extends Command implements CommandInterface
                 $data = $this->convertUrl($url);
                 $data['sitemap'] = $emsLinkSitemap;
 
-                $this->bulker->index(
-                    ['_index' => self::INDEX, '_type' => 'url', '_id' => \sha1('url_'.$url->getUrl())],
-                    $data
-                );
+                $this->bulker->index('url', \sha1('url_'.$url->getUrl()), self::INDEX, $data);
                 $progressBar->advance();
             } catch (\Exception $e) {
                 $this->io->error(\sprintf('Failed importing %s : %s', $url->getUrl(), $e->getMessage()));
@@ -254,16 +259,14 @@ final class ImportSitemap extends Command implements CommandInterface
     private function reset(): void
     {
         $this->io->section(\sprintf('Resetting index %s', self::INDEX));
-        $indices = $this->client->indices();
 
-        if ($indices->exists(['index' => self::INDEX])) {
-            $indices->delete(['index' => self::INDEX]);
+        if ($this->indexService->hasIndex(self::INDEX)) {
+            $this->indexService->deleteIndex(self::INDEX);
         }
 
-        $indices->create([
-            'index' => self::INDEX,
-            'body' => \json_decode(\file_get_contents(__DIR__.'/tech_search_mapping.json'), true),
-        ]);
+        $body = \json_decode(\file_get_contents(__DIR__.'/tech_search_mapping.json'), true);
+
+        $this->mapping->updateMapping(self::INDEX, $body, 'url');
     }
 
     private function setUrls(ResponseInterface $response): void

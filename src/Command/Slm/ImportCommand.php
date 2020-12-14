@@ -10,6 +10,7 @@ use Elastica\Client;
 use Elasticsearch\Common\Exceptions\Missing404Exception;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Common\EMSLink;
+use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Elasticsearch\Indexer;
 use EMS\CoreBundle\Entity\ContentType;
@@ -57,12 +58,15 @@ class ImportCommand extends Command implements CommandInterface
 
     protected static $defaultName = 'ems:job:slm-import';
 
-    public function __construct(Bulker $bulker, Client $client, FileService $fileService, Indexer $indexer, DataService $dataService, ContentTypeService $contentTypeService, TokenStorageInterface $tokenStorage)
+    private ElasticaService $elasticaService;
+
+    public function __construct(Bulker $bulker, Client $client, ElasticaService $elasticaService, FileService $fileService, Indexer $indexer, DataService $dataService, ContentTypeService $contentTypeService, TokenStorageInterface $tokenStorage)
     {
         $this->client = $client;
         $this->indexer = $indexer;
         $this->bulker = $bulker;
         $this->fileService = $fileService;
+        $this->elasticaService = $elasticaService;
 
         $this->contentTypeService = $contentTypeService;
         $this->dataService = $dataService;
@@ -120,9 +124,9 @@ class ImportCommand extends Command implements CommandInterface
     private function getImportDocument(EMSLink $emsLink): ImportDocument
     {
         try {
-            $document = $this->client->get(['index' => 'slm_preview', 'type' => $emsLink->getContentType(), 'id' => $emsLink->getOuuid()]);
+            $document = $this->elasticaService->getDocument('slm_preview', $emsLink->getContentType(), $emsLink->getOuuid());
 
-            return new ImportDocument($document, $this->fileService);
+            return new ImportDocument($document->getRaw(), $this->fileService);
         } catch (Missing404Exception $e) {
             throw new \Exception('Document not found!');
         }
@@ -153,7 +157,7 @@ class ImportCommand extends Command implements CommandInterface
     {
         $this->style->section('Import csv file');
 
-        $csvImporter = new CSVImporter($this->client, $importDocument, $index);
+        $csvImporter = new CSVImporter($this->client, $importDocument, $index, $this->elasticaService);
         $progressBar = $this->style->createProgressBar();
 
         foreach ($csvImporter->getKPIs() as $kpi) {
