@@ -9,4 +9,3 @@ twig:
     paths:
           '%kernel.project_dir%/vendor/elasticms/core-bundle/src/Resources/views': FOSUser
           '%kernel.project_dir%/vendor/elasticms/core-bundle/src-user/Resources/views': FOSUser
-    exception_controller: null
