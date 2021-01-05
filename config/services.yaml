@@ -1,7 +1,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+    env(DEFAULT_LOCAL): 'en'
+    locale: '%env(DEFAULT_LOCAL)%'
     #env(STORAGE_FOLDER): ''
     env(APP_LDAP_SERVER): ''
     env(APP_LDAP_PORT): '389'
@@ -17,7 +18,7 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
         bind:
-            $tikaServer:  '%env(string:TIKA_SERVER)%'
+            #$tikaServer:  '%env(string:TIKA_SERVER)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
