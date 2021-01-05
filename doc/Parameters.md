@@ -6,9 +6,11 @@ The environment variables have been grouped by bundles and for the Symfony frame
 
 ### APP_ENV
 
-[Possible values](https://symfony.com/doc/current/configuration.html#selecting-the-active-environment): `dev`, `prod`, `test`
+[Possible values](https://symfony.com/doc/current/configuration.html#selecting-the-active-environment): `dev`, `prod`, `redis`, `dev`, `test`
  - Example `APP_ENV=dev`
+ 
 But there is 2 more possible values, specific to elasticms:
+
  - `db` : It's equivalent to a `prod` environment, but PHP sessions are persisted in the RDBMS (does not work with SQLite databases).
  - `redis` : It's equivalent to a `prod` environment, but PHP sessions are saved in a Redis server.
 
@@ -200,6 +202,28 @@ If set to `false` job initiated from the interface are executed on the spot. Use
  - Default value `true`
  - Example `EMSCO_TRIGGER_JOB_FROM_WEB=false`
  
+  
+## Elasticms Client Helper Bundle variables
+
+### EMSCH_LOCALES
+
+List of available locales supported by the client/channels i.e.: `EMSCH_LOCALES=["en","fr","nl"]`
+
+### EMSCH_INSTANCE_ID
+
+Define the list of project's index prefixes, separated by a `|` i.e. `='demo_pgsql_v1_'`, By default it sets to the EMSCO_INSTANCE_ID value.
+
+### EMSCH_TRANSLATION_TYPE
+
+Define the translation content type name. Default value `label` i.e. `EMSCH_TRANSLATION_TYPE='label'`
+
+### EMSCH_ROUTE_TYPE
+
+Define the route content type name. Default value `route` i.e. `EMSCH_ROUTE_TYPE='route'`
+
+### EMSCH_TEMPLATES
+
+Define the template content type structure. Default value `{"template": {"name": "name","code": "body"}}` i.e. `EMSCH_TEMPLATES='{"template": {"name": "label","code": "body"}}'`
   
 ## Elasticms Common Bundle variables
 
