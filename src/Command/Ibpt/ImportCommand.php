@@ -2,7 +2,7 @@
 
 namespace App\Command\Ibpt;
 
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
 use EMS\CommonBundle\Elasticsearch\Document;
 use EMS\CommonBundle\Elasticsearch\Response\Response;

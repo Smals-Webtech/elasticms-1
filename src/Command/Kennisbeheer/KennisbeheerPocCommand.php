@@ -2,7 +2,7 @@
 
 namespace App\Command\Kennisbeheer;
 
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Elasticsearch\Bulk\Bulker;
 use GuzzleHttp\Client as HttpClient;

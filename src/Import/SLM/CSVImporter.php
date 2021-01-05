@@ -5,7 +5,7 @@ namespace App\Import\SLM;
 use App\Import\SLM\Document\Child;
 use App\Import\SLM\Document\KPI;
 use App\Import\SLM\Document\SLA;
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Elasticsearch\Exception\NotFoundException;
 use EMS\CommonBundle\Service\ElasticaService;
 
