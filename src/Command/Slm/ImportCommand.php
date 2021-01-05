@@ -6,7 +6,7 @@ use App\Import\SLM\CSVImporter;
 use App\Import\SLM\Document\Child;
 use App\Import\SLM\ImportDocument;
 use App\Import\SLM\XMLCollector;
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use Elasticsearch\Common\Exceptions\Missing404Exception;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Common\EMSLink;

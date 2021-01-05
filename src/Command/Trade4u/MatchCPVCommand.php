@@ -2,7 +2,7 @@
 
 namespace App\Command\Trade4u;
 
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use Elasticsearch\Endpoints\Indices\Analyze;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Elasticsearch\Document\Document;

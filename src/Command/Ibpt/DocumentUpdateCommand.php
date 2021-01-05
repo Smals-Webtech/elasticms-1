@@ -2,7 +2,7 @@
 
 namespace App\Command\Ibpt;
 
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use Elasticsearch\Endpoints\Index;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Service\ElasticaService;

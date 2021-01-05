@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command\TechSearch;
 
-use Elastica\Client;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Common\EMSLink;
 use EMS\CommonBundle\Elasticsearch\Exception\NotSingleResultException;
