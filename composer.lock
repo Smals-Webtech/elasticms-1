@@ -2432,6 +2432,7 @@
                 "reference": "458b08560a704e14e24165892caff3bf14993b00",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -2449,6 +2450,10 @@
                 }
             ],
             "description": "Flexmail API PHP Wrapper.",
+            "support": {
+                "issues": "https://github.com/Finlet/flexmail/issues",
+                "source": "https://github.com/Finlet/flexmail/tree/master"
+            },
             "time": "2016-01-11T10:04:22+00:00"
         },
         {
