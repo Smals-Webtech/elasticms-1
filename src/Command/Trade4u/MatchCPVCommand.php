@@ -2,9 +2,9 @@
 
 namespace App\Command\Trade4u;
 
-use EMS\CommonBundle\Elasticsearch\Client;
 use Elasticsearch\Endpoints\Indices\Analyze;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Elasticsearch\Document\Document;
 use EMS\CommonBundle\Elasticsearch\Response\Response;
 use EMS\CommonBundle\Service\ElasticaService;

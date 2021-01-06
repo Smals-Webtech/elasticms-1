@@ -2,9 +2,9 @@
 
 namespace App\Command\Kennisbeheer;
 
-use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Elasticsearch\Bulk\Bulker;
+use EMS\CommonBundle\Elasticsearch\Client;
 use GuzzleHttp\Client as HttpClient;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

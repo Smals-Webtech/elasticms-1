@@ -3,9 +3,9 @@
 namespace App\Command\Flexmail;
 
 use Doctrine\ORM\EntityManager;
-use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Command\CommandInterface;
 use EMS\CommonBundle\Common\Document;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CoreBundle\Command\EmsCommand;
 use EMS\CoreBundle\Entity\Template;
 use EMS\CoreBundle\Repository\EnvironmentRepository;

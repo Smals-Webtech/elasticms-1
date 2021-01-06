@@ -2,9 +2,9 @@
 
 namespace App\Command\Ibpt;
 
-use EMS\CommonBundle\Elasticsearch\Client;
 use Elasticsearch\Endpoints\Index;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Service\ElasticaService;
 use EMS\CommonBundle\Storage\NotFoundException;
 use EMS\CommonBundle\Storage\Service\FileSystemStorage;
