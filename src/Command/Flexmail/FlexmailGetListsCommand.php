@@ -2,8 +2,8 @@
 
 namespace App\Command\Flexmail;
 
-use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CoreBundle\Command\EmsCommand;
 use Finlet\flexmail\Config\Config;
 use Finlet\flexmail\FlexmailAPI\FlexmailAPI;

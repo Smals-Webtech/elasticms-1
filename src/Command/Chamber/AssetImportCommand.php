@@ -4,8 +4,8 @@ namespace App\Command\Chamber;
 
 use App\Command\LaChambre\Asset\Asset;
 use Doctrine\DBAL\Connection;
-use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CommonBundle\Command\CommandInterface;
+use EMS\CommonBundle\Elasticsearch\Client;
 use EMS\CoreBundle\Elasticsearch\Bulker;
 use EMS\CoreBundle\Service\AssetExtractorService;
 use Symfony\Bridge\Doctrine\RegistryInterface;
