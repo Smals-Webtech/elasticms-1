@@ -201,7 +201,22 @@ Name of the content type used a circle.
 If set to `false` job initiated from the interface are executed on the spot. Use the `ems:job:run` command to run pending jobs. It's recommended to schedule an `ems:job:run` command and turn off this option.
  - Default value `true`
  - Example `EMSCO_TRIGGER_JOB_FROM_WEB=false`
+
+### EMSCO_LOG_LEVEL
+Define the [level of logs](https://github.com/Seldaek/monolog/blob/main/doc/01-usage.md#log-levels) that will be saved in the elasticsearch ems_internal_logger_alias daily index. Default value: `INFO`.
+
+```dotenv
+EMSCO_LOG_LEVEL=NOTICE
+``` 
  
+### EMSCO_LOG_BY_PASS
+Define if the elastica logger must be turned off. Possible values are:
+ - `true`: the elastica logger is turn off
+ - `false`: the elastic logger is active
+
+```dotenv
+EMSCO_LOG_BY_PASS=false
+``` 
   
 ## Elasticms Client Helper Bundle variables
 
@@ -264,7 +279,8 @@ Refers to the [PHP hash_algos](https://www.php.net/manual/fr/function.hash-algos
  - EMS_INSTANCE_ID : See [EMSCO_INSTANCE_ID](#EMSCO_INSTANCE_ID)
  - EMS_NAME : See [EMSCO_NAME](#EMSCO_NAME)
  - EMS_SHORTNAME : See [EMSCO_SHORTNAME](#EMSCO_SHORTNAME)
- - EMS_SINGLE_TYPE_INDEX : See [EMSCO_SINGLE_TYPE_INDEX](#EMSCO_SINGLE_TYPE_INDEX)
+ - EMS_SINGLE_TYPE_INDEX : Not replaced
+ - EMSCO_SINGLE_TYPE_INDEX : Not replaced
  - EMS_PAGING_SIZE : See [EMSCO_PAGING_SIZE](#EMSCO_PAGING_SIZE)
  - EMS_THEME_COLOR : See [EMSCO_THEME_COLOR](#EMSCO_THEME_COLOR)
  - EMS_DATE_TIME_FORMAT : See [EMSCO_DATE_TIME_FORMAT](#EMSCO_DATE_TIME_FORMAT)
